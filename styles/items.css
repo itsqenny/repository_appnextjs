@@ -1,0 +1,226 @@
+   
+  main {
+      display: flex;
+      max-width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 8px;
+      background: var(--tg-second);
+    }
+    
+    .item p {
+      margin-bottom: 4px;
+    }
+    
+    main .item {
+      width: 45%;
+      min-width: none;
+      background-color: var(--tg-bg);
+      border-radius: 20px;
+      margin: 6px;
+      padding-bottom: 4px;
+      position: relative;
+    }
+    
+    main .item img {
+      width: 90%;
+      border-radius: 17px;
+      user-select: none;
+    }
+    
+    main .item-img{
+      position: relative;
+      z-index: 2;
+      margin-bottom: -24px;
+      width: 100%;
+      border-radius: 17px;
+      background: #fff;
+    }
+    main .item p {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      text-align: left;
+      font-weight: 400;
+      font-size: 12px;
+      height: 20px;
+      width: 90%;
+      padding-left: 5%;
+      color: var(--tg-text);
+    }
+    
+    main .item-info{
+      margin-top: 32px;
+    }
+  
+    main .item h4 {
+      font-size: 14px;
+      text-align: left;
+      padding-left: 5%;
+      font-weight: 700;
+      margin: 0;
+      color: var(--tg-text);
+    }
+    .buy-item {
+      text-align: center;
+      padding: 6px 10px;
+      font-size: 12px;
+      line-height: 18px;
+      color: var(--tg-text);
+    }
+    .add-item{
+      flex-shrink: 0;
+      font-weight: 500;
+      border-radius: 18px;
+      width: 92%;
+      border: none;
+      margin-bottom: 2px;
+      background-color: var(--tg-second);
+
+    }
+  
+
+
+    
+.item:focus {
+  outline: none;
+}
+
+.item:active {
+  letter-spacing: normal;
+  transform: translateY(4px);
+  box-shadow: none;
+  transform: scale(0.94);
+  transition: .1s linear;
+}
+    
+    .catalog-head {
+        color: var(--tg-text);
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 8px;
+        margin-left: var(--space-4x);
+        margin-right: var(--space-4x);
+      }
+      
+      .catalog {
+        font-weight: 900;
+        font-size: 24px;
+        line-height: 110%;
+        letter-spacing: -0.01em;
+      }
+      
+      .catalog-icons {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      
+      .button-search-ico {
+        background: #0000;
+        border: none;
+        outline: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-color);
+        padding: 0;
+        text-decoration: none;
+        color: var(--tg-text);
+      }
+      
+      .button-search-ico svg {
+        width: 25px;
+        height: 25px;
+      }
+      
+      .button-search-ico:focus {
+        outline: none;
+      }
+      
+      .button-search-ico:active {
+        letter-spacing: normal;
+        transform: translateY(4px);
+        box-shadow: none;
+        transform: scale(0.84);
+        transition: 0.1s;
+      }
+
+      .btns-cart{
+        display: flex;
+        gap: 8px;
+        margin: var(--space-4x);
+        padding-bottom: var(--space-4x);
+      }
+      .btn-favorite-cart{
+        width: 100%;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 140%;
+        color: var(--tg-text);
+      }
+      .btn-add-to-cart{
+        width: 100%;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 140%;
+        color: var(--tg-text);
+      }
+      .btn-add-to-cart.active{
+        width: 100%;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 140%;
+        fill: #fff;
+        background-color: #fb8c00;
+      }
+      .btn-add-to-cart.add{
+        width: 100%;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 140%;
+        color: var(--tg-text);
+        background-color: #e53935;
+      }
+      .btns-carts{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 14px 28px;
+        gap: 10px;
+        cursor: pointer;
+        transition: all .15s linear;
+        background: var(--tg-second);
+        border-radius: 12px;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        color: var(--tg-text);
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 140%;
+      }
+
+
+
+      .popup-message {
+        /* Общие стили для всплывающего сообщения */
+        
+        bottom: 20px; /* Изначальное положение */
+
+        background-color: var(--mainbutton); /* Цвет фона */
+        color: #fff;
+        padding: 10px 20px;
+        opacity: 0;
+        transition: opacity 3s ease, bottom 3s ease; /* Анимация для прозрачности и положения */
+        z-index: 1000;
+      }
+      
+      .popup-message.show {
+        bottom: 60px; /* Поднять вверх при активации */
+        opacity: 1;
+      }
+      
