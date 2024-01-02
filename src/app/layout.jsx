@@ -16,8 +16,6 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata = {
   title: 'zipperapp',
   description: 'powerful to zipperapp',
-  title: 'zipperapp1',
-  description: 'powerful to zipperapp1',
 }
 
 export const revalidate = 1;
