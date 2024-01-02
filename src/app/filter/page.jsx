@@ -6,7 +6,7 @@ import Link from "next/link";
 function Filter (){
   useEffect(() => {
     // Replace direct import with a fetch request
-    fetch('/api/products/')
+    fetch('https://repositorydb.onrender.com/products?_page=1&_limit=50')
       .then(response => response.json())
       .then(data => {
         setProductsData(data);
