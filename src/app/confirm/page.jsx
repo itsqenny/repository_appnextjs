@@ -19,7 +19,7 @@ export default function ProductConfirm({searchParams}) {
   };
   useEffect(() => {
     // Выполнение HTTP-запроса
-    fetch(`http://localhost:3001/products/${id}`)
+    fetch(`https://repositorydb.onrender.com/products/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('500 (Not Found)');

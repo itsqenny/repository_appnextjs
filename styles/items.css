@@ -203,24 +203,26 @@
         font-size: 16px;
         line-height: 140%;
       }
-
-
-
-      .popup-message {
-        /* Общие стили для всплывающего сообщения */
-        
-        bottom: 20px; /* Изначальное положение */
-
-        background-color: var(--mainbutton); /* Цвет фона */
-        color: #fff;
-        padding: 10px 20px;
-        opacity: 0;
-        transition: opacity 3s ease, bottom 3s ease; /* Анимация для прозрачности и положения */
-        z-index: 1000;
-      }
       
-      .popup-message.show {
-        bottom: 60px; /* Поднять вверх при активации */
-        opacity: 1;
-      }
-      
+      .main-popup{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: var(--tg-second);
+        padding: 8px 16px;
+        box-shadow: 0 -0.33px 0 #00000040;
+        z-index: 9998;
+    }
+    .main-popup.show{
+      height: 105px;
+        border-radius: 18px;
+        background: #00c73e;
+        color: var(--button-text-color);
+        font-size: 14px;
+        font-family: system,-apple-system,\.SFNSText-Regular,San Francisco,Roboto,Segoe UI,Helvetica Neue,Lucida Grande,sans-serif;
+        font-weight: 600;
+        width: 100%;
+        border: unset;
+        outline: unset;
+    }

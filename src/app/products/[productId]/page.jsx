@@ -17,7 +17,7 @@
     const [showPopup, setShowPopup] = useState(false); 
     useEffect(() => {
       // Выполнение HTTP-запроса
-      fetch(`http://localhost:3001/products/${params.productId}`)
+      fetch(`https://repositorydb.onrender.com/products/${params.productId}`)
         .then((response) => {
           if (!response.ok) {
             throw new Error('500 (Not Found)');
@@ -160,8 +160,11 @@
             </div>
         </Link>
         {showPopup && (
-                      <div className="popup-message show">
+                      <div className="main-popup">
+                        <div className="main-popup show">
                         Добавлено
+                        </div>
+                       
                       </div>
                     )}
       </>

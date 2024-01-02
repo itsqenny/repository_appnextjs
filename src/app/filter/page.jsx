@@ -6,7 +6,7 @@ import Link from "next/link";
 function Filter (){
   useEffect(() => {
     // Replace direct import with a fetch request
-    fetch('http://localhost:3000/api/products/')
+    fetch('/api/products/')
       .then(response => response.json())
       .then(data => {
         setProductsData(data);
