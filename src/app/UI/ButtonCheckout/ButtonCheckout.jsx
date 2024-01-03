@@ -3,13 +3,9 @@
 import { MainButton } from "@twa-dev/sdk/react"
 
 function ButtonPayment({price, handlePayment}){
-    let textColor, color;
-        if (typeof window !== 'undefined' && window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.themeParams) {
-        textColor = window.Telegram.WebApp.themeParams.button_text_color;
-        color = window.Telegram.WebApp.themeParams.button_color;
-        }
-
     const text = `Купить за ${price}`;
+    const textColor = Telegram.WebApp.themeParams.button_text_color;
+    const color = Telegram.WebApp.themeParams.button_color;
     return (
         <>
         <MainButton 
