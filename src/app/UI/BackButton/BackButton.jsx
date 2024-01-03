@@ -1,8 +1,11 @@
 import { BackButton } from "@twa-dev/sdk/react"
 
-function BackButton(){
+function Back(){
 
-    return (<BackButton/>);
+    return (
+    <>
+    <BackButton/>
+    </>);
 };
 
-export default BackButton;
+export default Back;

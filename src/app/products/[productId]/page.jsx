@@ -7,7 +7,7 @@
   import Loading from "./loading"
   import { useParams } from 'next/navigation'
   import ButtonPayment from "@/app/UI/MainButton/ButtonPayment"
-  import BackButton from "@/app/UI/BackButton/BackButton"
+  import Back from "@/app/UI/BackButton/BackButton"
 
   export default function ProductId(){
     const params = useParams()
@@ -79,7 +79,7 @@
 
     return (
       <>
-      <BackButton/>
+      <Back/>
         <div className="full-item" >
         <div className="images-slider-wrapper">
           <div className="images-slider-images">
