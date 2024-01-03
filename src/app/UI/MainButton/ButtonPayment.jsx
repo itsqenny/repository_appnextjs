@@ -1,3 +1,5 @@
+'use client'
+
 import { MainButton } from "@twa-dev/sdk/react"
 
 function ButtonPayment({handlePaymentClick}){

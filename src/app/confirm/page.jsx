@@ -10,6 +10,7 @@ export default function ProductConfirm({searchParams}) {
 
   const [item, setItem] = useState(null);
   const { id, name, ConfirmPrice, ConfirmSize, orderId } = searchParams;
+ 
   const [size, setSize] = useState(ConfirmSize || null)
   const [price, setPrice] = useState(ConfirmPrice || null);
   const [isCredited, setCredited] = useState(false);
