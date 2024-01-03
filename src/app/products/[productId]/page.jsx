@@ -78,19 +78,17 @@
   }
 
   const handlePaymentClick = () => {
-    if (typeof window !== 'undefined') { // Проверка, что код выполняется в браузере
-      const queryParams = {
-        id: item.id,
-        name: item.name,
-        ConfirmPrice: currentPrice,
-        ConfirmSize: currentSize,
-        orderId: uniqueOrderId,
-      };
-      const queryString = new URLSearchParams(queryParams).toString();
-      router.push(`/confirm?${queryString}`);
-    } else {
-      console.warn('window is not defined, skipping router.push');
-    }
+    const queryParams = {
+      id: item.id,
+      name: item.name,
+      ConfirmPrice: currentPrice,
+      ConfirmSize: currentSize,
+      orderId: uniqueOrderId,
+    };
+    const queryString = new URLSearchParams(queryParams).toString();
+    router.push(`/confirm/${queryString}`)
+    console.log('send data', queryParams);
+    
   };
 
     return (
@@ -176,10 +174,12 @@
           }
         }}>
         */}
-           
-          <div className="main-button">
+           {/* 
+           <div className="main-button">
                 <button onClick={handlePaymentClick}>Перейти к оплате</button>
             </div>
+           */}
+          
           
             <ButtonPayment handlePaymentClick={handlePaymentClick}/> 
             {/*

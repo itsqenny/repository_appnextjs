@@ -6,10 +6,20 @@ import Checkout from "./checkout";
 import Loading from "./loading";
 import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
 import Back from "@/app/UI/BackButton/BackButton";
-export default function ProductConfirm({searchParams}) {
+import { useParams } from 'next/navigation';
+export default function ProductConfirm() {
+  const params = useParams();
+  const decodedString = decodeURIComponent(params.confirmDetails);
+
+    // Преобразование декодированной строки в объект
+    const parsedParams = Object.fromEntries(new URLSearchParams(decodedString));
+
+    // Теперь вы можете распарсить параметры
+    const { id, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams;
+
+    console.log(parsedParams);
 
   const [item, setItem] = useState(null);
-  const { id, name, ConfirmPrice, ConfirmSize, orderId } = searchParams;
  
   const [size, setSize] = useState(ConfirmSize || null)
   const [price, setPrice] = useState(ConfirmPrice || null);
@@ -33,6 +43,7 @@ useEffect(() => {
         
       })
       .then((data) => {
+        console.log('Received data from API:', data);
         setItem(data);
       })
       .catch((error) => {
@@ -111,21 +122,19 @@ useEffect(() => {
               <button onClick={handlePayment}>Купить за ₽</button>
             </div>
             */}
-            
-            <ButtonCheckout handlePayment={handlePayment} price={price !== null ? price : ConfirmPrice} />
+             <ButtonCheckout handlePayment={handlePayment} price={price !== null ? price : ConfirmPrice} />
           
-            </>
-        ):(
-        <>
-          <Checkout items={searchParams} isCredited={isCredited} price={price} orderId={orderId}/>
-        </>
-        )}
-            
-        </div>
+          </>
+      ):(
+      <>
+        <Checkout items={searchParams} isCredited={isCredited} price={price} orderId={orderId}/>
+      </>
+      )}
+          
+      </div>
 
 
-        
-        </>
-    );
+      
+      </>
+  );
 }
-
