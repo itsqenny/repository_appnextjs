@@ -86,7 +86,7 @@
       orderId: uniqueOrderId,
     };
     const queryString = new URLSearchParams(queryParams).toString();
-    router.push(`confirm?${queryString}`)
+    router.push(`confirm/?${queryString}`)
   };
 
     return (
