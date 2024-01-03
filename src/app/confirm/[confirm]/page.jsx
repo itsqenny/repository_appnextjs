@@ -2,8 +2,8 @@
 import SelectBonus from "@/app/products/SelectBonus";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Checkout from "./checkout";
-import Loading from "./loading";
+import Checkout from "../checkout";
+import Loading from "../loading";
 import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
 import Back from "@/app/UI/BackButton/BackButton";
 export default function ProductConfirm({searchParams}) {
