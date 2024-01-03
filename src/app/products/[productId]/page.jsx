@@ -6,6 +6,7 @@
   import { useEffect, useState } from "react"
   import Loading from "./loading"
   import { useParams } from 'next/navigation'
+  import ButtonPayment from "@/app/UI/MainButton/ButtonPayment"
 
   export default function ProductId(){
     const params = useParams()
@@ -155,9 +156,12 @@
             orderId: uniqueOrderId,
           }
         }}>
-            <div className="main-button">
+          {/* 
+          <div className="main-button">
                 <button onClick={generateOrderId}>Перейти к оплате</button>
             </div>
+          */}
+            <ButtonPayment generateOrderId={generateOrderId}/>
         </Link>
         {showPopup && (
                       <div className="main-popup">
