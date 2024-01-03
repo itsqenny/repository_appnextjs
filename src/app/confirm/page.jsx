@@ -7,6 +7,7 @@ import Loading from "./loading";
 import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
 import Back from "@/app/UI/BackButton/BackButton";
 export default function ProductConfirm({searchParams}) {
+
   const [item, setItem] = useState(null);
   const { id, name, ConfirmPrice, ConfirmSize, orderId } = searchParams;
   const [size, setSize] = useState(ConfirmSize || null)
@@ -54,8 +55,8 @@ export default function ProductConfirm({searchParams}) {
               <div className="images-slider-image-item" key={id}>
                 <div className="image-item-wrapper">
                   <Image src={img} alt={`photo-${id}`} 
-                   width={3840}  // Начальная ширина изображения
-                   height={2160} // Начальная высота изображения (может быть другой, в зависимости от соотношения сторон)
+                   width={3840}
+                   height={2160}
                    srcSet={srcSet}
                    sizes="(max-width: 768px) 100vw, 50vw"
                    style={{
