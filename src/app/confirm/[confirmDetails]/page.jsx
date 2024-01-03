@@ -111,9 +111,9 @@ useEffect(() => {
               <button onClick={handlePayment}>Купить за ₽</button>
             </div>
             */}
-            {/* 
+            
             <ButtonCheckout handlePayment={handlePayment} price={price !== null ? price : ConfirmPrice} />
-          */}
+          
             </>
         ):(
         <>
