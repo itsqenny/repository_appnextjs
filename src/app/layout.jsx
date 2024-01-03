@@ -24,14 +24,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ru">
       <Script src="https://telegram.org/js/telegram-web-app.js"/>
+      <Script id="Telegram WebApp" >
+  {`Telegram.WebApp.setHeaderColor('secondary_bg_color')`}
+</Script>
       <body className={inter.className}>{children}
-      <script dangerouslySetInnerHTML={{
-          __html: `
-            Telegram.WebApp.setHeaderColor('secondary_bg_color');
-            Telegram.WebApp.expand();
-            Telegram.WebApp.enableClosingConfirmation();
-          `
-        }} />
       </body>
     </html>
   )
