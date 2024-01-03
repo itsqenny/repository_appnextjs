@@ -2,8 +2,8 @@
 import SelectBonus from "@/app/products/SelectBonus";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Checkout from "../checkout";
-import Loading from "../loading";
+import Checkout from "./checkout";
+import Loading from "./loading";
 import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
 import Back from "@/app/UI/BackButton/BackButton";
 export default function ProductConfirm({searchParams}) {
@@ -20,7 +20,8 @@ export default function ProductConfirm({searchParams}) {
     setCredited(true);
     setShowConfirmation(false);
   };
-  useEffect(() => {
+  
+useEffect(() => {
     // Выполнение HTTP-запроса
     fetch(`https://repositorydb.onrender.com/products/${id}`)
       .then((response) => {
@@ -37,6 +38,8 @@ export default function ProductConfirm({searchParams}) {
         console.error("Ошибка при загрузке продукта:", error);
       });
   }, [id]);
+
+  
 
   if(!item){
     return <Loading/>
@@ -107,7 +110,9 @@ export default function ProductConfirm({searchParams}) {
               <button onClick={handlePayment}>Купить за ₽</button>
             </div>
             */}
+            {/* 
             <ButtonCheckout handlePayment={handlePayment} price={price !== null ? price : ConfirmPrice} />
+          */}
             </>
         ):(
         <>

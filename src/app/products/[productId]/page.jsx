@@ -86,7 +86,7 @@
       orderId: uniqueOrderId,
     };
     const queryString = new URLSearchParams(queryParams).toString();
-    router.push(`confirm/?${queryString}`)
+    router.push(`/confirm?${queryString}`)
   };
 
     return (
@@ -172,11 +172,11 @@
           }
         }}>
         */}
-        {/*    
+           
           <div className="main-button">
                 <button onClick={handlePaymentClick}>Перейти к оплате</button>
             </div>
-          */}
+          
             <ButtonPayment handlePaymentClick={handlePaymentClick}/> 
             {/*
           </Link> */}
