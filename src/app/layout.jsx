@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
     <html lang="ru">
       <Script src="https://telegram.org/js/telegram-web-app.js"/>
       <Script id="Telegram WebApp" >
-  {`Telegram.WebApp.setHeaderColor('secondary_bg_color')`}
+  {`window.Telegram.WebApp.setHeaderColor('secondary_bg_color')`}
 </Script>
       <body className={inter.className}>{children}
       </body>
