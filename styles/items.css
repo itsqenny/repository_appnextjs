@@ -215,8 +215,7 @@
         z-index: 9998;
     }
     .main-popup.show{
-      height: 105px;
-        border-radius: 18px;
+        height: 40px;
         background: #00c73e;
         color: var(--button-text-color);
         font-size: 14px;
