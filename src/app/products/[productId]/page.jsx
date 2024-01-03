@@ -78,15 +78,19 @@
   }
 
   const handlePaymentClick = () => {
-    const queryParams = {
-      id: item.id,
-      name: item.name,
-      ConfirmPrice: currentPrice,
-      ConfirmSize: currentSize,
-      orderId: uniqueOrderId,
-    };
-    const queryString = new URLSearchParams(queryParams).toString();
-    router.push(`/confirm?${queryString}`)
+    if (typeof window !== 'undefined') { // Проверка, что код выполняется в браузере
+      const queryParams = {
+        id: item.id,
+        name: item.name,
+        ConfirmPrice: currentPrice,
+        ConfirmSize: currentSize,
+        orderId: uniqueOrderId,
+      };
+      const queryString = new URLSearchParams(queryParams).toString();
+      router.push(`/confirm?${queryString}`);
+    } else {
+      console.warn('window is not defined, skipping router.push');
+    }
   };
 
     return (
