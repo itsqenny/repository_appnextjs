@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Checkout from "./checkout";
 import Loading from "./loading";
-
+import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
+import Back from "@/app/UI/BackButton/BackButton";
 export default function ProductConfirm({searchParams}) {
   const [item, setItem] = useState(null);
   const { id, name, ConfirmPrice, ConfirmSize, orderId } = searchParams;
@@ -12,6 +13,7 @@ export default function ProductConfirm({searchParams}) {
   const [price, setPrice] = useState(ConfirmPrice || null);
   const [isCredited, setCredited] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(true);
+
   const handlePayment = () => {
     console.log('payment');
     setCredited(true);
@@ -44,7 +46,7 @@ export default function ProductConfirm({searchParams}) {
   const srcSet = widths.map((width) => `${item.img}?w=${width}&q=75 ${width}w`).join(', ');
     return (
         <>
-        
+        <Back/>
         <div className="confirm-item">
             <div className="images-slider-wrapper">
                 <div className="images-slider-images">
@@ -99,9 +101,12 @@ export default function ProductConfirm({searchParams}) {
             </div>
             </div>
             <SelectBonus price={ConfirmPrice} setParentPrice={setPrice}/>
+            {/* 
             <div className="main-button">
-              <button onClick={handlePayment}>Купить за {price !== null ? price : ConfirmPrice} ₽</button>
-          </div>
+              <button onClick={handlePayment}>Купить за ₽</button>
+            </div>
+            */}
+            <ButtonCheckout handlePayment={handlePayment} price={price !== null ? price : ConfirmPrice} />
             </>
         ):(
         <>
