@@ -4,14 +4,11 @@ import CustomerPhoto from "./customerPhoto";
 import { useTelegram } from "../UI/useTelegram/useTelegram";
 
 const Header = () => {
-    const { tg } = useTelegram();
     const userId = '12351';
     const name = 'Евгений';
     return (
         <> 
-        {tg.expand()}
-            <nav className="nav-form">
-                  
+            <nav className="nav-form"> 
                   <Link href={`/customer/${userId}`}>
                    <div className="usercard">
                      <div className="usercard_block">
