@@ -1,12 +1,15 @@
+'use client'
 import Link from "next/link";
 import CustomerPhoto from "./customerPhoto";
+import { useTelegram } from "../UI/useTelegram/useTelegram";
 
 const Header = () => {
-
+    const { tg } = useTelegram();
     const userId = '12351';
     const name = 'Евгений';
     return (
         <> 
+        {tg.expand()}
             <nav className="nav-form">
                   
                   <Link href={`/customer/${userId}`}>
