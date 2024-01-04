@@ -26,16 +26,6 @@ export default function RootLayout({ children }) {
     <html lang="ru">
       <Head>
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive"/>
-        <Script
-        id="expand"
-        dangerouslySetInnerHTML={{
-          __html: `
-            if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.expand) {
-              window.Telegram.WebApp.expand();
-            }
-          `
-        }}
-      />
       </Head>
      
       <body className={inter.className}>{children}
