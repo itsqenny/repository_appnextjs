@@ -1,5 +1,6 @@
 'use client'
 
+import Back from "@/app/UI/BackButton/BackButton";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -12,6 +13,8 @@ const SearchInput = () => {
         router.push(`?q=${searchQuery}`)
     };
     return (
+        <>
+        <Back/>
         <form onSubmit={onSearch}>
         <div className="wrapper__form__container">
             <div className="wrapper__form__container_input_">
@@ -43,6 +46,7 @@ const SearchInput = () => {
             </div>
             </div>
             </form>
+            </>
     );
 };
 

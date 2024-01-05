@@ -4,7 +4,6 @@ import Loading from "./loading";
 import SearchInput from "./SearchInput";
 import Products from "../products/page";
 import { useSearchParams } from "next/navigation";
-import Back from "../UI/BackButton/BackButton";
 
 function Search() {
     
@@ -19,7 +18,6 @@ function Search() {
   }
     return (
         <>
-        <Back/>
         <SearchInput/>
         <Products searchQuery={searchQuery}/>
         </>

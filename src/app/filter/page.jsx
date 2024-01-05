@@ -1,8 +1,8 @@
 'use client'
+import Back from "../UI/BackButton/BackButton";
 import { useState, useEffect } from "react";
 import Loading from "./loading";
 import Link from "next/link";
-import Back from "../UI/BackButton/BackButton";
 function Filter (){
   useEffect(() => {
     // Replace direct import with a fetch request
