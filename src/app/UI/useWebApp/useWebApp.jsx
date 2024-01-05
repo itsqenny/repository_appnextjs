@@ -6,7 +6,8 @@ export default function useWebApp() {
     if (window.Telegram && window.Telegram.WebApp) {
       let WebApp = window.Telegram.WebApp;
       WebApp.expand();
-      console.log(WebApp.expand())
+      WebApp.setHeaderColor('secondary_bg_color');
+      WebApp.enableClosingConfirmation();
     }
   }, []);
 }
