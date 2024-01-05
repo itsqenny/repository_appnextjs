@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Loading from "./loading";
 import Link from "next/link";
-
+import Back from "../UI/BackButton/BackButton";
 function Filter (){
   useEffect(() => {
     // Replace direct import with a fetch request
@@ -182,6 +182,7 @@ function Filter (){
 
     return (
         <>
+        <Back/>
         <div className="filters">
       {filtersVisible && (
         <div className="filters-body">

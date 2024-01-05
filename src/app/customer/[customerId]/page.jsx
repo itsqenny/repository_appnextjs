@@ -1,5 +1,7 @@
 'use client'
+import Back from "@/app/UI/BackButton/BackButton";
 import { useState } from "react";
+import SavedButton from '@/app/UI/MainButton/SavedButton'
 
 const CustomerId = () => {
    
@@ -54,6 +56,7 @@ const CustomerId = () => {
      
     return (
         <>
+        <Back/>
      {isEditing ? (
       <>
         <div className="profile-header">
@@ -219,9 +222,13 @@ const CustomerId = () => {
                   </div>
                 </div>
             </div>
+
+            {/* 
             <div className="main-button">
               <button onClick={handleSaveClick}>Сохранить</button>
-          </div>
+            </div>
+            */}
+            <SavedButton handleSaveClick={handleSaveClick} />
             </>
             )}
               </>

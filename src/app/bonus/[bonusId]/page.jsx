@@ -1,4 +1,5 @@
 'use client'
+import Back from "@/app/UI/BackButton/BackButton";
 import { useState } from "react";
 
 
@@ -18,6 +19,7 @@ const Bonus = () => {
 
     return (
         <>
+        <Back/>
             <div>
                 <div className="refer-friend-section">
                 <div className="refer-friend-box-selection">
