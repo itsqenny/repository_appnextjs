@@ -18,18 +18,21 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata = {
   title: 'zipperapp',
   description: 'powerful to zipperapp',
+  name: 'viewport',
+  content: 'width=device-width',
 }
 
 export const revalidate = 1;
 export default function RootLayout({ children }) {
   return (
     <html lang="ru">
-      <Head>
-        <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive"/>
-      </Head>
+      <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive"/>
+        
+      
      
       <body className={inter.className}>{children}
       </body>
+      
     </html>
   )
 }
