@@ -1,11 +1,13 @@
 'use client'
 import Link from "next/link";
 import CustomerPhoto from "./customerPhoto";
-import { useTelegram } from "../UI/useTelegram/useTelegram";
+import useWebApp from "../UI/useWebApp/useWebApp";
 
 const Header = () => {
+    useWebApp();
     const userId = '12351';
     const name = 'Евгений';
+    
     return (
         <> 
             <nav className="nav-form"> 
