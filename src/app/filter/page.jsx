@@ -1,10 +1,7 @@
 'use client'
-
 import { useState, useEffect } from "react";
 import Loading from "./loading";
 import Link from "next/link";
-import { BackButton } from "@twa-dev/sdk/react";
-import { useRouter } from "next/navigation";
 
 function Filter (){
   useEffect(() => {
@@ -182,7 +179,6 @@ function Filter (){
     }
     setMaxPrice(value);
   };
-
 
     return (
         <>
