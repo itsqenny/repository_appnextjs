@@ -12,17 +12,12 @@ function Search() {
     const searchQuery = search ? search.get('q') : null;
     const encodedSearchQuery = searchQuery || null;
 
-    const GoBack = () => {
-      router.push('/')
-    }
-
   if(!Products){
     return <Loading/>
   }
   
     return (
         <>
-        <BackButton onClick={GoBack}/>
         <SearchInput/>
         <Products searchQuery={searchQuery}/>
         </>

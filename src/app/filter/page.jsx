@@ -182,14 +182,10 @@ function Filter (){
     }
     setMaxPrice(value);
   };
-  const router = useRouter();
-  const GoBack = () => {
-    router.push('/')
-  }
+
 
     return (
         <>
-        <BackButton onClick={GoBack}/>
         <div className="filters">
       {filtersVisible && (
         <div className="filters-body">
