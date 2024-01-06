@@ -1,8 +1,11 @@
 'use client'
-import Back from "../UI/BackButton/BackButton";
+
 import { useState, useEffect } from "react";
 import Loading from "./loading";
 import Link from "next/link";
+import { BackButton } from "@twa-dev/sdk/react";
+import { useRouter } from "next/navigation";
+
 function Filter (){
   useEffect(() => {
     // Replace direct import with a fetch request
@@ -179,10 +182,14 @@ function Filter (){
     }
     setMaxPrice(value);
   };
+  const router = useRouter();
+  const GoBack = () => {
+    router.push('/')
+  }
 
     return (
         <>
-        <Back/>
+        <BackButton onClick={GoBack}/>
         <div className="filters">
       {filtersVisible && (
         <div className="filters-body">
