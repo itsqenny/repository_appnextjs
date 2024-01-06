@@ -7,14 +7,21 @@ import { useRouter } from "next/navigation";
 
 const SearchInput = () => {
     const [searchQuery, setSearchQuery] = useState("");
+    const [BackButton, setBackButton] = useState(null);
     const router = useRouter();
     const onSearch =(event) => {
         event.preventDefault();
         router.push(`?q=${searchQuery}`)
     };
+
+  if (typeof window !== 'undefined' && !BackButton) {
+    import('@/app/UI/BackButton/BackButton').then(module => {
+      setBackButton(module.default);
+    });
+  }
     return (
         <>
-        <Back/>
+        {BackButton && <Back/>}
         <form onSubmit={onSearch}>
         <div className="wrapper__form__container">
             <div className="wrapper__form__container_input_">
