@@ -15,9 +15,9 @@ const Header = () => {
                    <div className="usercard">
                      <div className="usercard_block">
                        <CustomerPhoto/>
-                       <div className='usercard-info'>
-                         <div className='usercard-name'>
-                           <div className='usercard-navigation-name'>{name}</div>
+                       <div className="usercard-info">
+                         <div className="usercard-name">
+                           <div className="usercard-navigation-name">{name}</div>
                            <svg
                              className="user_block_svg"
                              aria-hidden="true"

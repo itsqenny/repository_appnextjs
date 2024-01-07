@@ -1,13 +1,16 @@
-'use client'
+import { BackButton } from "@twa-dev/sdk/react";
 
-import { BackButton } from "@twa-dev/sdk/react"
+function Back() {
+  // Проверяем, определен ли объект window
+  if (typeof window === 'undefined') {
+    return null; // или другая логика, если необходимо
+  }
 
-function Back(){
-
-    return (
+  return (
     <>
-    <BackButton/>
-    </>);
-};
+      <BackButton />
+    </>
+  );
+}
 
 export default Back;
