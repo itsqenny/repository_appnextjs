@@ -174,13 +174,13 @@
           }
         }}>
         */}
-           {/* 
+            {/*
            <div className="main-button">
                 <button onClick={handlePaymentClick}>Перейти к оплате</button>
             </div>
-           */}
+           
           
-          
+          */}
             <ButtonPayment handlePaymentClick={handlePaymentClick}/> 
             {/*
           </Link> */}
