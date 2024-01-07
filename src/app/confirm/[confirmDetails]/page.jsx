@@ -117,17 +117,17 @@ useEffect(() => {
             </div>
             </div>
             <SelectBonus price={ConfirmPrice} setParentPrice={setPrice}/>
-            {/* 
+           {/* 
             <div className="main-button">
-              <button onClick={handlePayment}>Купить за ₽</button>
+              <button onClick={handlePayment}>Купить за {price !== null ? price : ConfirmPrice}₽</button>
             </div>
             */}
              <ButtonCheckout handlePayment={handlePayment} price={price !== null ? price : ConfirmPrice} />
-          
+            
           </>
       ):(
       <>
-        <Checkout items={searchParams} isCredited={isCredited} price={price} orderId={orderId}/>
+        <Checkout items={parsedParams} isCredited={isCredited} price={price} orderId={orderId}/>
       </>
       )}
           
