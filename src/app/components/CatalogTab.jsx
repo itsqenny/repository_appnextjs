@@ -24,7 +24,7 @@ const catalogTab = () => {
                 </svg>
                 </button>
             </Link>
-            <Link href={`/filter/`}>
+            <Link href={`/filter/filter`}>
                 <button className="button-search-ico">
                 <svg
                 viewBox="0 0 25 25"

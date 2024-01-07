@@ -2,7 +2,8 @@
 import { useState, useEffect } from "react";
 import Loading from "./loading";
 import Link from "next/link";
-
+import Back from "@/app/UI/BackButton/BackButton";
+import ChangeButton from "@/app/UI/MainButton/ChangeButton";
 function Filter (){
   useEffect(() => {
     // Replace direct import with a fetch request
@@ -182,6 +183,7 @@ function Filter (){
 
     return (
         <>
+        <Back/>
         <div className="filters">
       {filtersVisible && (
         <div className="filters-body">
@@ -303,9 +305,14 @@ function Filter (){
           </button>
         </div>
       ) : (
+        <>
+          {/* 
           <div className="main-button">
                 <button onClick={handleFiltersChange}>Применить фильтр</button>
             </div>
+            */}
+          <ChangeButton handleFiltersChange={handleFiltersChange}/>
+        </>
       )}
       {filteredProducts.length === 0 ? (
         <p></p>
