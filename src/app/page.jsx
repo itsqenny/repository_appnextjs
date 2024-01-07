@@ -1,3 +1,4 @@
+'use client'
 
 import Products from './products/page';
 import Header from './customer/page';
@@ -6,7 +7,7 @@ import SearchTab from './search/SearchTab';
 import OpenBanner from './banners/open/banner';
 import BonusTab from './bonus/BonusTab';
 
-export default async function Home(){
+export default function Home(){
     
     return (
         <>
