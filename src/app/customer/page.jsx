@@ -3,7 +3,7 @@ import Link from "next/link";
 import CustomerPhoto from "./customerPhoto";
 import useWebApp from "../UI/useWebApp/useWebApp";
 import Validation from "../UI/getUserId/Validation";
-
+import { useState } from "react";
 
 const Header = () => {
     useWebApp();
