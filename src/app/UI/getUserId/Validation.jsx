@@ -2,14 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-import Header from '@/app/customer/page';
-import CatalogTab from '@/app/components/CatalogTab';
-import SearchTab from '@/app/components/SearchTab';
-import OpenBanner from '@/app/banners/open/banner';
-import BonusTab from '@/app/bonus/BonusTab';
-import Products from "@/app/products/page";
 
-export default function Validation({ children }){
+export default function Validation(){
     const [userId, setUserId] = useState("");
 
     useEffect(() => {
@@ -59,15 +53,5 @@ export default function Validation({ children }){
     
         fetchData();
       }, []);
-      
-    return(
-        <>
-            <Header userId={userId}/>
-            <SearchTab/>
-            <BonusTab/>
-            <OpenBanner/>
-            <CatalogTab/>
-            <Products/>
-        </>
-    )
+    
 }

@@ -2,10 +2,12 @@
 import Link from "next/link";
 import CustomerPhoto from "./customerPhoto";
 import useWebApp from "../UI/useWebApp/useWebApp";
+import Validation from "../UI/getUserId/Validation";
 
-const Header = ({userId}) => {
+const Header = () => {
     useWebApp();
-    console.log('userId',userId)
+    Validation();
+    const userId = '12351';
     const name = 'Евгений';
     
     return (
@@ -14,7 +16,7 @@ const Header = ({userId}) => {
                   <Link href={`/customer/${userId}`}>
                    <div className="usercard">
                      <div className="usercard_block">
-                       <CustomerPhoto userId={userId}/>
+                       <CustomerPhoto/>
                        <div className="usercard-info">
                          <div className="usercard-name">
                            <div className="usercard-navigation-name">{name}</div>
