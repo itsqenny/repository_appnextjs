@@ -2,10 +2,12 @@
 import Back from "@/app/UI/BackButton/BackButton";
 import { useState } from "react";
 import SavedButton from '@/app/UI/MainButton/SavedButton'
+import { useParams } from 'next/navigation';
 
 const CustomerId = () => {
-   
-    const url = `https://cdn.zipperconnect.space/customer/settings/client/photo/204688184`;
+    const params = useParams();
+    const { userId } = params;
+    const url = `https://cdn.zipperconnect.space/customer/settings/client/photo/${userId}`;
     const username = (null)
     const [form, setForm] = useState({
         fullName: '',
@@ -70,7 +72,7 @@ const CustomerId = () => {
           
                     </div>
                     <div className="profile-name">Евгений</div>
-                    <footer>{`@${username}` || 'Не указан'}</footer>
+                    <footer>{`id:${userId}` || 'Не указан'}</footer>
                 </div>
             </div> 
         </div>
