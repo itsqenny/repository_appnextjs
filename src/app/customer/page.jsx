@@ -4,19 +4,23 @@ import CustomerPhoto from "./customerPhoto";
 import useWebApp from "../UI/useWebApp/useWebApp";
 import Validation from "../UI/getUserId/Validation";
 
+
 const Header = () => {
     useWebApp();
-    Validation();
-    const userId = '12351';
+    const [userId, setUserId] = useState("");
     const name = 'Евгений';
-    
+    const handleUserIdChange = (newUserId) => {
+      setUserId(newUserId);
+    };
+    console.log('userId:',userId)
     return (
         <> 
+         <Validation onUserIdChange={handleUserIdChange} />
             <nav className="nav-form"> 
                   <Link href={`/customer/${userId}`}>
                    <div className="usercard">
                      <div className="usercard_block">
-                       <CustomerPhoto/>
+                       <CustomerPhoto userId={userId}/>
                        <div className="usercard-info">
                          <div className="usercard-name">
                            <div className="usercard-navigation-name">{name}</div>
