@@ -11,7 +11,7 @@ const Header = () => {
     const handleUserIdChange = (newUserId) => {
       setUserId(newUserId);
     };
-    console.log('userId:',userId)
+    console.log('userId:',userId);
     return (
         <> 
          <Validation onUserIdChange={handleUserIdChange} />
