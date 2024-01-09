@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 
 export default function Validation({ onUserIdChange }){
-    const [userId, setUserId] = useState("");
+    let [userId, setUserId] = useState("");
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
@@ -53,10 +53,7 @@ export default function Validation({ onUserIdChange }){
     
         fetchData();
       }, []);
-
-      return {
-        userId,
-        isAuthenticated,
-      };
-    
+    return(
+      userId
+    )
 }
