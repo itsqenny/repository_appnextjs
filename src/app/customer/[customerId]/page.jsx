@@ -7,7 +7,8 @@ import { useParams } from 'next/navigation';
 const CustomerId = () => {
     const params = useParams();
     const { userId } = params;
-    console.log(`this customerID: ${userId}`)
+    console.log(params)
+    console.log(`this customerID: ${userId.toString()}`)
     const url = `https://cdn.zipperconnect.space/customer/settings/client/photo/${userId}`;
     const username = (null)
     const [form, setForm] = useState({
