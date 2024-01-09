@@ -4,15 +4,15 @@ import CustomerPhoto from "./customerPhoto";
 import useWebApp from "../UI/useWebApp/useWebApp";
 import Validation from "../UI/getUserId/Validation";
 import { useState } from "react";
+import initData from "../UI/useInitData/initData";
 
 const Header = () => {
     useWebApp();
     const [userId, setUserId] = useState("");
-    const name = 'Евгений';
     const handleUserIdChange = (newUserId) => {
       setUserId(newUserId);
     };
-    console.log('userId:',userId);
+    const { user } = initData();
     return (
         <> 
          <Validation onUserIdChange={handleUserIdChange} />
@@ -23,7 +23,7 @@ const Header = () => {
                        <CustomerPhoto userId={userId}/>
                        <div className="usercard-info">
                          <div className="usercard-name">
-                           <div className="usercard-navigation-name">{name}</div>
+                           <div className="usercard-navigation-name">{user?.first_name}</div>
                            <svg
                              className="user_block_svg"
                              aria-hidden="true"
