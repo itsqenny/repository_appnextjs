@@ -5,13 +5,8 @@ import { useState } from "react";
 import Validation from "../UI/getUserId/Validation";
 
 const BonusTab = () => {
-    const { userId } = Validation();
-    if (typeof userId !== 'string' && typeof userId !== 'number') {
-        // Обработка ошибки, если необходимо
-        console.error('Invalid userId');
-        return null; // или другой рендеринг по умолчанию или ошибку
-    }
-    console.log(`bonus userID: ${userId}`)
+    const result = Validation();
+    console.log(result); 
     const [userBonus, setUserBonus] = useState(0);
     return (
         <>
