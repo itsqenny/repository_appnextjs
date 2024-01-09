@@ -2,11 +2,11 @@
 
 
 export default function initData() {
-let WebApp = window.Telegram.WebApp;
+    let WebApp = typeof window !== 'undefined' ? window.Telegram.WebApp : null;
   return {
     WebApp,
-    user: WebApp.initDataUnsafe?.user,
-    queryId: WebApp.initDataUnsafe?.query_id,
-    userId: WebApp.initDataUnsafe?.user.id,
+    user: WebApp?.initDataUnsafe?.user,
+    queryId: WebApp?.initDataUnsafe?.query_id,
+    userId: WebApp?.initDataUnsafe?.user.id,
   };
 }
