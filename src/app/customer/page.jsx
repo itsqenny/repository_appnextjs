@@ -12,13 +12,10 @@ const Header = () => {
     const handleUserIdChange = (newUserId) => {
       setUserId(newUserId);
     };
-    const { user, WebApp } = initData();
+    const { user } = initData();
     
     return (
         <> 
-        {WebApp?.expand()}
-        {WebApp?.setHeaderColor('secondary_bg_color')}
-        {WebApp?.enableClosingConfirmation()}
          <Validation onUserIdChange={handleUserIdChange} />
             <nav className="nav-form"> 
                   <Link href={`/customer/${userId}`}>
