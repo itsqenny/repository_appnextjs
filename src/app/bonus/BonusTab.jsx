@@ -6,6 +6,7 @@ import Validation from "../UI/getUserId/Validation";
 
 const BonusTab = () => {
     const { userId } = Validation();
+    
     console.log(`bonus userID: ${userId}`)
     const [userBonus, setUserBonus] = useState(0);
     return (
