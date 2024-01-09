@@ -55,7 +55,5 @@ export default function Validation({ onUserIdChange }){
       }, []);
 
 
-    return {
-      userId: userId,
-    }
+      return userId;
 }
