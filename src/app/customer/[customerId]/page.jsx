@@ -76,7 +76,7 @@ const CustomerId = () => {
           
                     </div>
                     <div className="profile-name">{user?.first_name}</div>
-                    <footer>{`${customerId}` || 'Не указан'}</footer>
+                    <footer>{`@${user?.username}` || `${customerId}`}</footer>
                 </div>
             </div> 
         </div>
