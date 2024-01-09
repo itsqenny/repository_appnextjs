@@ -5,14 +5,22 @@ import { useState } from "react";
 import Validation from "../UI/getUserId/Validation";
 
 const BonusTab = () => {
-    const validationData = Validation();  // Получите данные из Validation()
-    const userId = validationData.userId; // Извлеките userId из объекта
+    const validationData = Validation(); 
+    let userId = null;
+
+    try {
+        const parsedData = JSON.parse(JSON.stringify(validationData)); // Преобразуйте объект в строку и снова в объект для уверенности
+        userId = parsedData.userId; // Извлеките userId
+    } catch (error) {
+        console.error('Error parsing validation data:', error);
+    }
+
     if (!userId) {
-        console.error('userId is not available');
-        return null; // или другое действие, которое вы считаете подходящим
+        console.error('Failed to extract userId from validation data');
+        return null; // или другой рендеринг по умолчанию или ошибку
     }
     
-    console.log(`bonus userID: ${userId}`);
+    
     const [userBonus, setUserBonus] = useState(0);
     return (
         <>
