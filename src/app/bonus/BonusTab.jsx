@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const BonusTab = () => {
     const { userId } = initData();
-    const [userBonus, setUserBonus] = useState(0);
+    const [userBonus, setUserBonus] = useState(0 || bonus);
     useEffect(() => {
         reloadBonus();
         SendData();
@@ -34,7 +34,7 @@ const BonusTab = () => {
             if (err) {
               console.error("Error saving bonus to CloudStorage", err);
             } else {
-              setUserBonus(bonus); // Обновление состояния userBonus
+              setUserBonus(bonus);
             }
           });
         };
