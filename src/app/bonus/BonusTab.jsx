@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const BonusTab = () => {
     const { userId } = initData();
-    const [userBonus, setUserBonus] = useState(0 || bonus);
+    const [userBonus, setUserBonus] = useState(0);
     useEffect(() => {
         reloadBonus();
         SendData();
