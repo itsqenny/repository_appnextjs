@@ -3,8 +3,10 @@ import Back from "@/app/UI/BackButton/BackButton";
 import { useState } from "react";
 import SavedButton from '@/app/UI/MainButton/SavedButton'
 import { useParams } from 'next/navigation';
+import { initData } from "@/app/UI/useInitData/initData";
 
 const CustomerId = () => {
+    const { user } = initData();
     const params = useParams();
     const { customerId } = params;
     console.log(params)
@@ -73,7 +75,7 @@ const CustomerId = () => {
                         </div>
           
                     </div>
-                    <div className="profile-name">Евгений</div>
+                    <div className="profile-name">{user?.first_name}</div>
                     <footer>{`${customerId}` || 'Не указан'}</footer>
                 </div>
             </div> 
