@@ -1,8 +1,10 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import Validation from "../UI/getUserId/Validation";
-const CustomerPhoto = ({userId}) => {
+import initData from "../UI/useInitData/initData";
+
+const CustomerPhoto = () => {
+  const { userId } = initData();
   const [imageSrc, setImageSrc] = useState(null);
   const [error, setError] = useState(null);
 
