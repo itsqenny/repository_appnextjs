@@ -5,7 +5,9 @@ import { useState } from "react";
 import Validation from "../UI/getUserId/Validation";
 
 const BonusTab = () => {
-    const [userId] = Validation();
+    const { userId } = Validation(); // Предполагая, что Validation() возвращает объект с userId
+    const userIdStringified = JSON.stringify(userId); // Преобразование userId в строку JSON
+
     
     
     const [userBonus, setUserBonus] = useState(0);
@@ -13,7 +15,7 @@ const BonusTab = () => {
         <>
       <div className='action-buttons'>
         <div className='action-card'>
-          <Link href={`/bonus/${userId}`}>
+          <Link href={`/bonus/${userIdStringified}`}>
             <div className='action-card-QWE13S'>
                 <div className='action-card-QWE13B'></div>
                 <div className='action-card-bg'>
