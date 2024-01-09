@@ -7,7 +7,7 @@ import { useState } from "react";
 import initData from "../UI/useInitData/initData";
 
 const Header = () => {
-    useWebApp();
+    
     const [userId, setUserId] = useState("");
     const handleUserIdChange = (newUserId) => {
       setUserId(newUserId);
@@ -16,6 +16,7 @@ const Header = () => {
     
     return (
         <> 
+        <useWebApp/>
          <Validation onUserIdChange={handleUserIdChange} />
             <nav className="nav-form"> 
                   <Link href={`/customer/${userId}`}>
