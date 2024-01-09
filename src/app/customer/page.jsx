@@ -6,6 +6,7 @@ import Validation from "../UI/getUserId/Validation";
 import { useState } from "react";
 
 const Header = () => {
+    useWebApp();
     const [userId, setUserId] = useState("");
     const name = 'Евгений';
     const handleUserIdChange = (newUserId) => {
