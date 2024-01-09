@@ -5,14 +5,20 @@ import { useState } from "react";
 import Validation from "../UI/getUserId/Validation";
 
 const BonusTab = () => {
-    const result = Validation();
-    console.log(result); 
+    const validationData = Validation();  // Получите данные из Validation()
+    const userId = validationData.userId; // Извлеките userId из объекта
+    if (!userId) {
+        console.error('userId is not available');
+        return null; // или другое действие, которое вы считаете подходящим
+    }
+    
+    console.log(`bonus userID: ${userId}`);
     const [userBonus, setUserBonus] = useState(0);
     return (
         <>
       <div className='action-buttons'>
         <div className='action-card'>
-          <Link href={`/bonus/123`}>
+          <Link href={`/bonus/${userId}`}>
             <div className='action-card-QWE13S'>
                 <div className='action-card-QWE13B'></div>
                 <div className='action-card-bg'>
