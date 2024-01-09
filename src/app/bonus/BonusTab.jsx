@@ -2,10 +2,10 @@
 'use client'
 import Link from "next/link";
 import { useState } from "react";
-import Validation from "../UI/getUserId/Validation";
+import initData from "../UI/useInitData/initData";
 
 const BonusTab = () => {
-    const userId = Validation();
+    const { userId } = initData();
     const [userBonus, setUserBonus] = useState(0);
 
     return (
