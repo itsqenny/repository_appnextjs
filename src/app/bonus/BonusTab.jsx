@@ -12,7 +12,7 @@ const BonusTab = () => {
         <>
       <div className='action-buttons'>
         <div className='action-card'>
-          <Link href={`/bonus/${userId}`}>
+          <Link href={`/bonus/123`}>
             <div className='action-card-QWE13S'>
                 <div className='action-card-QWE13B'></div>
                 <div className='action-card-bg'>
