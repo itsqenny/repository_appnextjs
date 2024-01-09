@@ -5,7 +5,7 @@ import { useState } from "react";
 import Validation from "../UI/getUserId/Validation";
 
 const BonusTab = () => {
-    const userId = Validation(onUserIdChange);
+    const userId = Validation();
     const [userBonus, setUserBonus] = useState(0);
 
     return (
