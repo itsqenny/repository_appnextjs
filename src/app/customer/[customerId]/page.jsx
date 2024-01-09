@@ -3,7 +3,7 @@ import Back from "@/app/UI/BackButton/BackButton";
 import { useState } from "react";
 import SavedButton from '@/app/UI/MainButton/SavedButton'
 import { useParams } from 'next/navigation';
-import { initData } from "@/app/UI/useInitData/initData";
+import initData  from "@/app/UI/useInitData/initData";
 
 const CustomerId = () => {
     const { user } = initData();
