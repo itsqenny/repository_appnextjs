@@ -5,7 +5,7 @@ import Validation from "../UI/getUserId/Validation";
 import { useState } from "react";
 import initData from "../UI/useInitData/initData";
 import useWebApp from "../UI/useWebApp/useWebApp";
-
+export const dynamic = 'force-dynamic'
 const Header = () => {
    useWebApp();
     const { user, userId } = initData();
