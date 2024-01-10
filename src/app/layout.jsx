@@ -15,18 +15,18 @@ import Head from 'next/head'
 import Script from 'next/script'
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata = {
-  title: 'zipperapp',
-  description: 'powerful to zipperapp',
-  name: 'viewport',
-  content: 'width=device-width',
-}
 
 export const revalidate = 1;
 export default function RootLayout({ children }) {
   return (
     <html lang="ru"> 
-      
+      <Head>
+        <title>zipperapp</title>
+        <meta name="description" content="zipperapp" />
+        <meta name="viewport" content="width=device-width" />
+        
+      </Head>
+
         <Script 
         id="Telegram WebApp"
         type="text/javascript"

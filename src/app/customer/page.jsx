@@ -8,11 +8,10 @@ import useWebApp from "../UI/useWebApp/useWebApp";
 
 export default function Header(){
     const { user, userId } = initData();
-    
     useWebApp();
     return (
         <> 
-        
+        <Validation/>
             <nav className="nav-form"> 
                   <Link href={`/customer/${userId}`}>
                    <div className="usercard">
