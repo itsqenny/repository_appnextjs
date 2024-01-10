@@ -11,7 +11,7 @@ export default function Header(){
   
     return (
         <> 
-         <Validation />
+        
             <nav className="nav-form"> 
                   <Link href={`/customer/${userId}`}>
                    <div className="usercard">
