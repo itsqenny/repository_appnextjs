@@ -7,7 +7,7 @@ import OpenBanner from './banners/open/banner';
 import BonusTab from './bonus/BonusTab';
 import { Suspense } from 'react'
 import Loading from './loading';
-L
+
 export default async function Home(){
     return (
         <>
