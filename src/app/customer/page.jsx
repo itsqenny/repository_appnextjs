@@ -7,11 +7,10 @@ import initData from "../UI/useInitData/initData";
 import useWebApp from "../UI/useWebApp/useWebApp";
 
 const Header = () => {
-   
+   useWebApp();
     const { user, userId } = initData();
     return (
         <> 
-        <useWebApp/>
          <Validation />
             <nav className="nav-form"> 
                   <Link href={`/customer/${userId}`}>
