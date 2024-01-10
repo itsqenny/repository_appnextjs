@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
       <Script 
       id="Telegram WebApp"
       type="text/javascript"
-      src="https://telegram.org/js/telegram-web-app.js" defer async/>
+      src="https://telegram.org/js/telegram-web-app.js" strategy="afterInteractive" defer async/>
       </head>
 
 
