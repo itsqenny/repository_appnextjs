@@ -3,19 +3,12 @@ import Link from "next/link";
 import CustomerPhoto from "./customerPhoto";
 import Validation from "../UI/getUserId/Validation";
 import initData from "../UI/useInitData/initData";
-import { useEffect } from "react";
+
 
 
 export default function Header(){
     const { user, userId } = initData();
-    useEffect(() => {
-      if (window.Telegram && window.Telegram.WebApp) {
-        let WebApp = window.Telegram.WebApp;
-        WebApp.expand();
-        WebApp.setHeaderColor('secondary_bg_color');
-        WebApp.enableClosingConfirmation();
-      }
-    }, []);
+  
     return (
         <> 
          <Validation />
