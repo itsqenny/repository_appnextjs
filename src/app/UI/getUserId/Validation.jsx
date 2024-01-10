@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 
-export default function Validation({ onUserIdChange }){
+export default function Validation(){
     let [userId, setUserId] = useState("");
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     useEffect(() => {
@@ -22,7 +22,6 @@ export default function Validation({ onUserIdChange }){
               if (user && user.id) {
                 const userId = user.id.toString();
                 setUserId(userId);
-                onUserIdChange(userId);
               }
             }
             
