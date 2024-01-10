@@ -1,7 +1,7 @@
 'use client'
 import Back from "@/app/UI/BackButton/BackButton";
 import initData from "@/app/UI/useInitData/initData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
 
 const Bonus = () => {
