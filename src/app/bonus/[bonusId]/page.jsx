@@ -1,11 +1,13 @@
 'use client'
 import Back from "@/app/UI/BackButton/BackButton";
+import initData from "@/app/UI/useInitData/initData";
 import { useState } from "react";
-
+import axios from 'axios';
 
 const Bonus = () => {
+    const { userId } = initData();
     const [isCopied, setIsCopied] = useState(false);
-    const userId = '123456';
+    const [userBonus, setUserBonus] = useState(0);
     const handleCopyClick = async () => {
       try {
         await navigator.clipboard.writeText(`https://t.me/zipperstore_bot?start=${userId}`);
@@ -15,8 +17,47 @@ const Bonus = () => {
       }
     };
 
-   const [userBonus, setUserBonus] = useState(0);
+   useEffect(() => {
+    reloadBonus();
+    SendData();
+  }, [userId]);
 
+  const reloadBonus = () => {
+    // Извлечение бонуса из Local Storage
+    const storedBonus = window.Telegram.WebApp.CloudStorage.getItems(["userBonus"], (err, values) => {
+      if (!err && values.userBonus) {
+        setUserBonus(values.userBonus);
+      } else {
+        // Если бонус отсутствует в CloudStorage, выполнить запрос к серверу
+        fetchData();
+      }
+    });
+
+    // Слушатель событий для обновления бонуса
+    const eventSource = new EventSource(`https://crm.zipperconnect.space/connect/bonus/${userId}`);
+    eventSource.onmessage = function (event) {
+      const bonus = JSON.parse(event.data);
+
+      // Обновление бонуса в Local Storage и состоянии компонента
+      window.Telegram.WebApp.CloudStorage.setItem("userBonus", bonus, (err, saved) => {
+        if (err) {
+          console.error("Error render bonus", err);
+        } else {
+          setUserBonus(bonus); // Обновление состояния userBonus
+        }
+      });
+    };
+  };
+
+  const fetchData = async () => {
+    await axios.post(`https://crm.zipperconnect.space/get/bonus/${userId}`, {
+      userId: userId,
+    });
+  };
+
+  const SendData = async () => {
+    fetchData();
+  };
     return (
         <>
         <Back/>
