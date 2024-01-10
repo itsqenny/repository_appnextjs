@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google'
 import '../../styles/customer.css'
 import '../../styles/filters.css'
-import globalStyles from '../../styles/global.css';
+import '../../styles/global.css'
 import '../../styles/header.css'
 import '../../styles/item.css'
 import '../../styles/items.css'
@@ -43,9 +43,6 @@ export default function RootLayout({ children }) {
      
       <body className={inter.className}>
         {children}
-        <style jsx global>
-        {globalStyles}
-      </style>
       </body>
       
     </html>
