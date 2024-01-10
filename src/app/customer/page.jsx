@@ -2,12 +2,10 @@
 import Link from "next/link";
 import CustomerPhoto from "./customerPhoto";
 import Validation from "../UI/getUserId/Validation";
-import { useState } from "react";
 import initData from "../UI/useInitData/initData";
-import useWebApp from "../UI/useWebApp/useWebApp";
-export const dynamic = 'force-dynamic'
-const Header = () => {
-   useWebApp();
+
+
+export default function Header(){
     const { user, userId } = initData();
     return (
         <> 
@@ -69,5 +67,4 @@ const Header = () => {
     );
 };
 
-export default Header;
 
