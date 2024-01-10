@@ -3,15 +3,15 @@ import Link from "next/link";
 import CustomerPhoto from "./customerPhoto";
 import Validation from "../UI/getUserId/Validation";
 import initData from "../UI/useInitData/initData";
-
+import useWebApp from "../UI/useWebApp/useWebApp";
 
 
 export default function Header(){
     const { user, userId } = initData();
-  
+    useWebApp();
     return (
         <> 
-        
+        <Validation/>
             <nav className="nav-form"> 
                   <Link href={`/customer/${userId}`}>
                    <div className="usercard">
