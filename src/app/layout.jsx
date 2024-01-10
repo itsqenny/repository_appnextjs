@@ -26,7 +26,15 @@ export const revalidate = 1;
 export default function RootLayout({ children }) {
   return (
     <html lang="ru"> 
-      
+      <head>
+        <Script 
+        id="Telegram WebApp"
+        type="text/javascript"
+        src="https://telegram.org/js/telegram-web-app.js" 
+        strategy="lazyOnload" 
+        defer 
+        async/>
+      </head>
       <body className={inter.className}>
         {children}
       </body>
