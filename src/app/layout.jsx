@@ -31,7 +31,6 @@ export default function RootLayout({ children }) {
         id="Telegram WebApp"
         type="text/javascript"
         src="https://telegram.org/js/telegram-web-app.js" 
-        strategy="lazyOnload" 
         defer 
         async/>
       </head>
