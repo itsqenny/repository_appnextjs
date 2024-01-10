@@ -8,8 +8,5 @@ export default function initData() {
     user: WebApp?.initDataUnsafe?.user,
     queryId: WebApp?.initDataUnsafe?.query_id,
     userId: WebApp?.initDataUnsafe?.user.id,
-    HeaderColor: WebApp?.setHeaderColor('secondary_bg_color'),
-    Expand: WebApp?.expand(),
-    ClosingConfirmation: WebApp?.enableClosingConfirmation(),
   };
 }
