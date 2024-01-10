@@ -4,13 +4,16 @@ import CustomerPhoto from "./customerPhoto";
 import Validation from "../UI/getUserId/Validation";
 import { useState } from "react";
 import initData from "../UI/useInitData/initData";
-import useWebApp from "../UI/useWebApp/useWebApp";
+
 
 const Header = () => {
-    useWebApp();
-    const { user, userId } = initData();
+   
+    const { user, userId, HeaderColor, Expand, ClosingConfirmation } = initData();
     return (
         <> 
+        {HeaderColor}
+        {Expand}
+        {ClosingConfirmation}
          <Validation />
             <nav className="nav-form"> 
                   <Link href={`/customer/${userId}`}>
@@ -70,3 +73,4 @@ const Header = () => {
 };
 
 export default Header;
+
