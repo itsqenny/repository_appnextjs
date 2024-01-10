@@ -23,17 +23,26 @@ export const metadata = {
 }
 
 export const revalidate = 1;
-
 export default function RootLayout({ children }) {
   return (
     <html lang="ru">
-      <body className={inter.className}>
-        {children}
-        <Script 
+      
+      <head>
+        
+
+      <Script 
       id="Telegram WebApp"
       type="text/javascript"
-      src="./UI/TelegramWebApp/telegram-web-app.js" strategy="beforeInteractive" defer async
-      />
+      src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" defer async/>
+      </head>
+
+
+      
+        
+      
+     
+      <body className={inter.className}>
+        {children}
       </body>
       
     </html>
