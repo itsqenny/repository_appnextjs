@@ -23,6 +23,7 @@ export const metadata = {
 }
 
 export const revalidate = 1;
+
 export default function RootLayout({ children }) {
   return (
     <html lang="ru">
