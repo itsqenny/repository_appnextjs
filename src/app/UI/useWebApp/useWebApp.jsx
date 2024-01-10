@@ -1,6 +1,6 @@
 'use client'
 import { useEffect } from 'react';
-
+export const dynamic = 'force-dynamic'
 export default function useWebApp() {
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
