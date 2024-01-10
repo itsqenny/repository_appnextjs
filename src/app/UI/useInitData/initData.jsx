@@ -10,6 +10,6 @@ export default function initData() {
     userId: WebApp?.initDataUnsafe?.user.id,
     HeaderColor: WebApp?.setHeaderColor('secondary_bg_color'),
     Expand: WebApp?.expand(),
-    ClosingConfirmation: WebApp.enableClosingConfirmation(),
+    ClosingConfirmation: WebApp?.enableClosingConfirmation(),
   };
 }
