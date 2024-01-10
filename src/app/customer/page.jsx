@@ -7,11 +7,10 @@ import { useState } from "react";
 import initData from "../UI/useInitData/initData";
 
 const Header = () => {
+    useWebApp();
     const { user, userId } = initData();
-    
     return (
         <> 
-        <useWebApp/>
          <Validation />
             <nav className="nav-form"> 
                   <Link href={`/customer/${userId}`}>
