@@ -8,24 +8,33 @@ import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
 import Back from "@/app/UI/BackButton/BackButton"
 import { useParams } from "next/navigation"
 import initData from "@/app/UI/useInitData/initData"
-import useSWR from 'swr';
 
 export default function ProductConfirm() {
 	const params = useParams()
 	const decodedString = decodeURIComponent(params.confirmDetails)
 	const parsedParams = Object.fromEntries(new URLSearchParams(decodedString))
 	const { id, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams
-  const { userId, queryId } = initData();
+	const { userId, queryId } = initData()
 	const [item, setItem] = useState(null)
 	const [size, setSize] = useState(ConfirmSize || null)
 	const [price, setPrice] = useState(ConfirmPrice || null)
 	const [isCredited, setCredited] = useState(false)
 	const [showConfirmation, setShowConfirmation] = useState(true)
-  const [userBonus, setUserBonus] = useState(null);
-  const [paymentData, setPaymentData] = useState(null)
-  const remainingBonus = Math.max(0, userBonus - (Number(price !== null ? price : ConfirmPrice.replace(/[\u00a0₽ ]/g, '').replace(',', '.')) - price));
-	const deductedAmount = Math.max(0, userBonus - remainingBonus);
-  useEffect(() => {
+	const [userBonus, setUserBonus] = useState(null)
+	const [isFirstRequestDone, setIsFirstRequestDone] = useState(false)
+	const [paymentData, setPaymentData] = useState(null)
+	const remainingBonus = Math.max(
+		0,
+		userBonus -
+			(Number(
+				price !== null
+					? price
+					: ConfirmPrice.replace(/[\u00a0₽ ]/g, "").replace(",", ".")
+			) -
+				price)
+	)
+	const deductedAmount = Math.max(0, userBonus - remainingBonus)
+	useEffect(() => {
 		// Выполнение HTTP-запроса
 		fetch(`https://repositorydb.onrender.com/products/${id}`)
 			.then((response) => {
@@ -52,84 +61,98 @@ export default function ProductConfirm() {
 		.map((width) => `${item.img}?w=${width}&q=75 ${width}w`)
 		.join(", ")
 
-    const paymentDate = new Date();
-    const options = { month: 'short', day: 'numeric' };
-    const onCheckout = async () => {
-        setCredited(true)
-        setShowConfirmation(false)
-        const data = {
-          name: name,
-          price: price !== null ? price : ConfirmPrice,
-          size: size !== null ? size : ConfirmSize,
-          queryId,
-          userId,
-          order_id: orderId,
-          productId: id,
-          time: paymentDate.toLocaleDateString("ru-RU", options),
-          remainingBonus: remainingBonus,
-          saveBonus: deductedAmount,
-          newBonus: isCredited ? 0 : 50,
-        };
-      
-        try {
-          const response = await fetch('https://crm.zipperconnect.space/customer/settings/client/buy/offer/pay', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          });
-      
-          const responseData = await response.json();
-      
-          if (responseData.paymentUrl) {
-            Telegram.WebApp.openLink(responseData.paymentUrl);
-            fetchStatusData();
-          } else {
-            console.error('Отсутствует ссылка для оплаты.');
-          }
-        } catch (error) {
-          console.error('Ошибка отправки данных на сервер:', error);
-        }
-      };
+	const paymentDate = new Date()
+	const options = { month: "short", day: "numeric" }
+	const onCheckout = async () => {
+		setCredited(true)
+		setShowConfirmation(false)
+		const data = {
+			name: name,
+			price: price !== null ? price : ConfirmPrice,
+			size: size !== null ? size : ConfirmSize,
+			queryId,
+			userId,
+			order_id: orderId,
+			productId: id,
+			time: paymentDate.toLocaleDateString("ru-RU", options),
+			remainingBonus: remainingBonus,
+			saveBonus: deductedAmount,
+			newBonus: isCredited ? 0 : 50,
+		}
 
-      const fetchStatusData = async () => {
-        const data = {
-          userId,
-          order_id: orderId,
-        };
-      
-        const requestOptions = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        };
-      
-        try {
-          const response = await fetch('https://crm.zipperconnect.space/get/payment', requestOptions);
-      
-          if (response.ok) {
-            const responseData = await response.json();
-            setPaymentData(responseData.status);
-            console.log(responseData.status);
-            
-          } else {
-            console.error(`Не удалось получить данные о платеже. Статус: ${response.status}`);
-          }
-        } catch (error) {
-          console.error('Ошибка при получении данных о платеже:', error);
-        }
-      };
-      
-      const paymentSWR = useSWR('https://crm.zipperconnect.space/get/payment', fetchStatusData, {
-  refreshInterval: 5000,
-  revalidateOnMount: true,
-});
+		try {
+			const response = await fetch(
+				"https://crm.zipperconnect.space/customer/settings/client/buy/offer/pay",
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(data),
+				}
+			)
 
-console.log(paymentSWR.data); // Получение доступа к данным платежа
-console.log(paymentSWR.error)
+			const responseData = await response.json()
+
+			if (responseData.paymentUrl) {
+				Telegram.WebApp.openLink(responseData.paymentUrl)
+				isFirstRequestDone(false)
+				fetchStatusData()
+				isFirstRequestDone(true)
+			} else {
+				console.error("Отсутствует ссылка для оплаты.")
+			}
+		} catch (error) {
+			console.error("Ошибка отправки данных на сервер:", error)
+		}
+	}
+
+	const fetchStatusData = async () => {
+		const data = {
+			userId,
+			order_id: orderId,
+		}
+
+		const requestOptions = {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(data),
+		}
+
+		try {
+			const response = await fetch(
+				"https://crm.zipperconnect.space/get/payment",
+				requestOptions
+			)
+
+			if (response.ok) {
+				const responseData = await response.json()
+				setPaymentData(responseData.status)
+				console.log(responseData.status)
+			} else {
+				console.error(
+					`Не удалось получить данные о платеже. Статус: ${response.status}`
+				)
+			}
+		} catch (error) {
+			console.error("Ошибка при получении данных о платеже:", error)
+		}
+	}
+
+	useEffect(() => {
+		if (isFirstRequestDone) {
+			const interval = setInterval(() => {
+				fetchStatusData()
+			}, 5000)
+
+			return () => {
+				clearInterval(interval)
+			}
+		}
+	}, [isFirstRequestDone])
+
 	return (
 		<>
 			<Back />
@@ -198,7 +221,11 @@ console.log(paymentSWR.error)
 								</p>
 							</div>
 						</div>
-						<SelectBonus price={ConfirmPrice} setParentPrice={setPrice} setParentBonus={setUserBonus}/>
+						<SelectBonus
+							price={ConfirmPrice}
+							setParentPrice={setPrice}
+							setParentBonus={setUserBonus}
+						/>
 						{/* 
             <div className="main-button">
               <button onClick={handlePayment}>Купить за {price !== null ? price : ConfirmPrice}₽</button>
@@ -212,7 +239,7 @@ console.log(paymentSWR.error)
 				) : (
 					<>
 						<Checkout
-              paymentData={paymentData}
+							paymentData={paymentData}
 							items={parsedParams}
 							isCredited={isCredited}
 							price={price}
