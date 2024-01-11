@@ -21,6 +21,7 @@ export default function ProductConfirm() {
 	const [isCredited, setCredited] = useState(false)
 	const [showConfirmation, setShowConfirmation] = useState(true)
   const [userBonus, setUserBonus] = useState(null);
+  const [paymentData, setPaymentData] = useState(null)
   const remainingBonus = Math.max(0, userBonus - (Number(price !== null ? price : ConfirmPrice.replace(/[\u00a0₽ ]/g, '').replace(',', '.')) - price));
 	const deductedAmount = Math.max(0, userBonus - remainingBonus);
   useEffect(() => {
@@ -82,11 +83,42 @@ export default function ProductConfirm() {
       
           if (responseData.paymentUrl) {
             Telegram.WebApp.openLink(responseData.paymentUrl);
+            fetchStatusData();
           } else {
             console.error('Отсутствует ссылка для оплаты.');
           }
         } catch (error) {
           console.error('Ошибка отправки данных на сервер:', error);
+        }
+      };
+
+      const fetchStatusData = async () => {
+        const data = {
+          userId,
+          order_id: orderId,
+        };
+      
+        const requestOptions = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            // Если требуется добавить другие заголовки, добавьте их здесь
+          },
+          body: JSON.stringify(data),
+        };
+      
+        try {
+          const response = await fetch("https://crm.zipperconnect.space/get/payment", requestOptions, { next: { revalidate: 2 } });
+      
+          if (response.ok) {
+            const responseData = await response.json();
+            setPaymentData(responseData.status);
+          } else {
+            // Если ответ не успешен, вы можете обработать это здесь
+            console.error(`Failed to fetch payment data. Status: ${response.status}`);
+          }
+        } catch (error) {
+          console.error("Error fetching payment data:", error);
         }
       };
 	return (
@@ -171,6 +203,7 @@ export default function ProductConfirm() {
 				) : (
 					<>
 						<Checkout
+              paymentData={paymentData}
 							items={parsedParams}
 							isCredited={isCredited}
 							price={price}

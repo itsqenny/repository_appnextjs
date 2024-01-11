@@ -3,44 +3,10 @@ import initData from "@/app/UI/useInitData/initData"
 import Image from "next/image"
 import { useState, useEffect } from "react"
 export const revalidate = 10 
-export default function Checkout({ items, isCredited, price, orderId }) {
+export default function Checkout({ items, isCredited, price, orderId, paymentData }) {
 	const { userId } = initData()
-	const [paymentData, setPaymentData] = useState(null)
 	const { id, name, ConfirmSize } = items
-    
-    useEffect(() => {
-        const fetchUpdateStatus = async () => {
-          const data = {
-            userId,
-            order_id: orderId,
-          };
-    
-          const requestOptions = {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          };
-    
-          try {
-            const response = await fetch("https://crm.zipperconnect.space/get/payment", requestOptions);
-    
-            if (response.ok) {
-              const responseData = await response.json();
-              setPaymentData(responseData.status);
-            } else {
-              // Если ответ не успешен, вы можете обработать это здесь
-              console.error(`Failed to fetch payment data. Status: ${response.status}`);
-            }
-          } catch (error) {
-            console.error("Error fetching payment data:", error);
-          }
-        };
-    
-        // Вызов функции для выполнения запроса при монтировании компонента или при изменении зависимостей
-        fetchUpdateStatus();
-      }, [userId, orderId]); // Зависимости, которые могут изменяться и вызывать повторный вызов useEffect
+
     
 
 	return (
