@@ -100,8 +100,8 @@ export default function ProductConfirm() {
       
         const requestOptions = {
           method: 'POST',
-          next:{
-            revalidate: 0,
+          headers: {
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
           
