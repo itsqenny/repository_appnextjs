@@ -8,6 +8,7 @@ import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
 import Back from "@/app/UI/BackButton/BackButton"
 import { useParams } from "next/navigation"
 import initData from "@/app/UI/useInitData/initData"
+import useSWR, { mutate } from 'swr';
 
 export default function ProductConfirm() {
 	const params = useParams()
@@ -100,29 +101,26 @@ export default function ProductConfirm() {
       
         const requestOptions = {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            // Если требуется добавить другие заголовки, добавьте их здесь
-          },
           body: JSON.stringify(data),
-          next: { revalidate: 5 } 
+          
         };
-      
         try {
-          const response = await fetch("https://crm.zipperconnect.space/get/payment", requestOptions);
-      
-          if (response.ok) {
-            const responseData = await response.json();
-            setPaymentData(responseData.status);
-            console.log(responseData.status);
-          } else {
-            // Если ответ не успешен, вы можете обработать это здесь
-            console.error(`Failed to fetch payment data. Status: ${response.status}`);
-          }
-        } catch (error) {
-          console.error("Error fetching payment data:", error);
-        }
-      };
+    const response = await fetch("https://crm.zipperconnect.space/get/payment", requestOptions);
+
+    if (response.ok) {
+      const responseData = await response.json();
+      setPaymentData(responseData.status);
+      console.log(responseData.status);
+
+      // Mutate с нужным ключом и установка revalidate:false
+      mutate('/api/status', responseData, false);
+    }
+  } catch (error) {
+    console.error("Error fetching payment data:", error);
+  }
+};
+
+useSWR('/api/status', fetchStatusData, { refreshInterval: 5000 });
 	return (
 		<>
 			<Back />
