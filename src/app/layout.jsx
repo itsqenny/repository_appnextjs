@@ -11,22 +11,26 @@ import '../../styles/searchTab.css'
 import '../../styles/selectSize.css'
 import '../../styles/stories.css'
 import '../../styles/openBanner.css'
+import '../../styles/ComingSoon.css'
 import Head from 'next/head'
 import Script from 'next/script'
 const inter = Inter({ subsets: ['latin'] })
 
 
 export const revalidate = 1;
+
+export const metadata = {
+  title: 'description',
+  description: 'zipperapp',
+  name: 'viewport',
+  content: 'width=device-width',
+}
 export default function RootLayout({ children }) {
   return (
-    <html lang="ru"> 
-      <Head>
-        <title>zipperapp</title>
-        <meta name="description" content="zipperapp" />
-        <meta name="viewport" content="width=device-width" />
-        
-      </Head>
-
+    <html lang="ru" suppressHydrationWarning> 
+      
+      <body className={inter.className} suppressHydrationWarning={true}>
+        {children}
         <Script 
         id="Telegram WebApp"
         type="text/javascript"
@@ -34,9 +38,6 @@ export default function RootLayout({ children }) {
         strategy="beforeInteractive" 
         defer 
         async/>
-      
-      <body className={inter.className}>
-        {children}
       </body>
       
     </html>

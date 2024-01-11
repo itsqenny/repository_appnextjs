@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 
 export default function Validation(){
-    const [userId, setUserId] = useState("");
+    const [userId, setUserId] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     useEffect(() => {
         const fetchData = async () => {

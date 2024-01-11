@@ -7,6 +7,7 @@ import OpenBanner from './banners/open/banner';
 import BonusTab from './bonus/BonusTab';
 import { Suspense } from 'react'
 import Loading from './loading';
+import ComingSoon from './banners/comingsoon/banner';
 
 export default async function Home(){
     return (
@@ -14,8 +15,9 @@ export default async function Home(){
         <Suspense fallback={<Loading/>}>
             <Header/>
             <SearchTab/>
-            <BonusTab/>
-            <OpenBanner/>
+            <BonusTab/> 
+            {/* <OpenBanner/> */}
+            <ComingSoon/>
             <CatalogTab/>
             <Products/>
         </Suspense>   

@@ -11,7 +11,7 @@
     --tg-second: var(--tg-theme-secondary-bg-color, #f4f4f5);
     --tg-text: var(--tg-theme-text-color, #000);
     --tg-button-text: var(--tg-theme-button-text-color, #fff);
-    --mainbutton: var(--tg-theme-button-text-color, rgba(135, 116, 225));
+    --main-button: var(--tg-theme-button-text-color, rgba(135, 116, 225));
     --font-family: "SF Pro Display",-apple-system,BlinkMacSystemFont,Roboto,sans-serif;
     --tg-hint: var(--tg-theme-hint-color, #aaaaaa);
   }
