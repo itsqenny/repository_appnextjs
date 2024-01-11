@@ -105,14 +105,16 @@ export default function ProductConfirm() {
             // Если требуется добавить другие заголовки, добавьте их здесь
           },
           body: JSON.stringify(data),
+          next: { revalidate: 5 } 
         };
       
         try {
-          const response = await fetch("https://crm.zipperconnect.space/get/payment", requestOptions, { next: { revalidate: 2 } });
+          const response = await fetch("https://crm.zipperconnect.space/get/payment", requestOptions);
       
           if (response.ok) {
             const responseData = await response.json();
             setPaymentData(responseData.status);
+            console.log(responseData.status);
           } else {
             // Если ответ не успешен, вы можете обработать это здесь
             console.error(`Failed to fetch payment data. Status: ${response.status}`);
