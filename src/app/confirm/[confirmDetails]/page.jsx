@@ -20,6 +20,7 @@ export default function ProductConfirm() {
 	const [price, setPrice] = useState(ConfirmPrice || null)
 	const [isCredited, setCredited] = useState(false)
 	const [showConfirmation, setShowConfirmation] = useState(true)
+  const [userBonus, setUserBonus] = useState(null);
   const remainingBonus = Math.max(0, userBonus - (Number(price !== null ? price : ConfirmPrice.replace(/[\u00a0₽ ]/g, '').replace(',', '.')) - price));
 	const deductedAmount = Math.max(0, userBonus - remainingBonus);
   useEffect(() => {
@@ -159,7 +160,7 @@ export default function ProductConfirm() {
 								</p>
 							</div>
 						</div>
-						<SelectBonus price={ConfirmPrice} setParentPrice={setPrice} />
+						<SelectBonus price={ConfirmPrice} setParentPrice={setPrice} setParentBonus={setUserBonus}/>
 						{/* 
             <div className="main-button">
               <button onClick={handlePayment}>Купить за {price !== null ? price : ConfirmPrice}₽</button>

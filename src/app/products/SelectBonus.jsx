@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import initData from "../UI/useInitData/initData";
 import axios from "axios";
 
-export default function SelectBonus({price, setParentPrice}){
+export default function SelectBonus({price, setParentPrice, setParentBonus}){
     const { userId } = initData();
     const [isCredited, setCredited] = useState(false);
     const [userBonus, setUserBonus] = useState(0);
@@ -18,6 +18,7 @@ export default function SelectBonus({price, setParentPrice}){
       const storedBonus = window.Telegram.WebApp.CloudStorage.getItems(["userBonus"], (err, values) => {
         if (!err && values.userBonus) {
           setUserBonus(values.userBonus);
+          setParentBonus(values.userBonus);
         } else {
           // Если бонус отсутствует в CloudStorage, выполнить запрос к серверу
           fetchData();
@@ -35,6 +36,7 @@ export default function SelectBonus({price, setParentPrice}){
             console.error("Error saving bonus to CloudStorage", err);
           } else {
             setUserBonus(bonus); // Обновление состояния userBonus
+            setParentBonus(bonus);
           }
         });
       };
