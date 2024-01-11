@@ -7,14 +7,14 @@ import Loading from "./loading"
 import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
 import Back from "@/app/UI/BackButton/BackButton"
 import { useParams } from "next/navigation"
+import initData from "@/app/UI/useInitData/initData"
 
 export default function ProductConfirm() {
 	const params = useParams()
 	const decodedString = decodeURIComponent(params.confirmDetails)
 	const parsedParams = Object.fromEntries(new URLSearchParams(decodedString))
 	const { id, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams
-	console.log(parsedParams)
-
+  const { userId, queryId } = initData();
 	const [item, setItem] = useState(null)
 	const [size, setSize] = useState(ConfirmSize || null)
 	const [price, setPrice] = useState(ConfirmPrice || null)
@@ -58,6 +58,7 @@ export default function ProductConfirm() {
           name: name,
           price: price !== null ? price : ConfirmPrice,
           size: size !== null ? size : ConfirmSize,
+          queryId,
           userId,
           order_id: orderId,
           productId: id,
