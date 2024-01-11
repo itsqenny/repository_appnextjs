@@ -8,6 +8,7 @@ import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
 import Back from "@/app/UI/BackButton/BackButton"
 import { useParams } from "next/navigation"
 import initData from "@/app/UI/useInitData/initData"
+import useSWR from 'swr';
 
 export default function ProductConfirm() {
 	const params = useParams()
@@ -104,23 +105,31 @@ export default function ProductConfirm() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(data),
-          
         };
+      
         try {
-          const response = await fetch("https://crm.zipperconnect.space/get/payment", requestOptions);
+          const response = await fetch('https://crm.zipperconnect.space/get/payment', requestOptions);
       
           if (response.ok) {
             const responseData = await response.json();
             setPaymentData(responseData.status);
             console.log(responseData.status);
+            paymentSWR();
           } else {
-            // Если ответ не успешен, вы можете обработать это здесь
-            console.error(`Failed to fetch payment data. Status: ${response.status}`);
+            console.error(`Не удалось получить данные о платеже. Статус: ${response.status}`);
           }
         } catch (error) {
-          console.error("Error fetching payment data:", error);
+          console.error('Ошибка при получении данных о платеже:', error);
         }
       };
+      
+      const paymentSWR = useSWR('https://crm.zipperconnect.space/get/payment', fetchStatusData, {
+  refreshInterval: 5000,
+  revalidateOnMount: true,
+});
+
+console.log(paymentSWR.data); // Получение доступа к данным платежа
+console.log(paymentSWR.error)
 	return (
 		<>
 			<Back />
