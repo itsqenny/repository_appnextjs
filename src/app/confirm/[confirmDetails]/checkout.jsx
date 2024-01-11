@@ -9,7 +9,7 @@ export default function Checkout({ items, isCredited, price, orderId }) {
 	const { id, name, ConfirmSize } = items
     
     useEffect(() => {
-        const fetchPaymentData = async () => {
+        const fetchUpdateStatus = async () => {
           const data = {
             userId,
             order_id: orderId,
@@ -39,7 +39,7 @@ export default function Checkout({ items, isCredited, price, orderId }) {
         };
     
         // Вызов функции для выполнения запроса при монтировании компонента или при изменении зависимостей
-        fetchPaymentData();
+        fetchUpdateStatus();
       }, [userId, orderId]); // Зависимости, которые могут изменяться и вызывать повторный вызов useEffect
     
 

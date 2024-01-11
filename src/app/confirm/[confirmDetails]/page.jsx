@@ -88,8 +88,6 @@ export default function ProductConfirm() {
         } catch (error) {
           console.error('Ошибка отправки данных на сервер:', error);
         }
-      
-        handleUpdatePayment();
       };
 	return (
 		<>
