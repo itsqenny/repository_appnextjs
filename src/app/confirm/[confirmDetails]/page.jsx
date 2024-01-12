@@ -12,12 +12,6 @@ import useSWR from 'swr';
 import { fetcher } from "./fetcher"
 
 export default function ProductConfirm() {
-	const params = useParams()
-	const decodedString = decodeURIComponent(params.confirmDetails)
-	const parsedParams = Object.fromEntries(new URLSearchParams(decodedString))
-	const { id, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams
-	const { userId, queryId } = initData()
-	//const userId = '1234'
 	const [item, setItem] = useState(null)
 	const [size, setSize] = useState(ConfirmSize || null)
 	const [price, setPrice] = useState(ConfirmPrice || null)
@@ -26,6 +20,12 @@ export default function ProductConfirm() {
 	const [userBonus, setUserBonus] = useState(null)
 	const [paymentData, setPaymentData] = useState('WAIT')
 	const [statusUpdate, setStatusUpdate] = useState(false)
+	const params = useParams()
+	const decodedString = decodeURIComponent(params.confirmDetails)
+	const parsedParams = Object.fromEntries(new URLSearchParams(decodedString))
+	const { id, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams
+	const { userId, queryId } = initData()
+	//const userId = '1234'
 	const remainingBonus = Math.max(
 		0,
 		userBonus -
