@@ -8,15 +8,15 @@ export default function CustomerStatus({ userId, orderId }) {
         userId,
         order_id: orderId,
     }
-	const { data, error } = useSWR('https://crm.zipperconnect.space/get/paymen', customer, fetcher)
+	const { data: status, error } = useSWR('https://crm.zipperconnect.space/get/paymen', customer, fetcher)
 
 	if (error) return "Произошла ошибка."
-	if (!data) return "Загрузка..."
+	if (!status) return "Загрузка..."
 
 	return (
 		<div>
 			<h1>TEST SWR</h1>
-			<strong>👁 {data.status}</strong>{" "}
+			<strong>👁 {status}</strong>{" "}
 		</div>
 	)
 }
