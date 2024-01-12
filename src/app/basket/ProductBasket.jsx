@@ -3,11 +3,17 @@
 
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-
+const fetcher = (url) => fetch(url).then((res) => res.json())
 export const revalidate = 0
-const ProductBasket = ({ data, productData }) => {
+const ProductBasket = ({ data }) => {
+  const { data: product, error } = useSWR(
+		`https://repositorydb.onrender.com/products/${data.basket.id}`,
+		fetcher
+	)
+
+	if (error) return "An error has occurred."
+	if (!product) return "Loading..."
   const router = useRouter();
-  const { img } = productData;
   const handlePaymentClick = () => {
     const queryParams = {
       id: data.basket.id,
@@ -29,7 +35,7 @@ const ProductBasket = ({ data, productData }) => {
 							<div className="product-image-card">
 								<div className="product-image-inner">
 									<div className="product-image-inner-row">
-                  <Image src={img[0]} 
+                  <Image src={product.img[0]} 
                                  width={200}
                                  height={160}
                                  sizes="(max-width: 768px) 100vw,
