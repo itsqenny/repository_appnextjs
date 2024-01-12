@@ -8,7 +8,20 @@ import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
 import Back from "@/app/UI/BackButton/BackButton"
 import { useParams } from "next/navigation"
 import initData from "@/app/UI/useInitData/initData"
-import useSWR from 'swr';
+import useSWR from "swr"
+
+const fetcher =  async ()=> {
+	const { orderId } = parsedParams
+	const { userId } = initData()
+	const customer = {
+		userId,
+		order_id: orderId,
+	}
+	const res = await fetch('https://crm.zipperconnect.space/get/payment', customer)
+	const req = await res.json();
+	const data = req.status;
+	return data
+}
 
 export default function ProductConfirm() {
 	const params = useParams()
@@ -22,7 +35,7 @@ export default function ProductConfirm() {
 	const [isCredited, setCredited] = useState(false)
 	const [showConfirmation, setShowConfirmation] = useState(true)
 	const [userBonus, setUserBonus] = useState(null)
-	const [paymentData, setPaymentData] = useState('WAIT')
+	const [paymentData, setPaymentData] = useState("WAIT")
 	const [statusUpdate, setStatusUpdate] = useState(false)
 	//const userId = '1234'
 	const remainingBonus = Math.max(
@@ -98,6 +111,7 @@ export default function ProductConfirm() {
 
 			if (responseData.paymentUrl) {
 				Telegram.WebApp.openLink(responseData.paymentUrl)
+				setStatusUpdate(true)
 			} else {
 				console.error("Отсутствует ссылка для оплаты.")
 			}
@@ -105,8 +119,9 @@ export default function ProductConfirm() {
 			console.error("Ошибка отправки данных на сервер:", error)
 		}
 	}
-	
-
+	const {data, error} = useSWR('status', fetcher)
+		if(error) return 'Ошибка загрузки данных'
+		if (!data) return 'Loading'
 	return (
 		<>
 			<Back />
@@ -180,7 +195,7 @@ export default function ProductConfirm() {
 							setParentPrice={setPrice}
 							setParentBonus={setUserBonus}
 						/>
-						
+
 						{/* 
             <div className="main-button">
               <button onClick={handlePayment}>Купить за {price !== null ? price : ConfirmPrice}₽</button>
@@ -200,6 +215,8 @@ export default function ProductConfirm() {
 							price={price}
 							orderId={orderId}
 						/>
+						{statusUpdate ? <h1>TEST STATUS SWR {data}</h1> : <h1>TEST STATUS SWR LOADING...</h1>}
+						
 					</>
 				)}
 			</div>
