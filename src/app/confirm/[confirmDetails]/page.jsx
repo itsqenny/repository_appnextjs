@@ -24,6 +24,7 @@ export default function ProductConfirm() {
 	const [showConfirmation, setShowConfirmation] = useState(true)
 	const [userBonus, setUserBonus] = useState(null)
 	const [paymentData, setPaymentData] = useState("WAIT")
+	const [customerStatus, setCustomerStatus] = useState(false)
 	//const userId = '1234'
 	const remainingBonus = Math.max(
 		0,
@@ -98,7 +99,7 @@ export default function ProductConfirm() {
 
 			if (responseData.paymentUrl) {
 				Telegram.WebApp.openLink(responseData.paymentUrl)
-
+				setCustomerStatus(true);
 			} else {
 				console.error("Отсутствует ссылка для оплаты.")
 			}
@@ -201,8 +202,9 @@ export default function ProductConfirm() {
 							price={price}
 							orderId={orderId}
 						/>
-						SWR(1)
+						{customerStatus && 
 						<CustomerStatus userId={userId} orderId={orderId}/>
+						}
 						
 					</>
 				)}
