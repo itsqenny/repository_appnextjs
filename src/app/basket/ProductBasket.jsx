@@ -4,8 +4,8 @@
 
 const ProductBasket = ({data}) => {
     
-    const basketItems = data.basket.map((item, index) => (
-        <div key={index}>
+    const basketItems = data.basket.map((item) => (
+        <div key={item.order_id}>
           <p>Name: {item.name}</p>
           <p>Order ID: {item.order_id}</p>
           <p>Price: {item.price}</p>
