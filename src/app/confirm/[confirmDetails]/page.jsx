@@ -9,6 +9,7 @@ import Back from "@/app/UI/BackButton/BackButton"
 import { useParams } from "next/navigation"
 import initData from "@/app/UI/useInitData/initData"
 import useSWR from 'swr';
+import { fetcher } from "./fetcher"
 
 export default function ProductConfirm() {
 	const params = useParams()
@@ -24,6 +25,7 @@ export default function ProductConfirm() {
 	const [showConfirmation, setShowConfirmation] = useState(true)
 	const [userBonus, setUserBonus] = useState(null)
 	const [paymentData, setPaymentData] = useState('WAIT')
+	const [statusUpdate, setStatusUpdate] = useState(false)
 	const remainingBonus = Math.max(
 		0,
 		userBonus -
@@ -97,6 +99,7 @@ export default function ProductConfirm() {
 
 			if (responseData.paymentUrl) {
 				Telegram.WebApp.openLink(responseData.paymentUrl)
+				setStatusUpdate(true);
 			} else {
 				console.error("Отсутствует ссылка для оплаты.")
 			}
@@ -104,38 +107,10 @@ export default function ProductConfirm() {
 			console.error("Ошибка отправки данных на сервер:", error)
 		}
 	}
-	const { data, error } = useSWR('https://crm.zipperconnect.space/get/payment', () => fetchData('https://crm.zipperconnect.space/get/payment'));
-	if (error) return <div>Ошибка загрузки данных</div>;
-	if (!data) return <div>Loading...</div>;
-
-	const fetchData = async (url) => {
-		try {
-		  const data = {
-			userId,
-			order_id: orderId,
-		  };
-		
-		  const response = await fetch(url, {
-			method: 'POST',
-			headers: {
-			  'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(data),
-		  });
-		
-		  if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
-		  }
-		
-		  const jsonData = await response.json();
-		  console.log(`data: ${jsonData}`);
-		  console.log(jsonData.status);
-		  return jsonData.status;
-		} catch (error) {
-		  console.error('Ошибка при загрузке данных:', error);
-		  throw error;
-		}
-	  };
+	if(statusUpdate){
+	const {data, error} = useSWR('https://crm.zipperconnect.space/get/payment', fetcher)
+	console.log(data);
+	}
 
 	return (
 		<>
@@ -183,6 +158,19 @@ export default function ProductConfirm() {
 						</div>
 						<div className="item-order-info">
 							<div className="confirm-item-price">
+							{statusUpdate && (
+								!data ? (
+									<>
+									Ожидается оплата...
+									</>
+								) : (
+									<>
+									{data.map((status) => (
+										<h1>{status}</h1>
+									))}
+									</>
+								)
+								)}
 								{price !== ConfirmPrice ? (
 									<>
 										{`${price} ₽`.replace(/(\d)(?=(\d{3})+(?!\d))/g, " $1 ")}
