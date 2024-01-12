@@ -10,7 +10,8 @@ export default function CustomerStatus({ userId, orderId }) {
       () => (userId && orderId ? [url, { userId, order_id: orderId }] : null),
       fetcher
     );
-  
+        
+    
     if (error) return "Произошла ошибка.";
     if (!data) return "Загрузка...";
 
