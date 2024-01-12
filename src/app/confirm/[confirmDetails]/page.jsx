@@ -8,6 +8,7 @@ import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
 import Back from "@/app/UI/BackButton/BackButton"
 import { useParams } from "next/navigation"
 import initData from "@/app/UI/useInitData/initData"
+import CustomerStatus from "./fetcher"
 import useSWR from "swr"
 
 export default function ProductConfirm() {
@@ -200,6 +201,7 @@ export default function ProductConfirm() {
 							price={price}
 							orderId={orderId}
 						/>
+						<CustomerStatus/>
 						
 					</>
 				)}
