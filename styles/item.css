@@ -228,6 +228,9 @@ hr{
     padding-top: var(--space-4x);
     margin-top: -28px;
   }
+  .item-order-info p{
+    text-align: left;
+  }
 
   .item-order{
     display: flex;
@@ -248,6 +251,9 @@ hr{
     font-weight: 900;
     font-size: 24px;
     line-height: 130%;
+  }
+  .product-offer-status p{
+    text-align: left;
   }
 
   .status-selection-steps-box{
