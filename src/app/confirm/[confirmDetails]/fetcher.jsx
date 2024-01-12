@@ -14,7 +14,7 @@ export default function CustomerStatus({userId, orderId}) {
   if (!data) return "Loading...";
   return (
     <div>
-      <h1>{data}</h1>
+      <h1>{data.status}</h1>
     </div>
   );
 }
