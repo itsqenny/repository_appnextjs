@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import BasketFetcher from "./BasketFetcher"
 import initData from "../UI/useInitData/initData"
-
+export const revalidate = 1
 const BasketItem = () => {
 	const [basketData, setBasketData] = useState([])
     const { userId } = initData();

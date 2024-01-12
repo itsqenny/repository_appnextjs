@@ -8,7 +8,7 @@ import { Suspense } from "react"
 import Loading from "./loading"
 import ComingSoon from "./banners/comingsoon/banner"
 import BasketItem from "./basket/basket"
-export const revalidate = 0
+
 export default async function Home() {
 	return (
 		<>
