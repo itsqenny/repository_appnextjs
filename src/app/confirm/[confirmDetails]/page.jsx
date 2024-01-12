@@ -66,27 +66,28 @@ export default function ProductConfirm() {
 
 	const paymentDate = new Date()
 	const options = { month: "short", day: "numeric" }
-	if(statusUpdate){
-		const fetcher = async (url) => {
-			const customerData = {
-			  userId,
-			  order_id: orderId,
-			};
-		  
-			const response = await fetch(url, {
-			  method: 'POST',
-			  headers: {
-				'Content-Type': 'application/json',
-			  },
-			  body: JSON.stringify(customerData),
-			});
-		  
-			const jsonData = await response.json();
-			console.log(`data: ${jsonData}`);
-			return jsonData; // возвращаем значение поля "status"
-		  };
+	const fetcher = async (url) => {
+		const customerData = {
+		  userId,
+		  order_id: orderId,
+		};
+	  
+		const response = await fetch(url, {
+		  method: 'POST',
+		  headers: {
+			'Content-Type': 'application/json',
+		  },
+		  body: JSON.stringify(customerData),
+		});
+	  
+		const jsonData = await response.json();
+		console.log(`data: ${jsonData}`);
+		return jsonData; // возвращаем значение поля "status"
+	  };
 
-		const {data, error} = useSWR('https://crm.zipperconnect.space/get/payment', fetcher)
+	if(statusUpdate){
+
+		const {data} = useSWR('https://crm.zipperconnect.space/get/payment', fetcher)
 		console.log(data)
 
 	}
@@ -179,8 +180,7 @@ export default function ProductConfirm() {
 						</div>
 						<div className="item-order-info">
 							<div className="confirm-item-price">
-							{statusUpdate && (
-								!data ? (
+							{!data ? (
 									<>
 									Ожидается оплата...
 									</>
@@ -191,7 +191,7 @@ export default function ProductConfirm() {
 									))}
 									</>
 								)
-								)}
+								}
 								{price !== ConfirmPrice ? (
 									<>
 										{`${price} ₽`.replace(/(\d)(?=(\d{3})+(?!\d))/g, " $1 ")}
