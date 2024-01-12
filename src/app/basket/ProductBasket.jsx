@@ -3,7 +3,7 @@
 
 
 const ProductBasket = ({data}) => {
-    console.log(`basket: ${data}`)
+    console.log(`basket: ${data.basket}`)
     return (
         <div>
             123
