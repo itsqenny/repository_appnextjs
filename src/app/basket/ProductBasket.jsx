@@ -1,17 +1,10 @@
 "use client"
-import useSWR from "swr"
+
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-const fetcher = (url) => fetch(url).then((res) => res.json())
+
 export const revalidate = 0
 const ProductBasket = ({ data }) => {
-	const { data: product, error } = useSWR(
-		`https://repositorydb.onrender.com/products/${data.basket.id}`,
-		fetcher
-	)
-	if (error) return "An error has occurred."
-	if (!product) return "Loading..."
-  console.log(product)
 	const router = useRouter()
 	const handlePaymentClick = () => {
 		const queryParams = {
