@@ -32,8 +32,9 @@ const ProductBasket = ({ data }) => {
 						<div className="product-image-card">
 							<div className="product-image-inner">
 								<div className="product-image-inner-row">
-									<Image
-										src={product.img[0]}
+                {product.map((products) => (
+                  <Image
+										src={products.img[0]}
 										width={200}
 										height={160}
 										sizes="(max-width: 768px) 100vw,
@@ -50,6 +51,8 @@ const ProductBasket = ({ data }) => {
 										alt={`${item.name}`}
 										priority={true}
 									/>
+                  
+                ))}
 								</div>
 							</div>
 						</div>
