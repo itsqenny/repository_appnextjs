@@ -2,9 +2,9 @@
 import initData from "@/app/UI/useInitData/initData"
 import Image from "next/image"
 import { useState, useEffect } from "react"
-export const revalidate = 10 
-export default function Checkout({ items, isCredited, price, orderId, paymentData }) {
-	const { userId } = initData()
+import CustomerStatus from "./StatusFetcher"
+
+export default function Checkout({ items, userId, price, orderId, paymentData, customerStatus }) {
 	const { id, name, ConfirmSize } = items
     
 
@@ -133,21 +133,13 @@ export default function Checkout({ items, isCredited, price, orderId, paymentDat
 				</div>
 				<div className="product-offer-id">Заказ №{orderId}</div>
 				<div className="product-offer-status">
-					{paymentData === "WAIT" ? (
-						<>Ожидается оплата</>
-					) : paymentData === "PAID" ? (
-						<>Оплачено</>
-					) : paymentData === "SENT" ? (
-						<>Готовится к отправке</>
-					) : paymentData === "TRANSITCN" ? (
-						<>Доставка из Китая в пути</>
-					) : paymentData === "TRANSITRU" ? (
-						<>В пути по России</>
-					) : paymentData === "DELIVERED" ? (
-						<>Доставлен в пункт выдачи</>
-					) : (
-						<>Загрузка...</>
-					)}
+				{customerStatus ? (<>
+					<CustomerStatus userId={userId} orderId={orderId}/>
+				</>
+				):(
+				<>
+				<p>Ожидается оплата...</p>
+				</>)}
 				</div>
 				<div
 					className="confirm-item-price"

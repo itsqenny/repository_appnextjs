@@ -8,8 +8,7 @@ import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
 import Back from "@/app/UI/BackButton/BackButton"
 import { useParams } from "next/navigation"
 import initData from "@/app/UI/useInitData/initData"
-import CustomerStatus from "./fetcher"
-import useSWR from "swr"
+import CustomerStatus from "./StatusFetcher"
 
 export default function ProductConfirm() {
 	const params = useParams()
@@ -196,16 +195,14 @@ export default function ProductConfirm() {
 				) : (
 					<>
 						<Checkout
+							customerStatus={customerStatus}
 							paymentData={paymentData}
+							userId={userId}
 							items={parsedParams}
 							isCredited={isCredited}
 							price={price}
 							orderId={orderId}
 						/>
-						{customerStatus && 
-						<CustomerStatus userId={userId} orderId={orderId}/>
-						}
-						
 					</>
 				)}
 			</div>
