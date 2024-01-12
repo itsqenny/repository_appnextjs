@@ -11,6 +11,7 @@ const ProductBasket = ({ data }) => {
 	)
 	if (error) return "An error has occurred."
 	if (!product) return "Loading..."
+  console.log(product)
 	const router = useRouter()
 	const handlePaymentClick = () => {
 		const queryParams = {
@@ -32,27 +33,7 @@ const ProductBasket = ({ data }) => {
 						<div className="product-image-card">
 							<div className="product-image-inner">
 								<div className="product-image-inner-row">
-                {product.map((products) => (
-                  <Image
-										src={products.img[0]}
-										width={200}
-										height={160}
-										sizes="(max-width: 768px) 100vw,
-                                       (max-width: 1200px) 50vw,
-                                       33vw"
-										style={{
-											height: "100%",
-											width: "100%",
-											borderRadius: "17px",
-											WebkitUserSelect: "none",
-											MozUserSelect: "none",
-											userSelect: "none",
-										}}
-										alt={`${item.name}`}
-										priority={true}
-									/>
-                  
-                ))}
+                
 								</div>
 							</div>
 						</div>
