@@ -125,8 +125,6 @@ export default function ProductConfirm() {
 		}
 	  }, [data]);
 
-	  if (error) return <div>failed to load</div>;
-	  if (!data) return <div>Loading...</div>;
 		
 	return (
 		<>
