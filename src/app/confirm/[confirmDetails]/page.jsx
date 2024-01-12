@@ -11,11 +11,16 @@ import initData from "@/app/UI/useInitData/initData"
 import useSWR from 'swr';
 
 export default function ProductConfirm() {
+	const { data, error } = useSWR('https://crm.zipperconnect.space/get/payment', () => fetchData('https://crm.zipperconnect.space/get/payment'));
+		if (error) return <div>Ошибка загрузки данных</div>;
+		if (!data) return <div>Loading...</div>;
+		
 	const params = useParams()
 	const decodedString = decodeURIComponent(params.confirmDetails)
 	const parsedParams = Object.fromEntries(new URLSearchParams(decodedString))
 	const { id, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams
 	const { userId, queryId } = initData()
+	//const userId = '1234'
 	const [item, setItem] = useState(null)
 	const [size, setSize] = useState(ConfirmSize || null)
 	const [price, setPrice] = useState(ConfirmPrice || null)
@@ -96,7 +101,6 @@ export default function ProductConfirm() {
 
 			if (responseData.paymentUrl) {
 				Telegram.WebApp.openLink(responseData.paymentUrl)
-				fetchStatusData()
 			} else {
 				console.error("Отсутствует ссылка для оплаты.")
 			}
@@ -104,27 +108,27 @@ export default function ProductConfirm() {
 			console.error("Ошибка отправки данных на сервер:", error)
 		}
 	}
-	const { data, error } = useSWR('https://crm.zipperconnect.space/get/payment', fetchStatusData);
-	if (error) return <div>Ошибка загрузки данных</div>;
- 	if (!data) return <div>Loading...</div>;
-	const fetchStatusData = async () => {
+	
+
+	const fetchData = async (url) => {
 		const data = {
 			userId,
 			order_id: orderId,
-		}
-
+		};
+	  
 		const response = await fetch(url, {
-			method: 'POST',
-			headers: {
-			  'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(data),
-		  });
-
+		  method: 'POST',
+		  headers: {
+			'Content-Type': 'application/json',
+		  },
+		  body: JSON.stringify(data),
+		});
+	  
 		const jsonData = await response.json();
-		console.log(jsonData);
-  		return jsonData;
-	}
+		console.log(`data: ${jsonData}`);
+		return jsonData;
+	  };
+	  console.log(fetchData)
 
 	return (
 		<>
