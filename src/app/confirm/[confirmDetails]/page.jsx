@@ -8,6 +8,7 @@ import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
 import Back from "@/app/UI/BackButton/BackButton"
 import { useParams } from "next/navigation"
 import initData from "@/app/UI/useInitData/initData"
+import useSWR from 'swr';
 
 export default function ProductConfirm() {
 	const params = useParams()
@@ -21,8 +22,7 @@ export default function ProductConfirm() {
 	const [isCredited, setCredited] = useState(false)
 	const [showConfirmation, setShowConfirmation] = useState(true)
 	const [userBonus, setUserBonus] = useState(null)
-	const [isFirstRequestDone, setIsFirstRequestDone] = useState(false)
-	const [paymentData, setPaymentData] = useState(null)
+	const [paymentData, setPaymentData] = useState('WAIT')
 	const remainingBonus = Math.max(
 		0,
 		userBonus -
@@ -96,9 +96,7 @@ export default function ProductConfirm() {
 
 			if (responseData.paymentUrl) {
 				Telegram.WebApp.openLink(responseData.paymentUrl)
-				setIsFirstRequestDone(false)
 				fetchStatusData()
-				setIsFirstRequestDone(true)
 			} else {
 				console.error("Отсутствует ссылка для оплаты.")
 			}
@@ -106,52 +104,27 @@ export default function ProductConfirm() {
 			console.error("Ошибка отправки данных на сервер:", error)
 		}
 	}
-
+	const { data, error } = useSWR('https://crm.zipperconnect.space/get/payment', fetchStatusData);
+	if (error) return <div>Ошибка загрузки данных</div>;
+ 	if (!data) return <div>Loading...</div>;
 	const fetchStatusData = async () => {
 		const data = {
 			userId,
 			order_id: orderId,
 		}
 
-		const requestOptions = {
-			method: "POST",
+		const response = await fetch(url, {
+			method: 'POST',
 			headers: {
-				"Content-Type": "application/json",
+			  'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(data),
-		}
+		  });
 
-		try {
-			const response = await fetch(
-				"https://crm.zipperconnect.space/get/payment",
-				requestOptions
-			)
-
-			if (response.ok) {
-				const responseData = await response.json()
-				setPaymentData(responseData.status)
-				console.log(responseData.status)
-			} else {
-				console.error(
-					`Не удалось получить данные о платеже. Статус: ${response.status}`
-				)
-			}
-		} catch (error) {
-			console.error("Ошибка при получении данных о платеже:", error)
-		}
+		const jsonData = await response.json();
+		console.log(jsonData);
+  		return jsonData;
 	}
-
-	useEffect(() => {
-		if (isFirstRequestDone) {
-			const interval = setInterval(() => {
-				fetchStatusData()
-			}, 5000)
-
-			return () => {
-				clearInterval(interval)
-			}
-		}
-	}, [isFirstRequestDone])
 
 	return (
 		<>
