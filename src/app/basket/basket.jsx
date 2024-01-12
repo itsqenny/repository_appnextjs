@@ -3,9 +3,11 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import BasketFetcher from "./BasketFetcher"
-const BasketItem = ({ cart, onDataUpdate, userId }) => {
-	const [basketData, setBasketData] = useState([])
+import initData from "../UI/useInitData/initData"
 
+const BasketItem = () => {
+	const [basketData, setBasketData] = useState([])
+    const { userId } = initData();
 	const handleDelete = async (productId, order_id) => {
 		setBasketData((prevBasketData) =>
 			prevBasketData.filter((item) => item.order_id !== productId)
@@ -29,7 +31,7 @@ const BasketItem = ({ cart, onDataUpdate, userId }) => {
 
 	return (
 		<>
-			<BasketFetcher />
+			<BasketFetcher userId={userId} />
 		</>
 	)
 }
