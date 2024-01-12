@@ -1,9 +1,11 @@
 
 import useSWR from "swr";
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
+
+
 
 export default function CustomerStatus() {
+const fetcher = (url) => fetch(url, customer).then((res) => res.json());
   const { data, error, isLoading } = useSWR(
     "https://api.github.com/repos/vercel/swr",
     fetcher
