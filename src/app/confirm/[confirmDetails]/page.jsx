@@ -14,7 +14,7 @@ export default function ProductConfirm() {
 	const { data, error } = useSWR('https://crm.zipperconnect.space/get/payment', () => fetchData('https://crm.zipperconnect.space/get/payment'));
 		if (error) return <div>Ошибка загрузки данных</div>;
 		if (!data) return <div>Loading...</div>;
-		
+
 	const params = useParams()
 	const decodedString = decodeURIComponent(params.confirmDetails)
 	const parsedParams = Object.fromEntries(new URLSearchParams(decodedString))
@@ -126,9 +126,9 @@ export default function ProductConfirm() {
 	  
 		const jsonData = await response.json();
 		console.log(`data: ${jsonData}`);
-		return jsonData;
+		console.log(jsonData.status);
+		return jsonData.status
 	  };
-	  console.log(fetchData)
 
 	return (
 		<>
@@ -203,6 +203,7 @@ export default function ProductConfirm() {
 							setParentPrice={setPrice}
 							setParentBonus={setUserBonus}
 						/>
+						
 						{/* 
             <div className="main-button">
               <button onClick={handlePayment}>Купить за {price !== null ? price : ConfirmPrice}₽</button>
