@@ -7,7 +7,7 @@ export default function CustomerBasket({ userId }) {
 		`https://crm.zipperconnect.space/customer/basket/${userId}`,
 		fetcher
 	)
-	
+
 	if (error) return "An error has occurred."
 	if (!data) return "Loading..."
 
