@@ -14,7 +14,7 @@ export default function CustomerStatus({ userId, orderId }) {
 	const statusTextMap = {
 		WAIT: {
 			text: "Ожидается оплата",
-			color: "#31b545",
+			color: "var(--tg-hint)",
 		},
 		PAID: {
 			text: "Оплачено",
