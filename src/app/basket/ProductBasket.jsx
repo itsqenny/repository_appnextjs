@@ -1,6 +1,6 @@
 
 "use client"
-
+export const revalidate = 0
 
 const ProductBasket = ({data}) => {
     
