@@ -8,6 +8,7 @@ import BonusTab from './bonus/BonusTab';
 import { Suspense } from 'react'
 import Loading from './loading';
 import ComingSoon from './banners/comingsoon/banner';
+import BasketItem from './basket/basket';
 
 export default async function Home(){
     return (
@@ -16,6 +17,7 @@ export default async function Home(){
             <Header/>
             <SearchTab/>
             <BonusTab/> 
+            <BasketItem/>
             {/* <OpenBanner/> */}
             <ComingSoon/>
             <CatalogTab/>

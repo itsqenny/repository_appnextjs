@@ -25,7 +25,7 @@ export default function CustomerStatus({ userId, orderId }) {
 			color: "#31b545",
 		},
     GOING: {
-			text: "Отправлен",
+			text: "Собирается",
 			color: "#31b545",
 		},
 		CANCEL: {
