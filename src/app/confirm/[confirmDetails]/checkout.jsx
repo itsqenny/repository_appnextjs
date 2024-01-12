@@ -6,7 +6,8 @@ export const revalidate = 10
 export default function Checkout({ items, isCredited, price, orderId, paymentData, statusUpdate, data }) {
 	const { userId } = initData()
 	const { id, name, ConfirmSize } = items
-
+	console.log(data);
+  	console.log(statusUpdate);
     
 
 	return (
