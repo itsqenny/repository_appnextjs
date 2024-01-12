@@ -10,19 +10,6 @@ import { useParams } from "next/navigation"
 import initData from "@/app/UI/useInitData/initData"
 import useSWR from "swr"
 
-const fetcher =  async ()=> {
-	const { orderId } = parsedParams
-	const { userId } = initData()
-	const customer = {
-		userId,
-		order_id: orderId,
-	}
-	const res = await fetch('https://crm.zipperconnect.space/get/payment', customer)
-	const req = await res.json();
-	const data = req.status;
-	return data
-}
-
 export default function ProductConfirm() {
 	const params = useParams()
 	const decodedString = decodeURIComponent(params.confirmDetails)
@@ -119,9 +106,28 @@ export default function ProductConfirm() {
 			console.error("Ошибка отправки данных на сервер:", error)
 		}
 	}
+
+	const fetcher =  async ()=> {
+		const customer = {
+			userId,
+			order_id: orderId,
+		}
+		const res = await fetch('https://crm.zipperconnect.space/get/payment', customer)
+		const req = await res.json();
+		const data = req.status;
+		return data
+	}
 	const {data, error} = useSWR('status', fetcher)
-		if(error) return 'Ошибка загрузки данных'
+	useEffect(() => {
 		if (!data) return 'Loading'
+		if (data) {
+			setPaymentData(data)
+		}
+	  }, [data]);
+
+	  if (error) return <div>failed to load</div>;
+	  if (!data) return <div>Loading...</div>;
+		
 	return (
 		<>
 			<Back />
