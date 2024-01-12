@@ -98,7 +98,7 @@ export default function ProductConfirm() {
 
 			if (responseData.paymentUrl) {
 				Telegram.WebApp.openLink(responseData.paymentUrl)
-				setCustomerStatus(true);
+				setCustomerStatus(true)
 			} else {
 				console.error("Отсутствует ссылка для оплаты.")
 			}
@@ -107,7 +107,6 @@ export default function ProductConfirm() {
 		}
 	}
 
-		
 	return (
 		<>
 			<Back />

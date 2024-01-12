@@ -4,9 +4,15 @@ import Image from "next/image"
 import { useState, useEffect } from "react"
 import CustomerStatus from "./StatusFetcher"
 
-export default function Checkout({ items, userId, price, orderId, paymentData, customerStatus }) {
+export default function Checkout({
+	items,
+	userId,
+	price,
+	orderId,
+	paymentData,
+	customerStatus,
+}) {
 	const { id, name, ConfirmSize } = items
-    
 
 	return (
 		<>
@@ -133,13 +139,15 @@ export default function Checkout({ items, userId, price, orderId, paymentData, c
 				</div>
 				<div className="product-offer-id">Заказ №{orderId}</div>
 				<div className="product-offer-status">
-				{customerStatus ? (<>
-					<CustomerStatus userId={userId} orderId={orderId}/>
-				</>
-				):(
-				<>
-				<p>Ожидается оплата...</p>
-				</>)}
+					{customerStatus ? (
+						<>
+							<CustomerStatus userId={userId} orderId={orderId} />
+						</>
+					) : (
+						<>
+							<p>Ожидается оплата...</p>
+						</>
+					)}
 				</div>
 				<div
 					className="confirm-item-price"
