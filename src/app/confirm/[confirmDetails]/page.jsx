@@ -194,8 +194,6 @@ export default function ProductConfirm() {
 				) : (
 					<>
 						<Checkout
-							statusUpdate={statusUpdate}
-							data={data}
 							paymentData={paymentData}
 							items={parsedParams}
 							isCredited={isCredited}
