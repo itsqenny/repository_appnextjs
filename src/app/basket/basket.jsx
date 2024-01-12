@@ -1,4 +1,3 @@
-
 "use client"
 import { useState, useEffect } from "react"
 import axios from "axios"
@@ -7,7 +6,7 @@ import initData from "../UI/useInitData/initData"
 
 const BasketItem = () => {
 	const [basketData, setBasketData] = useState([])
-    const { userId } = initData();
+	const { userId } = initData()
 	const handleDelete = async (productId, order_id) => {
 		setBasketData((prevBasketData) =>
 			prevBasketData.filter((item) => item.order_id !== productId)

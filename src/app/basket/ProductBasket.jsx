@@ -7,16 +7,16 @@ export const revalidate = 0
 const ProductBasket = ({ data }) => {
 	const router = useRouter()
 	const handlePaymentClick = () => {
-		const queryParams = {
-			id: data.basket.id,
-			name: data.basket.name,
-			ConfirmPrice: data.basket.price,
-			ConfirmSize: data.basket.size,
-			orderId: data.basket.order_id,
-		}
-		const queryString = new URLSearchParams(queryParams).toString()
-		router.push(`/confirm/${queryString}`)
-		console.log("send data", queryParams)
+		//const queryParams = {
+	//		id: data.basket.id,
+	//		name: data.basket.name,
+	//		ConfirmPrice: data.basket.price,
+	//		ConfirmSize: data.basket.size,
+	//		orderId: data.basket.order_id,
+		//}
+	//	const queryString = new URLSearchParams(queryParams).toString()
+	//	router.push(`/confirm/${queryString}`)
+	//	console.log("send data", queryParams)
 	}
 	const basketItems = data.basket.map((item, index) => (
 		<div key={item.order_id} className="product-container-order">
