@@ -23,15 +23,17 @@ export default function Checkout({
 				</div>
 			</div>
 			<div className="item-order-info">
-					{customerStatus ? (
-						<>
-							<CustomerStatus userId={userId} orderId={orderId} />
-						</>
-					) : (
-						<>
+				{customerStatus ? (
+					<>
+						<CustomerStatus userId={userId} orderId={orderId} />
+					</>
+				) : (
+					<>
+						<div className="product-offer-status">
 							<p>Ожидается оплата...</p>
-						</>
-					)}
+						</div>
+					</>
+				)}
 				<div
 					className="confirm-item-price"
 					style={{

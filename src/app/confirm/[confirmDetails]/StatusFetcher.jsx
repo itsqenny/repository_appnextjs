@@ -13,11 +13,19 @@ export default function CustomerStatus({ userId, orderId }) {
 
 	const statusTextMap = {
 		WAIT: {
-			text: "var(--tg-theme-hint-color)",
+			text: "Ожидается оплата",
 			color: "#31b545",
 		},
 		PAID: {
 			text: "Оплачено",
+			color: "#31b545",
+		},
+    SENT: {
+			text: "Отправлен",
+			color: "#31b545",
+		},
+    GOING: {
+			text: "Отправлен",
 			color: "#31b545",
 		},
 		CANCEL: {
@@ -49,7 +57,7 @@ export default function CustomerStatus({ userId, orderId }) {
 
 	// Условие для проверки статусов, которые должны изменять цвет
 	const ChangeColor1 =
-		data.status === "PAID" || data.status === "WAIT" || data.status === "CANCEL"
+		data.status === "PAID" || data.status === "WAIT" || data.status === "SENT" || data.status === "GOING" || data.status === "CANCEL"
 	const ChangeColor2 = data.status === "SENT" || data.status === "CANCEL"
 	const ChangeColor3 =
 		data.status === "TRANSITCN" ||
