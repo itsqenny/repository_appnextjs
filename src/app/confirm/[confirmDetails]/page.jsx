@@ -201,6 +201,7 @@ export default function ProductConfirm() {
 							price={price}
 							orderId={orderId}
 						/>
+						SWR(1)
 						<CustomerStatus userId={userId} orderId={orderId}/>
 						
 					</>
