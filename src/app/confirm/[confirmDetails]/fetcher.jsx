@@ -1,14 +1,14 @@
 import useSWR from "swr"
-
-const fetcher = (url) => fetch(url).then((res) => res.json())
+import axios from 'axios'
+ 
+const fetcher = url => axios.get(url).then(res => res.data)
 
 export default function CustomerStatus({ userId, orderId }) {
-	const url = "https://crm.zipperconnect.space/get/payment"
-
-	const { data, error } = useSWR(
-		() => (userId && orderId ? [url, { userId, order_id: orderId }] : null),
-		fetcher
-	)
+    const customer = {
+        userId,
+        order_id: orderId,
+    }
+	const { data, error } = useSWR('https://crm.zipperconnect.space/get/paymen', customer, fetcher)
 
 	if (error) return "Произошла ошибка."
 	if (!data) return "Загрузка..."
