@@ -12,6 +12,11 @@ import useSWR from 'swr';
 import { fetcher } from "./fetcher"
 
 export default function ProductConfirm() {
+	const params = useParams()
+	const decodedString = decodeURIComponent(params.confirmDetails)
+	const parsedParams = Object.fromEntries(new URLSearchParams(decodedString))
+	const { id, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams
+	const { userId, queryId } = initData()
 	const [item, setItem] = useState(null)
 	const [size, setSize] = useState(ConfirmSize || null)
 	const [price, setPrice] = useState(ConfirmPrice || null)
@@ -20,11 +25,6 @@ export default function ProductConfirm() {
 	const [userBonus, setUserBonus] = useState(null)
 	const [paymentData, setPaymentData] = useState('WAIT')
 	const [statusUpdate, setStatusUpdate] = useState(false)
-	const params = useParams()
-	const decodedString = decodeURIComponent(params.confirmDetails)
-	const parsedParams = Object.fromEntries(new URLSearchParams(decodedString))
-	const { id, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams
-	const { userId, queryId } = initData()
 	//const userId = '1234'
 	const remainingBonus = Math.max(
 		0,
@@ -66,6 +66,30 @@ export default function ProductConfirm() {
 
 	const paymentDate = new Date()
 	const options = { month: "short", day: "numeric" }
+	if(statusUpdate){
+		const fetcher = async (url) => {
+			const customerData = {
+			  userId,
+			  order_id: orderId,
+			};
+		  
+			const response = await fetch(url, {
+			  method: 'POST',
+			  headers: {
+				'Content-Type': 'application/json',
+			  },
+			  body: JSON.stringify(customerData),
+			});
+		  
+			const jsonData = await response.json();
+			console.log(`data: ${jsonData}`);
+			return jsonData; // возвращаем значение поля "status"
+		  };
+
+		const {data, error} = useSWR('https://crm.zipperconnect.space/get/payment', fetcher)
+		console.log(data)
+
+	}
 	const onCheckout = async () => {
 		setCredited(true)
 		setShowConfirmation(false)
@@ -107,10 +131,7 @@ export default function ProductConfirm() {
 			console.error("Ошибка отправки данных на сервер:", error)
 		}
 	}
-	if(statusUpdate){
-	const {data, error} = useSWR('https://crm.zipperconnect.space/get/payment', fetcher)
-	console.log(data);
-	}
+	
 
 	return (
 		<>
