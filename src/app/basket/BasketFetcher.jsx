@@ -10,11 +10,20 @@ export default function CustomerBasket({userId}) {
 
 	if (error) return "An error has occurred."
 	if (!data) return "Loading..."
+	const { id } = data.basket;
+	const { data: productData, error: productError } = useSWR(
+		`https://repositorydb.onrender.com/products/${id}`,
+		fetcher
+	)
+
+	if (productError) return "An error has occurred."
+	if (!productData) return "Loading..."
+
 
 
 	return (
 		<>
-            <ProductBasket data={data}/>
+            <ProductBasket data={data} productData={productData} />
 		</>
 	)
 }
