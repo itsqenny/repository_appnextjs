@@ -66,29 +66,31 @@ export default function ProductConfirm() {
 
 	const paymentDate = new Date()
 	const options = { month: "short", day: "numeric" }
-	const fetcher = async (url) => {
-		const customerData = {
-		  userId,
-		  order_id: orderId,
-		};
-	  
-		const response = await fetch(url, {
-		  method: 'POST',
-		  headers: {
-			'Content-Type': 'application/json',
-		  },
-		  body: JSON.stringify(customerData),
-		});
-	  
-		const jsonData = await response.json();
-		console.log(`data: ${jsonData}`);
-		return jsonData; // возвращаем значение поля "status"
-	  };
+	
 
 	if(statusUpdate){
 
 		const {data} = useSWR('https://crm.zipperconnect.space/get/payment', fetcher)
 		console.log(data)
+
+		const fetcher = async (url) => {
+			const customerData = {
+			  userId,
+			  order_id: orderId,
+			};
+		  
+			const response = await fetch(url, {
+			  method: 'POST',
+			  headers: {
+				'Content-Type': 'application/json',
+			  },
+			  body: JSON.stringify(customerData),
+			});
+		  
+			const jsonData = await response.json();
+			console.log(`data: ${jsonData}`);
+			return jsonData; // возвращаем значение поля "status"
+		  };
 
 	}
 	const onCheckout = async () => {
