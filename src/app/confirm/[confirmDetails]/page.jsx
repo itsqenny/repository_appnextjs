@@ -9,7 +9,6 @@ import Back from "@/app/UI/BackButton/BackButton"
 import { useParams } from "next/navigation"
 import initData from "@/app/UI/useInitData/initData"
 import useSWR from 'swr';
-import { fetcher } from "./fetcher"
 
 export default function ProductConfirm() {
 	const params = useParams()
@@ -66,27 +65,27 @@ export default function ProductConfirm() {
 
 	const paymentDate = new Date()
 	const options = { month: "short", day: "numeric" }
-	const fetcher = async (url) => {
-		const customerData = {
-		  userId,
-		  order_id: orderId,
-		};
-	  
-		const response = await fetch(url, {
-		  method: 'POST',
-		  headers: {
-			'Content-Type': 'application/json',
-		  },
-		  body: JSON.stringify(customerData),
-		});
-	  
-		const jsonData = await response.json();
-		console.log(`data: ${jsonData}`);
-		return jsonData; // возвращаем значение поля "status"
-	  };
 
 	if(statusUpdate){
-
+		const fetcher = async (url) => {
+			const customerData = {
+			  userId,
+			  order_id: orderId,
+			};
+		  
+			const response = await fetch(url, {
+			  method: 'POST',
+			  headers: {
+				'Content-Type': 'application/json',
+			  },
+			  body: JSON.stringify(customerData),
+			});
+		  
+			const jsonData = await response.json();
+			console.log(`data: ${jsonData}`);
+			return jsonData; // возвращаем значение поля "status"
+		  };
+		  
 		const {data} = useSWR('https://crm.zipperconnect.space/get/payment', fetcher)
 		console.log(data)
 
