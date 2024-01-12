@@ -180,18 +180,6 @@ export default function ProductConfirm() {
 						</div>
 						<div className="item-order-info">
 							<div className="confirm-item-price">
-							{statusUpdate && (!data ? (
-									<>
-									Ожидается оплата...
-									</>
-								) : (
-									<>
-									{data.map((status) => (
-										<h1>{status}</h1>
-									))}
-									</>
-								)
-								)}
 								{price !== ConfirmPrice ? (
 									<>
 										{`${price} ₽`.replace(/(\d)(?=(\d{3})+(?!\d))/g, " $1 ")}
@@ -233,6 +221,8 @@ export default function ProductConfirm() {
 				) : (
 					<>
 						<Checkout
+							statusUpdate={statusUpdate}
+							data={data}
 							paymentData={paymentData}
 							items={parsedParams}
 							isCredited={isCredited}
