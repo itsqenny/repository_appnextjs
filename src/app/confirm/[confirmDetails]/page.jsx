@@ -65,31 +65,6 @@ export default function ProductConfirm() {
 
 	const paymentDate = new Date()
 	const options = { month: "short", day: "numeric" }
-
-	if(statusUpdate){
-		const fetcher = async (url) => {
-			const customerData = {
-			  userId,
-			  order_id: orderId,
-			};
-		  
-			const response = await fetch(url, {
-			  method: 'POST',
-			  headers: {
-				'Content-Type': 'application/json',
-			  },
-			  body: JSON.stringify(customerData),
-			});
-		  
-			const jsonData = await response.json();
-			console.log(`data: ${jsonData}`);
-			return jsonData; // возвращаем значение поля "status"
-		  };
-		  
-		const {data} = useSWR('https://crm.zipperconnect.space/get/payment', fetcher)
-		console.log(data)
-
-	}
 	const onCheckout = async () => {
 		setCredited(true)
 		setShowConfirmation(false)
@@ -123,7 +98,6 @@ export default function ProductConfirm() {
 
 			if (responseData.paymentUrl) {
 				Telegram.WebApp.openLink(responseData.paymentUrl)
-				setStatusUpdate(true);
 			} else {
 				console.error("Отсутствует ссылка для оплаты.")
 			}

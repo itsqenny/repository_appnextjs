@@ -3,11 +3,9 @@ import initData from "@/app/UI/useInitData/initData"
 import Image from "next/image"
 import { useState, useEffect } from "react"
 export const revalidate = 10 
-export default function Checkout({ items, isCredited, price, orderId, paymentData, statusUpdate, data }) {
+export default function Checkout({ items, isCredited, price, orderId, paymentData }) {
 	const { userId } = initData()
 	const { id, name, ConfirmSize } = items
-	console.log(data);
-  	console.log(statusUpdate);
     
 
 	return (
@@ -151,18 +149,6 @@ export default function Checkout({ items, isCredited, price, orderId, paymentDat
 						<>Загрузка...</>
 					)}
 				</div>
-				{statusUpdate && (!data ? (
-									<>
-									Ожидается оплата...
-									</>
-								) : (
-									<>
-									{data.map((status) => (
-										<h1>{status}</h1>
-									))}
-									</>
-								)
-								)}
 				<div
 					className="confirm-item-price"
 					style={{
