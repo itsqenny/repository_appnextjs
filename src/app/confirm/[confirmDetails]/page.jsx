@@ -11,10 +11,6 @@ import initData from "@/app/UI/useInitData/initData"
 import useSWR from 'swr';
 
 export default function ProductConfirm() {
-	const { data, error } = useSWR('https://crm.zipperconnect.space/get/payment', () => fetchData('https://crm.zipperconnect.space/get/payment'));
-		if (error) return <div>Ошибка загрузки данных</div>;
-		if (!data) return <div>Loading...</div>;
-
 	const params = useParams()
 	const decodedString = decodeURIComponent(params.confirmDetails)
 	const parsedParams = Object.fromEntries(new URLSearchParams(decodedString))
@@ -108,26 +104,37 @@ export default function ProductConfirm() {
 			console.error("Ошибка отправки данных на сервер:", error)
 		}
 	}
-	
+	const { data, error } = useSWR('https://crm.zipperconnect.space/get/payment', () => fetchData('https://crm.zipperconnect.space/get/payment'));
+	if (error) return <div>Ошибка загрузки данных</div>;
+	if (!data) return <div>Loading...</div>;
 
 	const fetchData = async (url) => {
-		const data = {
+		try {
+		  const data = {
 			userId,
 			order_id: orderId,
-		};
-	  
-		const response = await fetch(url, {
-		  method: 'POST',
-		  headers: {
-			'Content-Type': 'application/json',
-		  },
-		  body: JSON.stringify(data),
-		});
-	  
-		const jsonData = await response.json();
-		console.log(`data: ${jsonData}`);
-		console.log(jsonData.status);
-		return jsonData.status
+		  };
+		
+		  const response = await fetch(url, {
+			method: 'POST',
+			headers: {
+			  'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		  });
+		
+		  if (!response.ok) {
+			throw new Error(`HTTP error! status: ${response.status}`);
+		  }
+		
+		  const jsonData = await response.json();
+		  console.log(`data: ${jsonData}`);
+		  console.log(jsonData.status);
+		  return jsonData.status;
+		} catch (error) {
+		  console.error('Ошибка при загрузке данных:', error);
+		  throw error;
+		}
 	  };
 
 	return (
