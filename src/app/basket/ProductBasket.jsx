@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 export const revalidate = 0
@@ -18,11 +19,20 @@ const ProductBasket = ({ data }) => {
 	//	router.push(`/confirm/${queryString}`)
 	//	console.log("send data", queryParams)
 	}
-	
-	
+	const queryParams = {
+			id: data.basket.id,
+			name: data.basket.name,
+			ConfirmPrice: data.basket.price,
+			ConfirmSize: data.basket.size,
+			orderId: data.basket.order_id,
+		}
+		const queryString = new URLSearchParams(queryParams).toString()
+
+		const handleDelete = async (item,order_id) => {}
 	const basketItems = data.basket.map((item, index) => (
 		<div key={item.order_id} className="product-container-order">
 			<div className="product-swiper">
+				<Link href={`/confirm/${queryString}`}>
 				<div className="product-image-component" onClick={handlePaymentClick}>
 					<div className="product-image-container">
 						<div className="product-image-card">
@@ -49,8 +59,9 @@ const ProductBasket = ({ data }) => {
 
 					<span className="product-size">Оплатить</span>
 				</div>
+				</Link>
 			</div>
-			<button onClick={() => handleDelete(product.order_id)}>
+			<button onClick={() => handleDelete(item.order_id)}>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="36"
