@@ -19,6 +19,7 @@ const ProductBasket = ({ data }) => {
 	//	console.log("send data", queryParams)
 	}
 	
+	
 	const basketItems = data.basket.map((item, index) => (
 		<div key={item.order_id} className="product-container-order">
 			<div className="product-swiper">
