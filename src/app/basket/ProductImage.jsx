@@ -27,7 +27,7 @@ export default function ProductImage({ item }) {
                 height: '100%';
                 inset:'0px',
                 color: 'transparent',
-                userSelect: "none";
+                userSelect: "none",
 			}}
 			priority={true}
 		/>
