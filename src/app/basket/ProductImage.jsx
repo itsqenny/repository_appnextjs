@@ -24,7 +24,7 @@ export default function ProductImage({ item }) {
 			style={{
                 position: 'absolute',
                 width: '100%',
-                height: '100%';
+                height: '100%',
                 inset:'0px',
                 color: 'transparent',
                 userSelect: "none",
