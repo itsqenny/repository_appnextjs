@@ -22,14 +22,10 @@ export default function ProductImage({ item }) {
 			srcSet={srcSet}
 			sizes="(max-width: 768px) 100vw, 50vw"
 			style={{
-				height: "100%",
-				width: "100%",
-				margin: "4% 0 5% 0",
-				objectFit: "cover",
-				WebkitUserSelect: "none",
-				MozUserSelect: "none",
-				userSelect: "none",
-				pointerEvents: "none",
+                position: 'absolute',
+                width: '100%',
+                inset:'0px',
+                color: 'transparent',
 			}}
 			priority={true}
 		/>
