@@ -2,19 +2,19 @@ import Image from "next/image"
 import useSWR from "swr"
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
-export default function ProductImage({ item}) {
+export default function ProductImage({ item }) {
 	const { data , error } = useSWR(
 		`https://repositorydb.onrender.com/products/${item.id}`,
 		fetcher
 	)
-
+    
 	if (error) return "An error has occurred."
 	if (!data) return "Loading..."
 
 	return (
 		<Image
 			src={data.img[0]}
-			alt={`photo-${id}`}
+			alt={`photo`}
 			width={3840} // Начальная ширина изображения
 			height={2160} // Начальная высота изображения (может быть другой, в зависимости от соотношения сторон)
 			srcSet={srcSet}
