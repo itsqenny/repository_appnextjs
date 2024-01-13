@@ -9,7 +9,7 @@ export default function CustomerBasket({ userId }) {
 	)
 
 	if (error) return "An error has occurred."
-	if (!data) return "Loading..."
+	if (!data) return ""
 
 	return (
 		<>

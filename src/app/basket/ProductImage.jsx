@@ -9,7 +9,7 @@ export default function ProductImage({ item }) {
 	)
     
 	if (error) return "An error has occurred."
-	if (!data) return "Loading..."
+	if (!data) return ""
     const widths = [640, 750, 828, 1080, 1200, 1920, 2048, 3840];
     const srcSet = widths.map((width) => `${item.img}?w=${width}&q=75 ${width}w`).join(', ');
   
@@ -24,8 +24,10 @@ export default function ProductImage({ item }) {
 			style={{
                 position: 'absolute',
                 width: '100%',
+                height: '100%';
                 inset:'0px',
                 color: 'transparent',
+                userSelect: "none";
 			}}
 			priority={true}
 		/>
