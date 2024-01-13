@@ -34,7 +34,7 @@ const ProductBasket = ({ data }) => {
 	const basketItems = data.basket.map((item, index) => (
 		<div key={item.order_id} className="product-container-order">
 			<div className="product-swiper">
-				<Link href={`/confirm/${queryString}`}>
+				<Link href={`/confirm/id=${item.id}&name=${item.name}&ConfirmPrice=${item.price}&ConfirmSize=${item.size}&orderId=${item.order_id}`}>
 				<div className="product-image-component" onClick={handlePaymentClick}>
 					<div className="product-image-container">
 						<div className="product-image-card">
