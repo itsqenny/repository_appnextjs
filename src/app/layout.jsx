@@ -12,6 +12,7 @@ import '../../styles/selectSize.css'
 import '../../styles/stories.css'
 import '../../styles/openBanner.css'
 import '../../styles/ComingSoon.css'
+import '../../styles/basket.css'
 import Head from 'next/head'
 import Script from 'next/script'
 const inter = Inter({ subsets: ['latin'] })
