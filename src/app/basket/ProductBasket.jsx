@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-
+import ProductImage from "./ProductImage"
 export const revalidate = 0
 const ProductBasket = ({ data }) => {
 	const router = useRouter()
@@ -26,7 +26,9 @@ const ProductBasket = ({ data }) => {
 			ConfirmSize: data.basket.size,
 			orderId: data.basket.order_id,
 		}
+		console.log(queryParams)
 		const queryString = new URLSearchParams(queryParams).toString()
+		console.log(queryString)
 
 		const handleDelete = async (item,order_id) => {}
 	const basketItems = data.basket.map((item, index) => (
@@ -38,7 +40,7 @@ const ProductBasket = ({ data }) => {
 						<div className="product-image-card">
 							<div className="product-image-inner">
 								<div className="product-image-inner-row">
-                
+									<ProductImage item={item}/>
 								</div>
 							</div>
 						</div>
