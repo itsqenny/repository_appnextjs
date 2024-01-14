@@ -2,12 +2,29 @@
 
 
 import Link from "next/link"
-
+import axios from "axios"
 import ProductImage from "./ProductImage"
+import initData from "../UI/useInitData/initData"
 export const revalidate = 0
 const ProductBasket = ({ data }) => {
-	
-	const handleDelete = async (item, order_id) => {}
+	const { userId } = initData();
+	const handleDelete = async (item) => {
+		try {
+			// Отправляем запрос на удаление элемента с заданным order_id
+			await axios.post(
+				"https://crm.zipperconnect.space/customers/user/basket/delete/item",
+				{
+					userId: userId,
+					productId: item.id,
+					order_id: item.order_id,
+				}
+			)
+
+			// Обновляем локальный стейт basketData, удаляя элемент с заданным order_id
+		} catch (error) {
+			console.error("Ошибка при удалении товара:", error)
+		}
+	}
 	const basketItems = data.basket.slice(0, 2).map((item, index) => (
 		<div key={item.order_id} className="product-container-order">
 			<div className="product-swiper">
@@ -42,7 +59,7 @@ const ProductBasket = ({ data }) => {
 					</div>
 				</Link>
 			</div>
-			<button onClick={() => handleDelete(item.order_id)}>
+			<button onClick={() => handleDelete(item)}>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="36"
