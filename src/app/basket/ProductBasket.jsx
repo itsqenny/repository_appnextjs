@@ -5,8 +5,11 @@ import Link from "next/link"
 import axios from "axios"
 import ProductImage from "./ProductImage"
 import initData from "../UI/useInitData/initData"
+import { useState } from "react"
+
 export const revalidate = 0
 const ProductBasket = ({ data }) => {
+	const [basket, setBasket] = useState(data.basket.slice(0, 2));
 	const { userId } = initData();
 	const handleDelete = async (item) => {
 		try {
@@ -14,12 +17,14 @@ const ProductBasket = ({ data }) => {
 			await axios.get(
 				`https://crm.zipperconnect.space/customers/user/basket/delete/item?userId=${userId}&productId=${item.id}&orderId=${item.order_id}`
 			)
-
+			setBasket((prevItems) =>
+        prevItems.filter((basketItem) => basketItem.order_id !== item.order_id)
+      );
 		} catch (error) {
 			console.error("Ошибка при удалении товара:", error)
 		}
 	}
-	const basketItems = data.basket.slice(0, 2).map((item, index) => (
+	const basketItems = basket.map((item, index) => (
 		<div key={item.order_id} className="product-container-order">
 			<div className="product-swiper">
 				<Link
