@@ -5,7 +5,7 @@ import Link from "next/link"
 
 import { useRouter } from "next/navigation"
 import ProductListImage from "./ProductListImage"
-import Back from "@/app/UI/BackButton/BackButton"
+
 export const revalidate = 0
 const ProductBasketList = ({ data }) => {
 
@@ -65,7 +65,12 @@ const ProductBasketList = ({ data }) => {
 
 	return (
 		<> 
-		{typeof window !== "undefined" && <Back />}
+		{typeof window !== "undefined" && (
+			(async () => {
+				const Back = (await import("@/app/UI/BackButton/BackButton")).default;
+				return <Back />;
+			})()
+		)}
 		<div className="product-block-order">
 			<div className="product-order">
 				Оплачивается	
