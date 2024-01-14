@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import BasketListFetcher from "./BasketListFetcher"
 import initData from "../../UI/useInitData/initData"
-import Back from "@/app/UI/BackButton/BackButton"
+
 
 export const dynamic = 'force-dynamic'
 const BasketListItem = () => {
@@ -33,7 +33,6 @@ const BasketListItem = () => {
 
 	return (
 		<>
-		<Back/>
 			<BasketListFetcher userId={userId} />
 		</>
 	)
