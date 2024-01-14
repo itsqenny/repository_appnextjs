@@ -3,14 +3,31 @@
 import Image from "next/image"
 import Link from "next/link"
 
-import { useRouter } from "next/navigation"
+
 import ProductListImage from "./ProductListImage"
+import { useState } from "react"
+import axios from "axios"
 
 export const revalidate = 0
 const ProductBasketList = ({ data }) => {
+	const { userId } = initData();
+	const [basketItem, setBasketItem] = useState(data.basket || [])
+	const handleDelete = async (item) => {
+		try {
+			// Отправляем запрос на удаление элемента с заданным order_id
+			await axios.get(
+				`https://crm.zipperconnect.space/customers/user/basket/delete/item?userId=${userId}&productId=${item.id}&orderId=${item.order_id}`
+			)
 
-	const handleDelete = async (item, order_id) => {}
-	const basketItems = data.basket.map((item, index) => (
+			// Update the state by filtering out the deleted item
+			setBasketItem((prevItems) =>
+				prevItems.filter((basketItem) => basketItem.order_id !== item.order_id)
+			)
+		} catch (error) {
+			console.error("Ошибка при удалении товара:", error)
+		}
+	}
+	const basketItems = basketItem.map((item, index) => (
 		<div key={item.order_id} className="product-container-order">
 			<div className="product-swiper">
 				<Link
@@ -44,7 +61,7 @@ const ProductBasketList = ({ data }) => {
 					</div>
 				</Link>
 			</div>
-			<button onClick={() => handleDelete(item.order_id)}>
+			<button onClick={() => handleDelete(item)}>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="36"

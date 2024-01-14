@@ -1,6 +1,5 @@
 "use client"
 
-
 import Link from "next/link"
 import axios from "axios"
 import ProductImage from "./ProductImage"
@@ -9,22 +8,27 @@ import { useState } from "react"
 
 export const revalidate = 0
 const ProductBasket = ({ data }) => {
-	const [basket, setBasket] = useState(data.basket.slice(0, 2));
-	const { userId } = initData();
+	//const userId = '204688184'
+	const { userId } = initData()
+	const initialBasketItems = data && data.basket ? data.basket.slice(0, 2) : [];
+	const [basketItem, setBasketItem] = useState(initialBasketItems)
+
 	const handleDelete = async (item) => {
 		try {
 			// Отправляем запрос на удаление элемента с заданным order_id
 			await axios.get(
 				`https://crm.zipperconnect.space/customers/user/basket/delete/item?userId=${userId}&productId=${item.id}&orderId=${item.order_id}`
 			)
-			setBasket((prevItems) =>
-        prevItems.filter((basketItem) => basketItem.order_id !== item.order_id)
-      );
+
+			// Update the state by filtering out the deleted item
+			setBasketItem((prevItems) =>
+				prevItems.filter((basketItem) => basketItem.order_id !== item.order_id)
+			)
 		} catch (error) {
 			console.error("Ошибка при удалении товара:", error)
 		}
 	}
-	const basketItems = basket.map((item, index) => (
+	const basketItems = basketItem.map((item, index) => (
 		<div key={item.order_id} className="product-container-order">
 			<div className="product-swiper">
 				<Link
@@ -78,32 +82,36 @@ const ProductBasket = ({ data }) => {
 	))
 
 	return (
+		<>
+		{data && data.basket && data.basket && basketItem.length > 0 && (
 		<div className="product-block-order">
 			<div className="product-order">
 				Оплачивается
-				{data.basket.length > 2 && (	
+				{data && data.basket && data.basket.length > 2 && (
 					<Link href={`/basket/`}>
-					<div className="product-order-open-all">
-						Все
-						<svg
-							viewBox="0 0 20 20"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="m7.5 5 5 5-5 5"
-								stroke="currentColor"
-								strokeWidth="1.5"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							></path>
-						</svg>
-					</div>
+						<div className="product-order-open-all">
+							Все
+							<svg
+								viewBox="0 0 20 20"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									d="m7.5 5 5 5-5 5"
+									stroke="currentColor"
+									strokeWidth="1.5"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								></path>
+							</svg>
+						</div>
 					</Link>
 				)}
 			</div>
 			<div className="product-container">{basketItems}</div>
 		</div>
+		)}
+		</>
 	)
 }
 
