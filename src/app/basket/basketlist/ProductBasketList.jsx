@@ -65,7 +65,7 @@ const ProductBasketList = ({ data }) => {
 
 	return (
 		<> 
-		<Back />
+		{typeof window !== "undefined" && <Back />}
 		<div className="product-block-order">
 			<div className="product-order">
 				Оплачивается	
