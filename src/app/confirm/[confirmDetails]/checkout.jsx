@@ -13,7 +13,6 @@ export default function Checkout({
 	customerStatus,
 }) {
 	const { id, name, ConfirmSize } = items
-
 	return (
 		<>
 			<div className="bg-full-item-name">

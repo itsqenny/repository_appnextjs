@@ -3,12 +3,12 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import ProductImage from "./ProductImage"
+import ProductListImage from "./ProductListImage"
 export const revalidate = 0
-const ProductBasket = ({ data }) => {
-	
+const ProductBasketList = ({ data }) => {
+
 	const handleDelete = async (item, order_id) => {}
-	const basketItems = data.basket.slice(0, 2).map((item, index) => (
+	const basketItems = data.basket.map((item, index) => (
 		<div key={item.order_id} className="product-container-order">
 			<div className="product-swiper">
 				<Link
@@ -19,7 +19,7 @@ const ProductBasket = ({ data }) => {
 							<div className="product-image-card">
 								<div className="product-image-inner">
 									<div className="product-image-inner-row">
-										<ProductImage item={item} />
+										<ProductListImage item={item} />
 									</div>
 								</div>
 							</div>
@@ -64,31 +64,11 @@ const ProductBasket = ({ data }) => {
 	return (
 		<div className="product-block-order">
 			<div className="product-order">
-				Оплачивается
-				{data.basket.length > 2 && (	
-					<Link href={`/basket/`}>
-					<div className="product-order-open-all">
-						Все
-						<svg
-							viewBox="0 0 20 20"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path
-								d="m7.5 5 5 5-5 5"
-								stroke="currentColor"
-								strokeWidth="1.5"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							></path>
-						</svg>
-					</div>
-					</Link>
-				)}
+				Оплачивается	
 			</div>
 			<div className="product-container">{basketItems}</div>
 		</div>
 	)
 }
 
-export default ProductBasket
+export default ProductBasketList

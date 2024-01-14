@@ -1,10 +1,10 @@
 "use client"
 import { useState, useEffect } from "react"
 import axios from "axios"
-import BasketFetcher from "./BasketFetcher"
-import initData from "../UI/useInitData/initData"
+import BasketListFetcher from "./BasketListFetcher"
+import initData from "../../UI/useInitData/initData"
 
-const BasketItem = () => {
+const BasketListItem = () => {
 	const [basketData, setBasketData] = useState([])
 	const { userId } = initData()
 	//const userId = '204688184'
@@ -31,9 +31,9 @@ const BasketItem = () => {
 
 	return (
 		<>
-			<BasketFetcher userId={userId} />
+			<BasketListFetcher userId={userId} />
 		</>
 	)
 }
 
-export default BasketItem
+export default BasketListItem

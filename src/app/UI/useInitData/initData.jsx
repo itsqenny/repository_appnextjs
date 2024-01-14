@@ -7,6 +7,6 @@ export default function initData() {
     WebApp,
     user: WebApp?.initDataUnsafe?.user,
     queryId: WebApp?.initDataUnsafe?.query_id,
-    userId: WebApp?.initDataUnsafe?.user.id,
+    userId: WebApp?.initDataUnsafe?.user?.id,
   };
 }
