@@ -2,8 +2,10 @@
 
 import Image from "next/image"
 import Link from "next/link"
+
 import { useRouter } from "next/navigation"
 import ProductListImage from "./ProductListImage"
+import Back from "@/app/UI/BackButton/BackButton"
 export const revalidate = 0
 const ProductBasketList = ({ data }) => {
 
@@ -62,12 +64,15 @@ const ProductBasketList = ({ data }) => {
 	))
 
 	return (
+		<> 
+		<Back />
 		<div className="product-block-order">
 			<div className="product-order">
 				Оплачивается	
 			</div>
 			<div className="product-container">{basketItems}</div>
 		</div>
+		</>
 	)
 }
 
