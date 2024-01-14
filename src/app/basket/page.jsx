@@ -5,7 +5,6 @@ import BasketListItem from "./basketlist/basketlist"
 const BasketList = () => {
     return (
         <>
-            <Back/>
             <BasketListItem/>
         </>
     );
