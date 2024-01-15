@@ -1,5 +1,5 @@
 import Link from "next/link"
-import CustomerPhoto from "./CustomerPhoto"
+import CustomerPhoto from "./CustomerImg"
 
 const Header = ({ data, userId, error, user }) => {
 	
