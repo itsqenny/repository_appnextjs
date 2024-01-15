@@ -9,7 +9,7 @@ const Header = ({ data, userId, error, user }) => {
 				<Link href={`/customer/${userId}`}>
 					<div className="usercard">
 						<div className="usercard_block">
-							{error && !data ? (
+							{error ? (
 								<>
 									<div className="usercard_avatar">
 										<div className="usercard_avatar_logo">
