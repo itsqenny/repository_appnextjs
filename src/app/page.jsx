@@ -1,5 +1,4 @@
 import Products from "./products/page"
-import Header from "./customer/page"
 import CatalogTab from "./components/CatalogTab"
 import SearchTab from "./components/SearchTab"
 import OpenBanner from "./banners/open/banner"
@@ -9,12 +8,13 @@ import Loading from "./loading"
 import ComingSoon from "./banners/comingsoon/banner"
 import BasketItem from "./basket/basket"
 import PaidBasket from "./paidbasket/paidBasket"
+import Customer from "./customer/Customer"
 
 export default async function Home() {
 	return (
 		<>
 			<Suspense fallback={<Loading />}>
-				<Header />
+				<Customer/>
 				<SearchTab />
 				<Bonus/>	
 				<BasketItem />
