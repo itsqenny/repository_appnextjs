@@ -23,17 +23,18 @@ export const metadata = {
 	title: "description",
 	description: "zipperapp",
 }
+export const viewport = {
+  width: 'device-width',
+  height: 'device-height',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: 1,
+  interactiveWidget: 'resizes-visual',
+  userScalable: 'no',
+}
 export default function RootLayout({ children }) {
 	return (
 		<html lang="ru" suppressHydrationWarning>
-			<meta
-				name="viewport"
-				content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content, maximum-scale=1"
-			/>
-			<meta
-				name="viewport"
-				content="width=device-width, height=device-height, user-scalable=no"
-			/>
 			<body className={inter.className} suppressHydrationWarning={true}>
 				{children}
 				<Script
