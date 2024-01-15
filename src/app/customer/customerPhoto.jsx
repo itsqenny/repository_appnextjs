@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import initData from "../UI/useInitData/initData"
 
 const CustomerPhoto = ({ userId, data }) => {
+	
 	return (
 		<>
 				<div className="usercard_avatar">

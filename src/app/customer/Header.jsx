@@ -2,7 +2,7 @@ import Link from "next/link"
 import CustomerPhoto from "./CustomerPhoto"
 
 const Header = ({ data, userId, error, user }) => {
-	console.log(data)
+	
 	return (
 		<>
 			<nav className="nav-form">
