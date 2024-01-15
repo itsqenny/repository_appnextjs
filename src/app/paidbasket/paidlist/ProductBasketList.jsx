@@ -12,27 +12,12 @@ export const revalidate = 0
 const ProductBasketList = ({ data }) => {
 	const { userId } = initData();
 	//const userId = '204688184'
-	const [basketItem, setBasketItem] = useState(data.basket || [])
-	const handleDelete = async (item) => {
-		try {
-			// Отправляем запрос на удаление элемента с заданным order_id
-			await axios.get(
-				`https://crm.zipperconnect.space/customers/user/basket/delete/item?userId=${userId}&productId=${item.id}&orderId=${item.order_id}`
-			)
-
-			// Update the state by filtering out the deleted item
-			setBasketItem((prevItems) =>
-				prevItems.filter((basketItem) => basketItem.order_id !== item.order_id)
-			)
-		} catch (error) {
-			console.error("Ошибка при удалении товара:", error)
-		}
-	}
+	const [basketItem, setBasketItem] = useState(data || [])
 	const basketItems = basketItem.map((item, index) => (
-		<div key={item.order_id} className="product-container-order">
-			<div className="product-swiper">
+		<div key={item.order_id} className="product-container-order"
+		style={{display:'block'}}>
 				<Link
-					href={`/order/id=${item.id}&name=${item.name}&ConfirmPrice=${item.price}&ConfirmSize=${item.size}&orderId=${item.order_id}`}
+					href={`/paid/id=${item.id}&name=${item.name}&ConfirmPrice=${item.price}&ConfirmSize=${item.size}&orderId=${item.order_id}`}
 				>
 					<div className="product-image-component">
 						<div className="product-image-container">
@@ -61,40 +46,24 @@ const ProductBasketList = ({ data }) => {
 						<span className="product-size">Оплатить</span>
 					</div>
 				</Link>
-			</div>
-			<button onClick={() => handleDelete(item)}>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="36"
-					height="36"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					strokeWidth="2"
-					strokeLinecap="round"
-					strokeLinejoin="round"
-					className="ai ai-Cross"
-				>
-					<path d="M20 20L4 4m16 0L4 20" />
-				</svg>
-			</button>
 		</div>
 	))
-
 	return (
-		<> 
+		<>
 		{typeof window !== "undefined" && (
 			(async () => {
 				const Back = (await import("@/app/UI/BackButton/BackButton")).default;
 				return <Back />;
 			})()
 		)}
+		{basketItem.length > 0 && (
 		<div className="product-block-order">
 			<div className="product-order">
-				Оплачивается	
+				Оплачено
 			</div>
 			<div className="product-container">{basketItems}</div>
 		</div>
+		)}
 		</>
 	)
 }

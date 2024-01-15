@@ -8,7 +8,7 @@ import { Suspense } from "react"
 import Loading from "./loading"
 import ComingSoon from "./banners/comingsoon/banner"
 import BasketItem from "./basket/basket"
-
+import PaidBasket from "./paidBasket/paidBasket"
 export default async function Home() {
 	return (
 		<>
@@ -17,6 +17,7 @@ export default async function Home() {
 				<SearchTab />
 				<BonusTab />
 				<BasketItem />
+				<PaidBasket/>
 				{/* <OpenBanner/> */}
 				<ComingSoon />
 				<CatalogTab />
