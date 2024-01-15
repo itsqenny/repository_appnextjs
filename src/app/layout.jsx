@@ -22,17 +22,18 @@ export const revalidate = 1
 export const metadata = {
 	title: "description",
 	description: "zipperapp",
-	name: "viewport",
-	content: "width=device-width",
-	name: "viewport",
-	content:
-		"width=device-width, initial-scale=1.0, interactive-widget=resizes-content, maximum-scale=1",
-	name: "viewport",
-	content: "width=device-width, height=device-height, user-scalable=no",
 }
 export default function RootLayout({ children }) {
 	return (
 		<html lang="ru" suppressHydrationWarning>
+			<meta
+				name="viewport"
+				content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content, maximum-scale=1"
+			/>
+			<meta
+				name="viewport"
+				content="width=device-width, height=device-height, user-scalable=no"
+			/>
 			<body className={inter.className} suppressHydrationWarning={true}>
 				{children}
 				<Script
