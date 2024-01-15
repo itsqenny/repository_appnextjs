@@ -50,7 +50,7 @@ const Header = ({ data, userId, error, user }) => {
 										/>
 									</svg>
 								</div>
-								<div className="usercard-rank">Starter</div>
+								<div className="usercard-rank">Classic</div>
 							</div>
 						</div>
 					</div>
