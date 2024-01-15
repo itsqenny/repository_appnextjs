@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
-
+import initData from "@/app/UI/useInitData/initData"
 import ProductListImage from "./ProductListImage"
 import { useState } from "react"
 import axios from "axios"
