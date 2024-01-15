@@ -166,16 +166,16 @@
 	background: linear-gradient(
 			0.25turn,
 			transparent,
-			var(--tg-text),
+			var(--tg-second),
 			transparent
 		),
-		linear-gradient(var(--tg-hint), var(--tg-hint)),
+		linear-gradient(var(--tg-bg), var(--tg-bg)),
 		radial-gradient(
 			38px circle at 19px 19px,
-			var(--tg-hint) 50%,
+			var(--tg-bg) 50%,
 			transparent 51%
 		),
-		linear-gradient(var(--tg-hint), var(--tg-hint));
+		linear-gradient(var(--tg-bg), var(--tg-bg));
 	background-repeat: no-repeat;
 	background-size: 315px 250px, 315px 180px, 100px 100px, 225px 30px;
 	background-position: -315px 0, 0 0, 0px 190px, 50px 195px;
