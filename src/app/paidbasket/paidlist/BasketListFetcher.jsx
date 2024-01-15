@@ -1,5 +1,5 @@
 import useSWR from "swr"
-import ProductBasketList from "./ProductBasketList.jsx"
+import ProductBasketList from "./ProductBasketList"
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function CustomerBasketList({userId}) {

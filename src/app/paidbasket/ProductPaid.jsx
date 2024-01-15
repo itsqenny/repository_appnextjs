@@ -1,9 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import axios from "axios"
 import ProductImage from "./ProductImage"
-import initData from "../UI/useInitData/initData"
+
 
 export const revalidate = 0
 const ProductPaid = ({ data }) => {

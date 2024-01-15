@@ -8,7 +8,7 @@ import { Suspense } from "react"
 import Loading from "./loading"
 import ComingSoon from "./banners/comingsoon/banner"
 import BasketItem from "./basket/basket"
-import PaidBasket from "./paidBasket/paidBasket"
+import PaidBasket from "./paidbasket/paidBasket"
 export default async function Home() {
 	return (
 		<>
