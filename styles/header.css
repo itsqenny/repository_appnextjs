@@ -45,11 +45,45 @@
 	align-items: center;
 	padding: 1px 4px;
 	border-radius: 5px;
-	color: var(--tg-text);
-	font-weight: 500;
+	color: #fff;
+	font-weight: 200;
 	font-size: 12px;
-	line-height: 100%;
-	background: var(--tg-bg);
+	line-height: 110%;
+    letter-spacing: 0.04em;
+	background: #000;
+}
+
+.usercard-status {
+	display: flex;
+    margin-top: 8px;
+    margin-left: 5px;
+    align-items: center;
+    padding: 1px 5px;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 130%;
+    white-space: nowrap;
+    background: #000;
+    outline: unset;
+    transition: transform .15s linear;
+    animation: status-both .8s both;
+    flex: 0 1;
+}
+
+@keyframes status-both {
+    0% {
+        transform: scale(.1);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 a {
 	text-decoration: none;
@@ -73,11 +107,7 @@ a {
 			transparent
 		),
 		linear-gradient(var(--tg-bg), var(--tg-bg)),
-		radial-gradient(
-			38px circle at 19px 19px,
-			var(--tg-bg) 50%,
-			transparent 51%
-		),
+		radial-gradient(38px circle at 19px 19px, var(--tg-bg) 50%, transparent 51%),
 		linear-gradient(var(--tg-bg), var(--tg-bg));
 	background-repeat: no-repeat;
 	background-size: 315px 250px, 315px 180px, 100px 100px, 225px 30px;

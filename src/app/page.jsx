@@ -14,11 +14,11 @@ export default async function Home() {
 	return (
 		<>
 			<Suspense fallback={<Loading />}>
-				<Customer/>
+				<Customer />
 				<SearchTab />
-				<Bonus/>	
+				<Bonus />
 				<BasketItem />
-				<PaidBasket/>
+				<PaidBasket />
 				{/* <OpenBanner/> */}
 				<ComingSoon />
 				<CatalogTab />

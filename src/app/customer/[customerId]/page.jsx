@@ -6,6 +6,7 @@ const CustomerPage = () => {
   const params = useParams()
   const {customerId} = params
   const { user } = initData()
+  //const user = { username: 'whokilledravey', first_name: 'Евгений'}
   return (
     <>
       <PhotoIdFetcher customerId={customerId} user={user}/>
