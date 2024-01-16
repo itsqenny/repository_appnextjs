@@ -20,7 +20,7 @@ const Header = ({ data, userId, error, user }) => {
 												viewBox="0 0 314 251"
 												fill="none"
 											>
-												{/* SVG для отображения логотипа, если изображение отсутствует */}
+										
 											</svg>
 										</div>
 									</div>

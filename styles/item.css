@@ -570,7 +570,7 @@ hr{
 .main-button button{
   height: 50px;
     border-radius: 12px;
-    background: var(--mainbutton);
+    background: var(--main-button);
     color: var(--button-text-color);
     font-size: 17px;
     font-family: system,-apple-system,\.SFNSText-Regular,San Francisco,Roboto,Segoe UI,Helvetica Neue,Lucida Grande,sans-serif;
