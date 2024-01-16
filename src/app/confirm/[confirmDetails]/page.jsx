@@ -1,4 +1,4 @@
-
+'use client'
 import initData from '@/app/UI/useInitData/initData';
 import ConfirmFetcher from './BonusFetcher';
 
