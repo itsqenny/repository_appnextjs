@@ -1,5 +1,4 @@
 "use client"
-import SelectBonus from "@/app/products/SelectBonus"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
