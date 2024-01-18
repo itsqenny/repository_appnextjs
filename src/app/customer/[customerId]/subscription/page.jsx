@@ -1,11 +1,13 @@
 "use client"
 import Back from "@/app/UI/BackButton/BackButton"
+import initData from "@/app/UI/useInitData/initData"
 import { useState } from "react"
 
 const Subscription = () => {
 	const [isVisible, setIsPopupVisible] = useState(false)
-
+	const { WebApp } = initData()
 	const showPopup = () => {
+		WebApp.HapticFeedback.notificationOccurred('error');
 		setIsPopupVisible(true)
 		setTimeout(() => {
 			setIsPopupVisible(false)
