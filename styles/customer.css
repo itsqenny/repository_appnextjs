@@ -366,6 +366,7 @@
 	font-size: 16px;
 	line-height: 110%;
 	margin: 0 var(--space-4x) 0 var(--space-4x);
+	text-align: left;
 }
 
 .profile-data-info h2 {

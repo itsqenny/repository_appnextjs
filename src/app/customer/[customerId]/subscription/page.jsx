@@ -1,8 +1,9 @@
 "use client"
-
+import Back from "@/app/UI/BackButton/BackButton"
 const Subscription = () => {
 	return (
 		<>
+		<Back/>
 			<div className="profile-data">
 				<div
 					class="subscription-container"
@@ -49,9 +50,6 @@ const Subscription = () => {
 							Эксклюзивный доступ к новинкам и акциям
 						</li>
 						<li class="feature-item">Дополнительные предложения и скидки</li>
-						<li class="feature-item">
-							Эксклюзивный доступ к новинкам и акциям
-						</li>
                         <li class="feature-item">
 							Лимит на списание бонусов (до 3990) 
 						</li>
