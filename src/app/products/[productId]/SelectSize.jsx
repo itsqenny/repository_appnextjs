@@ -1,10 +1,12 @@
 'use client'
 
+import initData from "@/app/UI/useInitData/initData";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
 export default function SelectSize({ item, onPriceClick, onSizeClick}) {
+  const { WebApp } = initData()
     const [activeSize, setActiveSize] = useState(null);
     const [activePrice, setActivePrice] = useState(null);
   const findSizeByPrice = (price) => {
@@ -15,7 +17,7 @@ export default function SelectSize({ item, onPriceClick, onSizeClick}) {
     if (item) {
       const setInitialValues = () => {
         const defaultSize = findSizeByPrice(item.price);
-        console.log('Default Size:', defaultSize);
+        
         if (defaultSize) {
           setActiveSize(defaultSize);
     setActivePrice(item.size[defaultSize]); // Также устанавливаем активную цену
@@ -33,11 +35,13 @@ export default function SelectSize({ item, onPriceClick, onSizeClick}) {
   }, [item]);
 
   const handleSizeClick = (size, price) => {
+    WebApp.HapticFeedback.impactOccurred('medium');
     setActiveSize(size);
     setActivePrice(price);
     onPriceClick(price); // вызовите функцию обратного вызова здесь
     onSizeClick(size)
   };
+  
     return (
         <>
             <div className="size_box">

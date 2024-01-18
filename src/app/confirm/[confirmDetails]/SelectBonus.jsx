@@ -3,7 +3,7 @@ import {  useState } from "react";
 import initData from "@/app/UI/useInitData/initData";
 
 export default function SelectBonus({price, setParentPrice, setParentBonus, data}){
-    //const { userId } = initData();
+    const { WebApp } = initData();
     const [isCredited, setCredited] = useState(false);
     //const [userBonus, setUserBonus] = useState(data.bonus);
 
@@ -24,8 +24,9 @@ export default function SelectBonus({price, setParentPrice, setParentBonus, data
           }
     
           setParentPrice(calculatedPrice);
+          WebApp.HapticFeedback.impactOccurred('medium');
         } else {
-          console.log('error');
+          WebApp.HapticFeedback.notificationOccurred('error');
         }
       };
 
