@@ -8,11 +8,11 @@ import PhotoFetcher from "./PhotoFetcher";
 export default function Customer(){
     const { user, userId } = initData();
     useWebApp();
-    //const userId = '2046881841'
+    //const userId = '204688184'
     //const user = { username: 'whokilledravey', first_name: 'Евгений'}
     return (
         <> 
-        <Validation/>
+        {/*<Validation/> */}
            
             <PhotoFetcher userId={userId} user={user}/>
         </>
