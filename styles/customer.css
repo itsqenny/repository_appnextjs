@@ -596,3 +596,37 @@
 	position: absolute;
 	inset: 0;
 }
+
+
+.popup-container {
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	width: 358px;
+	padding: 9px 16px;
+	transform: translateX(-50%);
+	background-color: Var(--tg-second);
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+	border-radius: 14px;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
+	margin-bottom: 10px;
+	font-size: 13px;
+	font-weight: 500;
+	text-align: left;
+	display: flex;
+	align-items: center; /* Центрирование по вертикали */
+  }
+  
+  .popup-container p {
+	margin: 0; /* Убираем внешние отступы у текста */
+  }
+  
+  .popup-container svg {
+	flex-shrink: 0; /* Запрещаем сжатие SVG */
+	margin-right: 16px; /* Расстояние между SVG и текстом */
+  }
+  
+  .popup-container.show {
+	opacity: 1;
+  }
