@@ -20,7 +20,7 @@ export default function ProductId(){
   const [showPopup, setShowPopup] = useState(false); 
   useEffect(() => {
     // Выполнение HTTP-запроса
-    fetch(`https://repositorydb.onrender.com/products/${params.productId}`)
+    fetch(`/api/products/${params.productId}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('500 (Not Found)');
@@ -161,29 +161,14 @@ const handlePaymentClick = () => {
            </div>
           
         </div>
-      </div>
-      {/*
-      <Link href={{
-        pathname: '/confirm',
-        query:{
-          id: item.id,
-          name: item.name,
-          ConfirmPrice: currentPrice,
-          ConfirmSize: currentSize,
-          orderId: uniqueOrderId,
-        }
-      }}>
-      */}
-          {/*
+      </div>  
          <div className="main-button">
               <button onClick={handlePaymentClick}>Перейти к оплате</button>
           </div>
-         */}
+          {/**/}
         
         
           <ButtonPayment handlePaymentClick={handlePaymentClick}/> 
-          {/*
-        </Link> */}
       {showPopup && (
                     <div className="main-popup">
                       <div className="main-popup show">

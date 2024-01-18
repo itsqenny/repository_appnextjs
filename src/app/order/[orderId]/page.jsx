@@ -26,7 +26,7 @@ export default function ProductOffer() {
 	//const userId = '1234'
 	useEffect(() => {
 		// Выполнение HTTP-запроса
-		fetch(`https://repositorydb.onrender.com/products/${parsedParams.id}`)
+		fetch(`/api/products/${parsedParams.id}`)
 			.then((response) => {
 				if (!response.ok) {
 					throw new Error("500 (Not Found)")
