@@ -1,14 +1,11 @@
 'use client'
 
 import { BackButton } from "@twa-dev/sdk/react"
+import { useRouter } from 'next/navigation'
 export const dynamic = 'force-dynamic'
 function Back(){
     const handleBackClick = () => {
-        // Отключаем прокрутку вверх при нажатии на кнопку Back
-        window.scrollTo(0, 0);
-
-        // Возвращаемся назад в истории
-        window.history.back();
+        router.back();
     };
     return (
     <>
