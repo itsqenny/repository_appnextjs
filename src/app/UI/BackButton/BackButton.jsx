@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic'
 function Back(){
     const router = useRouter()
     const handleBackClick = () => {
-        router.back();
+        router.push('/', { scroll: true});
     };
     return (
     <>
