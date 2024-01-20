@@ -11,8 +11,8 @@ const SkeletonBasket = () => {
 				<div className="skeleton-product-container">
 					<div className="skeleton-container-order">
 						<div className="product-image-component">
-							<div className="product-image-container">
-								<div className="product-image-card">
+							<div className="skeleton-product-image-container">
+								<div className="skeleton-product-image-card">
 									<div className="skeleton-product-image-inner">
 										<div className="product-image-inner-row"></div>
 									</div>

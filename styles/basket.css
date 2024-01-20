@@ -173,6 +173,17 @@
 	align-items: center;
 	justify-content: center;
 }
+.skeleton-product-image-container {
+	position: relative;
+	flex-shrink: 0;
+	border-radius: 20px;
+	overflow: hidden;
+	background: var(--tg-hint);
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 .skeleton-product-image-inner {
 	position: relative;
 	margin: 8px;
@@ -198,6 +209,17 @@
 	border-radius: 20px;
 	overflow: hidden;
 	background: #fff;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.skeleton-product-image-card {
+	position: relative;
+	flex-shrink: 0;
+	border-radius: 20px;
+	overflow: hidden;
+	background: var(--tg-hint);
 
 	display: flex;
 	align-items: center;
