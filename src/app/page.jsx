@@ -14,7 +14,6 @@ export default async function Home() {
 	return (
 		<>
 			<Suspense fallback={<Loading />}>
-				EL PRIMO
 				<Customer />
 				<SearchTab />
 				<Bonus />

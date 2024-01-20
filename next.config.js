@@ -11,9 +11,6 @@ const nextConfig = {
     //Only For Next.js versions prior to 14.1.0 because it is enabled by default since version 14.1.0 
     windowHistorySupport:true 
 },
-typescript: {
-  ignoreBuildErrors: true,
-},
 }
 
 module.exports = nextConfig
