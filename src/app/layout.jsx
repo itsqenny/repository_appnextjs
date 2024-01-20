@@ -1,3 +1,4 @@
+
 import { Inter } from "next/font/google"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../styles/customer.css"
@@ -16,8 +17,8 @@ import "../../styles/ComingSoon.css"
 import "../../styles/basket.css"
 import Head from "next/head"
 import Script from "next/script"
+import ClientSideScrollRestorer from "./ClientSideScrollRestorer";
 const inter = Inter({ subsets: ["latin"] })
-
 export const revalidate = 1
 
 export const metadata = {
@@ -34,6 +35,7 @@ export const viewport = {
   userScalable: 'no',
 }
 export default function RootLayout({ children }) {
+	
 	return (
 		<html lang="ru" suppressHydrationWarning>
 			<body className={inter.className} suppressHydrationWarning={true}>
@@ -47,6 +49,7 @@ export default function RootLayout({ children }) {
 					async
 				/>
 			</body>
+			<ClientSideScrollRestorer />
 		</html>
 	)
 }
