@@ -48,6 +48,7 @@ export default function RootLayout({ children }) {
 					defer
 					async
 				/>
+				<ClientSideScrollRestorer />
 			</body>
 			
 		</html>
