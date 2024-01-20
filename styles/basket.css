@@ -178,7 +178,7 @@
 	flex-shrink: 0;
 	border-radius: 20px;
 	overflow: hidden;
-	background: var(--tg-hint);
+	background: var(--tg-bg);
 	height: 100%;
 	display: flex;
 	align-items: center;
@@ -219,7 +219,7 @@
 	flex-shrink: 0;
 	border-radius: 20px;
 	overflow: hidden;
-	background: var(--tg-hint);
+	background: var(--tg-bg);
 
 	display: flex;
 	align-items: center;

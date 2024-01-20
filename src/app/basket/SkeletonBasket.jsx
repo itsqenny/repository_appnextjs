@@ -23,22 +23,22 @@ const SkeletonBasket = () => {
 						<div className="product-details">
 							<span
 								className="skeleton-product-price-and-datecreated"
-                                style={{ marginTop: "14px" }}
+								style={{ marginTop: "14px" }}
 							></span>
 							<span
 								className="skeleton-product-price-and-datecreated"
 								style={{ width: "90px" }}
 							></span>
-                            <span
+							<span
 								className="skeleton-product-price-and-datecreated"
 								style={{ width: "80px" }}
 							></span>
 						</div>
 					</div>
-                    <div className="skeleton-container-order">
+					<div className="skeleton-container-order">
 						<div className="product-image-component">
-							<div className="product-image-container">
-								<div className="product-image-card">
+							<div className="skeleton-product-image-container">
+								<div className="skeleton-product-image-card">
 									<div className="skeleton-product-image-inner">
 										<div className="product-image-inner-row"></div>
 									</div>
@@ -49,13 +49,13 @@ const SkeletonBasket = () => {
 						<div className="product-details">
 							<span
 								className="skeleton-product-price-and-datecreated"
-                                style={{ marginTop: "14px" }}
+								style={{ marginTop: "14px" }}
 							></span>
 							<span
 								className="skeleton-product-price-and-datecreated"
 								style={{ width: "90px" }}
 							></span>
-                            <span
+							<span
 								className="skeleton-product-price-and-datecreated"
 								style={{ width: "80px" }}
 							></span>
