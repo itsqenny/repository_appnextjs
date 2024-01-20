@@ -1,5 +1,6 @@
 import Link from "next/link"
 import CustomerPhoto from "./CustomerImg"
+import CustomerRank from "./CustomerRank"
 
 const Header = ({ data, userId, error, user }) => {
 	
@@ -55,7 +56,7 @@ const Header = ({ data, userId, error, user }) => {
 										/>
 									</svg>
 								</div>
-								<div className="usercard-rank">connect</div>
+								<CustomerRank userId={userId}/>
 							</div>
 						</div>
 					</div>

@@ -5,6 +5,7 @@ import SavedButton from "@/app/UI/MainButton/SavedButton"
 import { useParams } from "next/navigation"
 import initData from "@/app/UI/useInitData/initData"
 import Link from "next/link"
+import CustomerIdRank from "./CustomerIdRank"
 
 const CustomerId = ({ customerId, data, error, user }) => {
 	const [form, setForm] = useState({
@@ -113,7 +114,7 @@ const CustomerId = ({ customerId, data, error, user }) => {
 									user?.username !== undefined ? user?.username : customerId
 								}`}</footer>
 							</div>
-							<div className="usercard-status">connect</div>
+							<CustomerIdRank userId={customerId} />
 						</div>
 					</div>
 					<div className="profile-data">
@@ -161,11 +162,13 @@ const CustomerId = ({ customerId, data, error, user }) => {
 							</div>
 							 */}
 						</div>
-						<div className="profile-data-info">Получите доступ к эксклюзивным возможностям</div>
+						<div className="profile-data-info">
+							Получите доступ к эксклюзивным возможностям
+						</div>
 						<Link href={`/customer/${customerId}/subscription`}>
-						<button className="btn-profile-data-info btn-profile-data">
-							Смотреть Подробности
-						</button>
+							<button className="btn-profile-data-info btn-profile-data">
+								Смотреть Подробности
+							</button>
 						</Link>
 					</div>
 					<div className="profile-data">

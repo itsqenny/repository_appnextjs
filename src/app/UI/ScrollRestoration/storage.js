@@ -10,7 +10,7 @@ const replaceStateLimit = 90;
 const replaceStateInterval = 10000; // 10 секунд
 
 export const setCurrentScrollHistory = ([x, y]) => {
-    console.log(`Remember history scroll to ${x} ${y}. Href ${window.location.href}.`);
+    //console.log(`Remember history scroll to ${x} ${y}. Href ${window.location.href}.`);
     x = Math.max(x, 0);
     y = Math.max(y, 0);
 
@@ -25,7 +25,7 @@ export const setCurrentScrollHistory = ([x, y]) => {
     replaceStateCounter++;
 
     // Выводим информацию в консоль перед вызовом replaceState
-    console.log(`Calling replaceState. Counter: ${replaceStateCounter}, Limit: ${replaceStateLimit}`);
+    //console.log(`Calling replaceState. Counter: ${replaceStateCounter}, Limit: ${replaceStateLimit}`);
 
     // Вызываем replaceState только если не превышено ограничение и прошло достаточно времени
     if (replaceStateCounter <= replaceStateLimit) {
@@ -33,7 +33,7 @@ export const setCurrentScrollHistory = ([x, y]) => {
     }
 
     // Выводим информацию в консоль после вызова replaceState
-    console.log(`replaceState called. Counter: ${replaceStateCounter}, Limit: ${replaceStateLimit}`);
+    //console.log(`replaceState called. Counter: ${replaceStateCounter}, Limit: ${replaceStateLimit}`);
 
     // Сбрасываем счетчик после интервала
     setTimeout(() => {

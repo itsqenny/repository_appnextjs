@@ -35,22 +35,22 @@ const unmountScroll = () => {
 };
 
 const popstate = (e) => {
-    console.log('Popstate started.');
-    console.log(e.state, window.history.state);
+    //console.log('Popstate started.');
+    //console.log(e.state, window.history.state);
     const scroll = getScrollFromState(e.state);
-    console.log(`Found scroll ${scroll?.toString()}.`);
+    //console.log(`Found scroll ${scroll?.toString()}.`);
     if (scroll) {
         restoreScroll(scroll);
     }
 };
 
 const unmountPop = () => {
-    console.log('Unmount popstate.');
+    //console.log('Unmount popstate.');
     window.removeEventListener('popstate', popstate);
 };
 
 const mountPop = () => {
-    console.log('Mount popstate.');
+    //console.log('Mount popstate.');
     window.addEventListener('popstate', popstate);
 };
 

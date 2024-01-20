@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic"
 export const revalidate = 0
 export default function BonusIdFetcher({ userId }) {
 	const { data, error } = useSWR(
-		`https://crm.zipperconnect.space/customer/bonus/${userId}`,
+		`/api/customer/bonus/${userId}`,
 		fetcher
 	)
 	if (error) return "An error has occurred."

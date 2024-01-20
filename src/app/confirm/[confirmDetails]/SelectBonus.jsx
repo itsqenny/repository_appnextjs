@@ -27,6 +27,7 @@ export default function SelectBonus({price, setParentPrice, setParentBonus, data
           WebApp.HapticFeedback.impactOccurred('medium');
         } else {
           WebApp.HapticFeedback.notificationOccurred('error');
+          
         }
       };
 
