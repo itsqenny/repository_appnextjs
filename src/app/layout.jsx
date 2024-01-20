@@ -49,7 +49,7 @@ export default function RootLayout({ children }) {
 					async
 				/>
 			</body>
-			<ClientSideScrollRestorer />
+			
 		</html>
 	)
 }
