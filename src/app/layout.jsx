@@ -37,7 +37,6 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="ru" suppressHydrationWarning>
 			<body className={inter.className} suppressHydrationWarning={true}>
-				{children}
 				<Script
 					id="Telegram WebApp"
 					type="text/javascript"
@@ -47,6 +46,8 @@ export default function RootLayout({ children }) {
 					async
 				/>
 				<ClientSideScrollRestorer />
+				{children}
+
 				<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 				<script>eruda.init();</script>
 			</body>
