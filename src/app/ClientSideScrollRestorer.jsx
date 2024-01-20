@@ -1,5 +1,5 @@
 "use client"
-import { useScrollRestorer } from './UI/ScrollRestoration/index';
+import { useScrollRestorer } from 'next-scroll-restorer';
 const ClientSideScrollRestorer = () => {
     
   if (typeof window !== 'undefined') {
