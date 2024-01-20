@@ -5,9 +5,17 @@ const getKey = (pos) => `${uniq}_${pos}`;
 export const HistoryState = null;
 
 export const setCurrentScrollHistory = ([x, y]) => {
-    //console.log(`Remember history scroll to ${x} ${y}. Href ${window.location.href}.`);
+    console.log(`Remember history scroll to ${x} ${y}. Href ${window.location.href}.`);
+    
+    // Проверяем, являются ли x и y числами
+    if (isNaN(x) || isNaN(y)) {
+        console.error('Error: x and y must be numbers.');
+        return;
+    }
+
     x = Math.max(x, 0);
     y = Math.max(y, 0);
+
     const newState = (window.history.state) ?? {};
     window.history.replaceState(
         {
