@@ -69,7 +69,7 @@ export default function ConfirmId({data, userId}) {
 			time: paymentDate.toLocaleDateString("ru-RU", options),
 			remainingBonus: userBonus.restBonus,
 			saveBonus: userBonus.deductBonus,
-			newBonus: isCredited ? 0 : 100,
+			newBonus: !isCredited ? 0 : 100,
 		}
 
 		try {
