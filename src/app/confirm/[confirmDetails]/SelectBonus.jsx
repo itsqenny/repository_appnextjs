@@ -8,7 +8,8 @@ export default function SelectBonus({
 	setParentBonus,
 	data,
 	userId,
-	isCredited
+	isCredited,
+	setCredited,
 }) {
 	
 	const { WebApp } = initData()

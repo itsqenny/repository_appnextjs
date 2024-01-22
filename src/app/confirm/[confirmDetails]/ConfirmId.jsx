@@ -171,6 +171,7 @@ export default function ConfirmId({data, userId}) {
                             data={data}
 							userId={userId}
 							isCredited={isCredited}
+							setCredited={setCredited}
 						/>
 					
 
