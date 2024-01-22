@@ -170,6 +170,7 @@ export default function ConfirmId({data, userId}) {
 							setParentBonus={setUserBonus}
                             data={data}
 							userId={userId}
+							isCredited={isCredited}
 						/>
 					
 

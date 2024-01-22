@@ -8,10 +8,10 @@ export default function SelectBonus({
 	setParentBonus,
 	data,
 	userId,
+	isCredited
 }) {
 	
 	const { WebApp } = initData()
-	const [isCredited, setCredited] = useState(false)
 	const [restBonus, setRestBonus] = useState(0)
 	const [deductBonus, setDeductBonus] = useState(0)
 	
