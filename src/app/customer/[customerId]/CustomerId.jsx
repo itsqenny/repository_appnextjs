@@ -6,8 +6,19 @@ import { useParams } from "next/navigation"
 import initData from "@/app/UI/useInitData/initData"
 import Link from "next/link"
 import CustomerIdRank from "./CustomerIdRank"
+import Notification from "@/app/components/popup/notification"
 
 const CustomerId = ({ customerId, data, error, user }) => {
+	const [isVisible, setIsPopupVisible] = useState(false)
+	const message = 'В текущее время эта функция недоступна'
+	const { WebApp } = initData()
+	const showPopup = () => {
+		WebApp.HapticFeedback.notificationOccurred('error');
+		setIsPopupVisible(true)
+		setTimeout(() => {
+			setIsPopupVisible(false)
+		}, 3000) // Закроется через 3 секунды, можно настроить
+	}
 	const [form, setForm] = useState({
 		fullName: "",
 		address: "",
@@ -182,9 +193,11 @@ const CustomerId = ({ customerId, data, error, user }) => {
 							</span>
 						</div>
 
-						<button className="btn-profile-data-info btn-profile-data">
+						<button className="btn-profile-data-info btn-profile-data"
+						onClick={showPopup}>
 							Написать
 						</button>
+						<Notification isVisible={isVisible} message={message}/>
 					</div>
 				</>
 			) : (

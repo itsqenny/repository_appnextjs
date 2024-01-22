@@ -11,32 +11,21 @@ import initData from "@/app/UI/useInitData/initData"
 import SelectBonus from "./SelectBonus"
 
 
-export default function ConfirmId({data}) {
+export default function ConfirmId({data, userId}) {
 	const params = useParams()
 	const decodedString = decodeURIComponent(params.confirmDetails)
 	const parsedParams = Object.fromEntries(new URLSearchParams(decodedString))
 	const { id, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams
-	const { userId, queryId } = initData()
+	const { queryId } = initData()
 	const [item, setItem] = useState(null)
 	const [size, setSize] = useState(ConfirmSize || null)
 	const [price, setPrice] = useState(ConfirmPrice || null)
 	const [isCredited, setCredited] = useState(false)
 	const [showConfirmation, setShowConfirmation] = useState(true)
-	const [userBonus, setUserBonus] = useState(null)
+	const [userBonus, setUserBonus] = useState(0)
 	const [paymentData, setPaymentData] = useState("WAIT")
 	const [customerStatus, setCustomerStatus] = useState(false)
-	//const userId = '1234'
-	const remainingBonus = Math.max(
-		0,
-		userBonus -
-			(Number(
-				price !== null
-					? price
-					: ConfirmPrice.replace(/[\u00a0₽ ]/g, "").replace(",", ".")
-			) -
-				price)
-	)
-	const deductedAmount = Math.max(0, userBonus - remainingBonus)
+
 	useEffect(() => {
 		// Выполнение HTTP-запроса
 		fetch(`https://repositorydb.onrender.com/products/${id}`)
@@ -78,9 +67,9 @@ export default function ConfirmId({data}) {
 			order_id: orderId,
 			productId: id,
 			time: paymentDate.toLocaleDateString("ru-RU", options),
-			remainingBonus: remainingBonus,
-			saveBonus: deductedAmount,
-			newBonus: isCredited ? 0 : 50,
+			remainingBonus: userBonus.restBonus,
+			saveBonus: userBonus.deductBonus,
+			newBonus: isCredited ? 0 : 100,
 		}
 
 		try {
@@ -107,7 +96,6 @@ export default function ConfirmId({data}) {
 			console.error("Ошибка отправки данных на сервер:", error)
 		}
 	}
-
 	return (
 		<>
 			<Back />
@@ -181,7 +169,9 @@ export default function ConfirmId({data}) {
 							setParentPrice={setPrice}
 							setParentBonus={setUserBonus}
                             data={data}
+							userId={userId}
 						/>
+					
 
 						{/* 
             <div className="main-button">

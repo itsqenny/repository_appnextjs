@@ -18,6 +18,7 @@ export default function ProductId(){
   const [addToCart, setAddToCart] = useState(false);
   const [addFavorite, setFavorite] = useState(false);
   const [showPopup, setShowPopup] = useState(false); 
+  const [message, setMessage] = useState('');
   useEffect(() => {
     // Выполнение HTTP-запроса
     fetch(`/api/products/${params.productId}`)
@@ -57,25 +58,9 @@ const generateOrderId = () => {
 
 
 const uniqueOrderId = generateOrderId();
-const isClicked = () => {
-  setAddToCart(true);
-  setShowPopup(true);
-  setTimeout(() => {
-    setShowPopup(false);
-    setAddToCart(false); // Сбрасываем состояние после определенного времени (если это необходимо)
-  }, 2000); 
-
-}
 
 
-const handleFavorite = () => {
-  setFavorite(true);
-  setShowPopup(true);
-  setTimeout(() => {
-    setShowPopup(false);
-    setFavorite(false); // Сбрасываем состояние после определенного времени (если это необходимо)
-  }, 2000); 
-}
+
 
 const handlePaymentClick = () => {
   const queryParams = {
@@ -131,6 +116,7 @@ const handlePaymentClick = () => {
           <hr/>
             <SelectSize item={item} onPriceClick={handlePriceChange} onSizeClick={handleSizeChange}/>
           <hr/>
+          {/* 
            <div className="btns-cart">
                 <div className={`btn-add-to-cart btns-carts ${addFavorite ? 'add' : 'no'}`} 
                 onClick={handleFavorite}>
@@ -159,7 +145,7 @@ const handlePaymentClick = () => {
                   </svg>
                  </div>
            </div>
-          
+          */}
         </div>
       </div>  
       {/*
@@ -173,7 +159,7 @@ const handlePaymentClick = () => {
       {showPopup && (
                     <div className="main-popup">
                       <div className="main-popup show">
-                      Добавлено
+                      {message}
                       </div>
                      
                     </div>
