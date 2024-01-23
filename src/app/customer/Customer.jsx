@@ -12,7 +12,7 @@ export default function Customer(){
     //const user = { username: 'whokilledravey', first_name: 'Евгений'}
     return (
         <> 
-        {/*<Validation/> */}
+        <Validation/>
            
             <PhotoFetcher userId={userId} user={user}/>
         </>
