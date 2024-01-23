@@ -121,6 +121,7 @@
 .product-container-order > * {
 	scroll-snap-align: start;
 	font-size: 2rem;
+	width: 100%;
 }
 
 .product-container-order button {

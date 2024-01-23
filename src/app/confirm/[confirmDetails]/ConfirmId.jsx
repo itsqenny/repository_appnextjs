@@ -10,8 +10,7 @@ import { useParams } from "next/navigation"
 import initData from "@/app/UI/useInitData/initData"
 import SelectBonus from "./SelectBonus"
 
-
-export default function ConfirmId({data, userId}) {
+export default function ConfirmId({ data, userId }) {
 	const params = useParams()
 	const decodedString = decodeURIComponent(params.confirmDetails)
 	const parsedParams = Object.fromEntries(new URLSearchParams(decodedString))
@@ -69,7 +68,7 @@ export default function ConfirmId({data, userId}) {
 			time: paymentDate.toLocaleDateString("ru-RU", options),
 			remainingBonus: userBonus.restBonus,
 			saveBonus: userBonus.deductBonus,
-			newBonus: !isCredited ? 100: 0,
+			newBonus: !isCredited ? 100 : 0,
 		}
 
 		try {
@@ -96,6 +95,7 @@ export default function ConfirmId({data, userId}) {
 			console.error("Ошибка отправки данных на сервер:", error)
 		}
 	}
+
 	return (
 		<>
 			<Back />
@@ -168,18 +168,18 @@ export default function ConfirmId({data, userId}) {
 							price={ConfirmPrice}
 							setParentPrice={setPrice}
 							setParentBonus={setUserBonus}
-                            data={data}
+							data={data}
 							userId={userId}
 							isCredited={isCredited}
 							setCredited={setCredited}
 						/>
-					
 
-						{/* 
-            <div className="main-button">
-              <button onClick={handlePayment}>Купить за {price !== null ? price : ConfirmPrice}₽</button>
-            </div>
-            */}
+						<div className="main-button">
+							<button onClick={onCheckout}>
+								Купить за {price !== null ? price : ConfirmPrice}₽
+							</button>
+						</div>
+						{/*  */}
 						<ButtonCheckout
 							onCheckout={onCheckout}
 							price={price !== null ? price : ConfirmPrice}

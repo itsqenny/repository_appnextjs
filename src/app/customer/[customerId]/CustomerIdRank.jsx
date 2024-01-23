@@ -2,11 +2,17 @@ import useSWR from "swr"
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export const revalidate = 0
-export default function CustomerIdRank({ userId }) {
+export default function CustomerIdRank({ userId, setSubs }) {
 	const { data, error } = useSWR(
 		`https://crm.zipperconnect.space/customer/rank/${userId}`,
-		fetcher
-	)
+		fetcher,
+		{
+		  onSuccess: (data) => {
+			// Вызываем setSubs, чтобы передать данные в родительский компонент
+			setSubs(data);
+		  },
+		}
+	  );
 
 	let content
 	if (data?.subscription === "connect+") {

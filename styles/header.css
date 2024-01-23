@@ -111,7 +111,6 @@ to {
 
 .usercard-status {
 	display: flex;
-    margin-top: 8px;
     margin-left: 5px;
     align-items: center;
     padding: 1px 5px;
@@ -130,7 +129,6 @@ to {
 
 .usercard-status-connect-plus {
 	display: flex;
-    margin-top: 8px;
     margin-left: 5px;
     align-items: center;
     padding: 1px 5px;
@@ -150,7 +148,6 @@ to {
 
 .usercard-status-connect-pro {
 	display: flex;
-    margin-top: 8px;
     margin-left: 5px;
     align-items: center;
     padding: 1px 5px;

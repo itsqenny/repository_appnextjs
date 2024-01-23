@@ -315,8 +315,33 @@
 	animation: refer-friend-image-emoji 0.8s both;
 }
 
+
+.bonus-card-container {
+	border-radius: 20px;
+	background-color: #7969dc;
+	width: 100%;
+	animation: refer-friend-image-emoji 0.8s both;
+	padding: 0 20px;
+  }
+
+  .bonus-card-box{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+  }
+  
+  .bonus-card-text,
+  .bonus-card-title {
+	margin-top: 12px;
+	letter-spacing: -0.03em;
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+  }
+  .bonus-card-title{
+	font-weight: 300;
+  }
 .refer-friend-box {
-	padding: 15px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -334,15 +359,15 @@
 }
 
 .refer-friend-text {
-	font-weight: 500;
-	font-size: 60px;
+	font-weight: 700;
+	font-size: 35px;
 	line-height: 100%;
 	text-align: left;
 	letter-spacing: -0.02em;
 }
 .refer-friend-bonus {
-	font-weight: 900;
-	font-size: 24px;
+	font-weight: 500;
+	font-size: 18px;
 	line-height: 130%;
 	text-align: left;
 	letter-spacing: -0.02em;
