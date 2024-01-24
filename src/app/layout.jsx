@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google"
 import "bootstrap/dist/css/bootstrap.min.css"
+import "../../styles/theme.css"
 import "../../styles/customer.css"
 import "../../styles/filters.css"
 import "../../styles/global.css"
@@ -34,9 +35,10 @@ export const viewport = {
 	userScalable: "no",
 }
 export default function RootLayout({ children }) {
+	const theme = children ? 'dark-theme' : 'light-theme';
 	return (
-		<html lang="ru" suppressHydrationWarning>
-			<body className={inter.className} suppressHydrationWarning={true}>
+		<html lang="ru" className={theme}>
+			<body className={inter.className} >
 				<Script
 					id="Telegram WebApp"
 					type="text/javascript"
