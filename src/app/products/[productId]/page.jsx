@@ -72,7 +72,7 @@ const handlePaymentClick = () => {
   };
   const queryString = new URLSearchParams(queryParams).toString();
   router.push(`/confirm/${queryString}`)
-  console.log('send data', queryParams);
+  //console.log('send data', queryParams);
   
 };
 
