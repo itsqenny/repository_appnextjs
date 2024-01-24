@@ -18,7 +18,7 @@ import "../../styles/basket.css"
 import Head from "next/head"
 import Script from "next/script"
 import ClientSideScrollRestorer from "./ClientSideScrollRestorer"
-import { useTheme } from "./UI/useTheme/useTheme"
+
 const inter = Inter({ subsets: ["latin"] })
 export const revalidate = 1
 
@@ -34,12 +34,15 @@ export const viewport = {
 	userScalable: 1,
 	interactiveWidget: "resizes-visual",
 	userScalable: "no",
+
 }
 export default function RootLayout({ children }) {
-	const theme = useTheme();
+	const theme = 'telegram-white telegram-black telegram-hint telegram-link telegram-primary telegram-primary-text telegram-secondary-white'
+	const css = `${inter.className} ${theme}`;
+	
 	return (
-		<html lang="ru" style={theme} suppressHydrationWarning>
-			<body className={inter.className} suppressHydrationWarning={true}>
+		<html lang="ru" class="colors" suppressHydrationWarning>
+			<body className={css} suppressHydrationWarning={true}>
 				<Script
 					id="Telegram WebApp"
 					type="text/javascript"

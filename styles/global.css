@@ -26,8 +26,7 @@
     --telegram-button-text-color: var(--tg-theme-button-text-color, #ffffff);
     --telegram-secondary-bg-color: var(--tg-theme-secondary-bg-color, #f4f4f5);
   }
-  @import "./themes/dark-theme.css";
-  @import "./themes/light-theme.css";
+ 
   
 }
 
