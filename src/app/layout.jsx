@@ -1,6 +1,6 @@
+
 import { Inter } from "next/font/google"
 import "bootstrap/dist/css/bootstrap.min.css"
-import "../../styles/theme.css"
 import "../../styles/customer.css"
 import "../../styles/filters.css"
 import "../../styles/global.css"
@@ -18,6 +18,7 @@ import "../../styles/basket.css"
 import Head from "next/head"
 import Script from "next/script"
 import ClientSideScrollRestorer from "./ClientSideScrollRestorer"
+import { useTheme } from "./UI/useTheme/useTheme"
 const inter = Inter({ subsets: ["latin"] })
 export const revalidate = 1
 
@@ -35,10 +36,10 @@ export const viewport = {
 	userScalable: "no",
 }
 export default function RootLayout({ children }) {
-	const theme = children ? 'dark-theme' : 'light-theme';
+	const theme = useTheme();
 	return (
-		<html lang="ru" className={theme}>
-			<body className={inter.className} >
+		<html lang="ru" style={theme} suppressHydrationWarning>
+			<body className={inter.className} suppressHydrationWarning={true}>
 				<Script
 					id="Telegram WebApp"
 					type="text/javascript"

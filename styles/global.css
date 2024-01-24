@@ -1,5 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
+@layer base {
+  :root {
     --space-4x: 16px;
     --space-6x: 0%;
     --space-8x: 32px;
@@ -14,28 +18,39 @@
     --main-button: var(--tg-theme-button-text-color, rgba(135, 116, 225));
     --font-family: "SF Pro Display",-apple-system,BlinkMacSystemFont,Roboto,sans-serif;
     --tg-hint: var(--tg-theme-hint-color, #aaaaaa);
+    --telegram-bg-color: var(--tg-theme-bg-color, #ffffff);
+    --telegram-text-color: var(--tg-theme-text-color, #000000);
+    --telegram-hint-color: var(--tg-theme-hint-color, #707579);
+    --telegram-link-color: var(--tg-theme-link-color, #3390ec);
+    --telegram-button-color: var(--tg-theme-button-color, #3390ec);
+    --telegram-button-text-color: var(--tg-theme-button-text-color, #ffffff);
+    --telegram-secondary-bg-color: var(--tg-theme-secondary-bg-color, #f4f4f5);
   }
+  @import "./themes/dark-theme.css";
+  @import "./themes/light-theme.css";
+  
+}
 
-  * {
-    user-select: none;
-    margin: 0px;
-    padding: 0px;
-    text-align: center;
-    box-sizing: border-box;
-  }
+* {
+  user-select: none;
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+  box-sizing: border-box;
+}
 
 body {
-    user-select: none;
-    color: var(--tg-text);
-    font-family: "Roboto", sans-serif;
-    font-weight: 300;
-    background: var(--tg-second);
-  }
+  user-select: none;
+  color: var(--tg-text);
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  background: var(--telegram-secondary-bg-color);
+}
 
-  body::-webkit-scrollbar {
-    display: none;
-  }
+body::-webkit-scrollbar {
+  display: none;
+}
 
-  a{
-    text-decoration: none;
-  }
+a{
+  text-decoration: none;
+}
