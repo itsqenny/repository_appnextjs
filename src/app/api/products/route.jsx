@@ -2,7 +2,7 @@
 export const revalidate = 10;
 
 export async function GET(request){
-    const api = process.env.API_PRODUCT_LIST;
+    const api = process.env.API_PRODUCTS;
     const res = await fetch(`${api}/products?_page=1&_limit=50`)
     const items = await res.json()
     
