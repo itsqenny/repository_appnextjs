@@ -4,7 +4,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function CustomerStatus({ userId, orderId }) {
 	const { data, error } = useSWR(
-		`https://crm.zipperconnect.space/get/status?userId=${userId}&order_id=${orderId}`,
+		`/api/customer/status?userId=${userId}&orderId=${orderId}`,
 		fetcher
 	)
 

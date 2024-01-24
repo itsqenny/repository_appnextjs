@@ -1,10 +1,11 @@
 export async function GET(request) {
+	const api = process.env.NEXT_PUBLIC_API_PRODUCT_LIST;
 	try {
 		const url = new URL(request.url || request)
 		const pathnameParts = url.pathname.split("/").filter((part) => part !== "")
 		const productId = pathnameParts[pathnameParts.length - 1]
 		const res = await fetch(
-			`https://repositorydb.onrender.com/products/${productId}`
+			`${api}/products/${productId}`
 		)
 		const item = await res.json()
 

@@ -1,5 +1,5 @@
 export const getProducts = async () => {
-    const res = await fetch('https://repositorydb.onrender.com/products?_page=1&_limit=50',{
+    const res = await fetch('/api/products',{
     })
     if(!res.ok){
         throw new Error({message: 'invalid products'})

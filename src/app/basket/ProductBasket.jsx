@@ -10,14 +10,15 @@ export const revalidate = 0
 const ProductBasket = ({ data }) => {
 	//const userId = '204688184'
 	const { userId } = initData()
-	const initialBasketItems = data && data.basket ? data.basket.slice(0, 2) : [];
+	const initialBasketItems = data && data.basket ? data.basket.slice(0, 2) : []
 	const [basketItem, setBasketItem] = useState(initialBasketItems)
 
 	const handleDelete = async (item) => {
+		const api = process.env.API_URL
 		try {
 			// Отправляем запрос на удаление элемента с заданным order_id
 			await axios.get(
-				`https://crm.zipperconnect.space/customers/user/basket/delete/item?userId=${userId}&productId=${item.id}&orderId=${item.order_id}`
+				`${api}/customers/user/basket/delete/item?userId=${userId}&productId=${item.id}&orderId=${item.order_id}`
 			)
 
 			// Update the state by filtering out the deleted item
@@ -83,34 +84,34 @@ const ProductBasket = ({ data }) => {
 
 	return (
 		<>
-		{data && data.basket && data.basket && basketItem.length > 0 && (
-		<div className="product-block-order">
-			<div className="product-order">
-				Оплачивается
-				{data && data.basket && data.basket.length > 2 && (
-					<Link href={`/basket/`}>
-						<div className="product-order-open-all">
-							Все
-							<svg
-								viewBox="0 0 20 20"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									d="m7.5 5 5 5-5 5"
-									stroke="currentColor"
-									strokeWidth="1.5"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								></path>
-							</svg>
-						</div>
-					</Link>
-				)}
-			</div>
-			<div className="product-container">{basketItems}</div>
-		</div>
-		)}
+			{data && data.basket && data.basket && basketItem.length > 0 && (
+				<div className="product-block-order">
+					<div className="product-order">
+						Оплачивается
+						{data && data.basket && data.basket.length > 2 && (
+							<Link href={`/basket/`}>
+								<div className="product-order-open-all">
+									Все
+									<svg
+										viewBox="0 0 20 20"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											d="m7.5 5 5 5-5 5"
+											stroke="currentColor"
+											strokeWidth="1.5"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										></path>
+									</svg>
+								</div>
+							</Link>
+						)}
+					</div>
+					<div className="product-container">{basketItems}</div>
+				</div>
+			)}
 		</>
 	)
 }

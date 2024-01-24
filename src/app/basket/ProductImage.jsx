@@ -4,10 +4,9 @@ const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function ProductImage({ item }) {
 	const { data , error } = useSWR(
-		`https://repositorydb.onrender.com/products/${item.id}`,
+		`/api/products/${item.id}`,
 		fetcher
 	)
-    
 	if (error) return "An error has occurred."
 	if (!data) return ""
     const widths = [640, 750, 828, 1080, 1200, 1920, 2048, 3840];

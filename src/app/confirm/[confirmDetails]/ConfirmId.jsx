@@ -15,7 +15,7 @@ export default function ConfirmId({ data, userId }) {
 	const decodedString = decodeURIComponent(params.confirmDetails)
 	const parsedParams = Object.fromEntries(new URLSearchParams(decodedString))
 	const { id, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams
-	const { queryId } = initData()
+	const { queryId, WebApp } = initData()
 	const [item, setItem] = useState(null)
 	const [size, setSize] = useState(ConfirmSize || null)
 	const [price, setPrice] = useState(ConfirmPrice || null)
@@ -27,7 +27,7 @@ export default function ConfirmId({ data, userId }) {
 
 	useEffect(() => {
 		// Выполнение HTTP-запроса
-		fetch(`https://repositorydb.onrender.com/products/${id}`)
+		fetch(`/api/products/${id}`)
 			.then((response) => {
 				if (!response.ok) {
 					throw new Error("500 (Not Found)")
@@ -57,6 +57,7 @@ export default function ConfirmId({ data, userId }) {
 	const onCheckout = async () => {
 		setCredited(true)
 		setShowConfirmation(false)
+		const api = process.env.NEXT_PUBLIC_API_URL
 		const data = {
 			name: name,
 			price: price !== null ? price : ConfirmPrice,
@@ -72,19 +73,15 @@ export default function ConfirmId({ data, userId }) {
 		}
 
 		try {
-			const response = await fetch(
-				"https://crm.zipperconnect.space/customer/settings/client/buy/offer/pay",
-				{
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(data),
-				}
-			)
+			const response = await fetch(`/api/customer/pay`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(data),
+			})
 
 			const responseData = await response.json()
-
 			if (responseData.paymentUrl) {
 				Telegram.WebApp.openLink(responseData.paymentUrl)
 				setCustomerStatus(true)

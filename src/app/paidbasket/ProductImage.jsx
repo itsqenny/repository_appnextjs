@@ -4,7 +4,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function ProductImage({ item }) {
 	const { data , error } = useSWR(
-		`https://repositorydb.onrender.com/products/${item.id}`,
+		`/api/products/${item.id}`,
 		fetcher
 	)
     

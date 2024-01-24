@@ -5,7 +5,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function CustomerBasket({ userId }) {
 	const { data, error } = useSWR(
-		`https://crm.zipperconnect.space/customer/basket/${userId}`,
+		`/api/customer/basket/${userId}`,
 		fetcher
 	)
 
