@@ -1,0 +1,25 @@
+
+
+const Skeleton = () => {
+    return (
+        <>
+        
+					<div className="skeleton-item">
+						<div className="skeleton-item-img-box">
+							<div className="skeleton-item-wrapper">
+								<div className="item-img-inner"></div>
+							</div>
+						</div>
+						<div className="skeleton-item-info">
+							<h4 style={{ width: "20%", marginTop: "4px" }}></h4>
+							<h4></h4>
+							<div className="skeleton-add-item" style={{ marginTop:'8px' }}></div>
+						</div>
+					</div>
+
+
+        </>
+    );
+};
+
+export default Skeleton;

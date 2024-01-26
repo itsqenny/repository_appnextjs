@@ -15,7 +15,7 @@ export default function FetcherProducts({ searchQuery, userId }) {
 			{" "}
 			{error ? (
 				<>
-					<p>Ошибка. Пожалуйста, обратитесь за поддержкой.</p>
+					<SkeletonProducts/>
 				</>
 			) : (
 				<>
@@ -25,6 +25,7 @@ export default function FetcherProducts({ searchQuery, userId }) {
 						</>
 					) : (
 						<>
+						
 							 <Products data={data} searchQuery={searchQuery}/>
 						</>
 					)}

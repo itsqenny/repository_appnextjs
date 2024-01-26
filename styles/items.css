@@ -1,41 +1,56 @@
 main {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+  }
+  
+  .item-box {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 10px;
+	gap: 10px;
+	margin: var(--space-4x);
+  }
+  
+  .item {
 	display: flex;
-	max-width: 100%;
-	flex-wrap: wrap;
-	justify-content: center;
-	margin-top: 8px;
-	background: var(--tg-second);
-}
-
-.item p {
-	margin-bottom: 4px;
-}
-
-main .item {
-	width: 45%;
-	min-width: none;
-	background-color: var(--tg-bg);
+	flex-direction: column;
+	flex-shrink: 0;
+	background: var(--tg-bg);
 	border-radius: 20px;
-	margin: 6px;
-	padding-bottom: 4px;
-	position: relative;
-}
-
-main .item img {
-	width: 90%;
+	scroll-snap-align: start;
+	color: var(--tg-text);
+	min-width: 0px;
+	max-width: 100%; /* Максимальная ширина для элемента */
+  }
+  
+  .item img {
+	max-width: 100%; /* Уменьшаем максимальную ширину изображения */
+	height: auto; /* Поддерживаем пропорции изображения */
 	border-radius: 17px;
 	user-select: none;
-}
-
-main .item-img {
+  }
+  
+  .item-img-box {
+	padding: 0;
+  }
+  
+  .item-img-wrapper {
 	position: relative;
-	z-index: 2;
-	margin-bottom: -24px;
-	width: 100%;
-	border-radius: 17px;
+	flex-shrink: 0;
+	box-sizing: initial;
+	border-radius: 16px;
+	overflow: hidden;
 	background: #fff;
-}
-main .item p {
+  }
+  
+  .item-img-inner {
+	position: relative;
+	width: 100%;
+	padding-bottom: 64%;
+  }
+  
+  .item p {
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
@@ -44,38 +59,37 @@ main .item p {
 	font-size: 12px;
 	height: 20px;
 	width: 90%;
-	padding-left: 5%;
 	color: var(--tg-text);
-}
-
-main .item-info {
-	margin-top: 32px;
-}
-
-main .item h4 {
+  }
+  
+  .item-info {
+	padding: 0 8px 8px;
+  }
+  
+  .item h4 {
 	font-size: 14px;
 	text-align: left;
-	padding-left: 5%;
 	font-weight: 700;
 	margin: 0;
 	color: var(--tg-text);
-}
-.buy-item {
+  }
+  
+  .buy-item {
 	text-align: center;
 	padding: 6px 10px;
 	font-size: 12px;
 	line-height: 18px;
 	color: var(--tg-text);
-}
-.add-item {
+  }
+  
+  .add-item {
 	flex-shrink: 0;
 	font-weight: 500;
 	border-radius: 18px;
-	width: 92%;
+	width: 100%;
 	border: none;
-	margin-bottom: 2px;
 	background-color: var(--tg-second);
-}
+  }
 
 .item:focus {
 	outline: none;
@@ -221,43 +235,29 @@ main .item h4 {
 	outline: unset;
 }
 
-main {
-	display: flex;
-	max-width: 100%;
-	flex-wrap: wrap;
-	justify-content: center;
-	margin-top: 8px;
-	background: var(--tg-second);
-}
 
 .item p {
 	margin-bottom: 4px;
 }
 
-main .skeleton-item {
-	width: 45%;
-	min-width: none;
-	height: 204px;
-	background-color: var(--tg-bg);
-	border-radius: 20px;
-	margin: 6px;
-	padding-bottom: 4px;
-	position: relative;
+.skeleton-item-box {
+	display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    gap: 10px;
+    margin: var(--space-4x);
+}
+.skeleton-item-img-box {
+	padding: 8px 8px 0;
 }
 
-main .skeleton-item img {
-	width: 90%;
-	border-radius: 17px;
-	user-select: none;
-}
-
-main .skeleton-item-img {
+.skeleton-item-wrapper {
 	position: relative;
-	z-index: 2;
-	border-radius: 18px;
-  height: 120px;
-	margin: 4px 4px;
-	background: linear-gradient(0.25turn, transparent, var(--tg-bg), transparent),
+    flex-shrink: 0;
+    box-sizing: initial;
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(0.25turn, transparent, var(--tg-bg), transparent),
 		linear-gradient(var(--tg-second), var(--tg-second)),
 		radial-gradient(
 			38px circle at 19px 19px,
@@ -266,17 +266,19 @@ main .skeleton-item-img {
 		),
 		linear-gradient(var(--tg-second), var(--tg-second));
 	background-repeat: no-repeat;
-	background-size: 315px 250px, 315px 180px, 100px 100px, 225px 30px;
 	background-position: -315px 0, 0 0, 0px 190px, 50px 195px;
 	animation: loading 1.5s infinite;
 }
-main .skeleton-item-info p {
+.skeleton-item-info{
+	padding: 0 8px 8px;
+}
+.skeleton-item-info p {
 	margin: 4px 4px;
 	border-radius: 10px;
-	width: 50%;
+	width: 20%;
 	text-align: left;
 	font-weight: 400;
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 	font-size: 12px;
 	height: 14px;
 	padding-left: 5%;
@@ -295,17 +297,22 @@ main .skeleton-item-info p {
 	animation: loading 1.5s infinite;
 }
 
-main .skeleton-item-info {
-	margin-top: 0px;
+.skeleton-item{
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 0;
+	background: var(--tg-bg);
+	border-radius: 20px;
+	scroll-snap-align: start;
+	color: var(--tg-text);
+	min-width: 0px;
+	max-width: 100%; /* Максимальная ширина для элемента */
 }
 
-main .skeleton-item h4 {
+.skeleton-item h4 {
 	height: 14px;
-	align-items: left;
-	padding-left: 5%;
 	border-radius: 10px;
-	font-weight: 700;
-	margin: 4px 4px;
+	margin-bottom: 4px;
 	width: 80%;
 	background: linear-gradient(0.25turn, transparent, var(--tg-bg), transparent),
 		linear-gradient(var(--tg-second), var(--tg-second)),
@@ -320,35 +327,21 @@ main .skeleton-item h4 {
 	background-position: -315px 0, 0 0, 0px 190px, 50px 195px;
 	animation: loading 1.5s infinite;
 }
-.skeleton-buy-item {
-	position: relative;
-	z-index: 2;
-	margin-bottom: -24px;
-	border-radius: 18px;
+.buy-item {
+	text-align: center;
+	padding: 6px 10px;
+	font-size: 12px;
+	line-height: 18px;
+	color: var(--tg-text);
+  }
 
-	height: 30px;
-	margin: 4px 4px;
-	background: linear-gradient(0.25turn, transparent, var(--tg-bg), transparent),
-		linear-gradient(var(--tg-second), var(--tg-second)),
-		radial-gradient(
-			38px circle at 19px 19px,
-			var(--tg-second) 50%,
-			transparent 51%
-		),
-		linear-gradient(var(--tg-second), var(--tg-second));
-	background-repeat: no-repeat;
-	background-size: 315px 250px, 315px 180px, 100px 100px, 225px 30px;
-	background-position: -315px 0, 0 0, 0px 190px, 50px 195px;
-	animation: loading 1.5s infinite;
-}
 .skeleton-add-item {
 	flex-shrink: 0;
 	font-weight: 500;
 	border-radius: 18px;
-	width: 92%;
+	width: 100%;
 	height: 30px;
 	border: none;
-	margin-bottom: 2px;
 	background: linear-gradient(0.25turn, transparent, var(--tg-bg), transparent),
 		linear-gradient(var(--tg-second), var(--tg-second)),
 		radial-gradient(

@@ -43,7 +43,7 @@ body {
   color: var(--tg-text);
   font-family: "Roboto", sans-serif;
   font-weight: 300;
-  background: var(--telegram-secondary-bg-color);
+  background: var(--tg-second);
 }
 
 body::-webkit-scrollbar {
