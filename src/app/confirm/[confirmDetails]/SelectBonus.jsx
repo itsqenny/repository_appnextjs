@@ -86,7 +86,7 @@ export default function SelectBonus({
 							>
 								₽
 							</span>
-							<span className="item-switcher-num">50</span>
+							<span className="item-switcher-num">100</span>
 						</div>
 					</div>
 					<div

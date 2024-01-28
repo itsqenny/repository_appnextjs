@@ -9,13 +9,19 @@ import Back from "@/app/UI/BackButton/BackButton"
 import { useParams } from "next/navigation"
 import initData from "@/app/UI/useInitData/initData"
 import SelectBonus from "./SelectBonus"
-
+import useSWR from "swr"
+import FormData from "@/app/components/popup/FormData"
+const fetcher = (url) => fetch(url).then((res) => res.json())
 export default function ConfirmId({ data, userId }) {
 	const params = useParams()
 	const decodedString = decodeURIComponent(params.confirmDetails)
 	const parsedParams = Object.fromEntries(new URLSearchParams(decodedString))
 	const { id, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams
-	const { queryId, WebApp } = initData()
+	const { queryId, WebApp, user } = initData()
+	const { data: userData, error } = useSWR(
+		`/api/customer/settings/?userId=${userId}`,
+		fetcher
+	)
 	const [item, setItem] = useState(null)
 	const [size, setSize] = useState(ConfirmSize || null)
 	const [price, setPrice] = useState(ConfirmPrice || null)
@@ -24,7 +30,8 @@ export default function ConfirmId({ data, userId }) {
 	const [userBonus, setUserBonus] = useState(0)
 	const [paymentData, setPaymentData] = useState("WAIT")
 	const [customerStatus, setCustomerStatus] = useState(false)
-
+	const [isVisible, setIsPopupVisible] = useState(false)
+	const message = 'Чтобы продолжить покупку, необходимо заполнить данные'
 	useEffect(() => {
 		// Выполнение HTTP-запроса
 		fetch(`/api/products/${id}`)
@@ -55,41 +62,47 @@ export default function ConfirmId({ data, userId }) {
 	const paymentDate = new Date()
 	const options = { month: "short", day: "numeric" }
 	const onCheckout = async () => {
-		setCredited(true)
-		setShowConfirmation(false)
-		const api = process.env.NEXT_PUBLIC_API_URL
-		const data = {
-			name: name,
-			price: price !== null ? price : ConfirmPrice,
-			size: size !== null ? size : ConfirmSize,
-			queryId,
-			userId,
-			order_id: orderId,
-			productId: id,
-			time: paymentDate.toLocaleDateString("ru-RU", options),
-			remainingBonus: userBonus.restBonus,
-			saveBonus: userBonus.deductBonus,
-			newBonus: !isCredited ? 100 : 0,
-		}
+		if (userData && Object.values(userData).some((value) => value === null || value === undefined || value === "")) {
+			WebApp.HapticFeedback.notificationOccurred('error');
+			setIsPopupVisible(true)
+		} else {
+			
+			setCredited(true)
+			setShowConfirmation(false)
 
-		try {
-			const response = await fetch(`/api/customer/pay`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(data),
-			})
-
-			const responseData = await response.json()
-			if (responseData.paymentUrl) {
-				Telegram.WebApp.openLink(responseData.paymentUrl)
-				setCustomerStatus(true)
-			} else {
-				console.error("Отсутствует ссылка для оплаты.")
+			const data = {
+				name: name,
+				price: price !== null ? price : ConfirmPrice,
+				size: size !== null ? size : ConfirmSize,
+				queryId,
+				userId,
+				order_id: orderId,
+				productId: id,
+				time: paymentDate.toLocaleDateString("ru-RU", options),
+				remainingBonus: userBonus.restBonus,
+				saveBonus: userBonus.deductBonus,
+				newBonus: !isCredited ? 100 : 0,
 			}
-		} catch (error) {
-			console.error("Ошибка отправки данных на сервер:", error)
+
+			try {
+				const response = await fetch(`/api/customer/pay`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(data),
+				})
+
+				const responseData = await response.json()
+				if (responseData.paymentUrl) {
+					Telegram.WebApp.openLink(responseData.paymentUrl)
+					setCustomerStatus(true)
+				} else {
+					console.error("Отсутствует ссылка для оплаты.")
+				}
+			} catch (error) {
+				console.error("Ошибка отправки данных на сервер:", error)
+			}
 		}
 	}
 
@@ -170,17 +183,25 @@ export default function ConfirmId({ data, userId }) {
 							isCredited={isCredited}
 							setCredited={setCredited}
 						/>
+
+						
+						{!isVisible ? 
+						(<>
 						{/*
 						<div className="main-button">
 							<button onClick={onCheckout}>
 								Купить за {price !== null ? price : ConfirmPrice}₽
 							</button>
 						</div>
-						  */}
+						 */}
 						<ButtonCheckout
 							onCheckout={onCheckout}
 							price={price !== null ? price : ConfirmPrice}
 						/>
+						</>):(<>
+							<FormData isVisible={isVisible} setIsPopupVisible={setIsPopupVisible} userId={userId} user={user}/>
+						</>)}
+						
 					</>
 				) : (
 					<>
