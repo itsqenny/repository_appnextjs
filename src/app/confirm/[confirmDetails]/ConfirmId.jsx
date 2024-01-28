@@ -31,6 +31,7 @@ export default function ConfirmId({ data, userId }) {
 	const [paymentData, setPaymentData] = useState("WAIT")
 	const [customerStatus, setCustomerStatus] = useState(false)
 	const [isVisible, setIsPopupVisible] = useState(false)
+	const [subsBonus, setSubsBonus] = useState(100)
 	const message = 'Чтобы продолжить покупку, необходимо заполнить данные'
 	useEffect(() => {
 		// Выполнение HTTP-запроса
@@ -81,7 +82,7 @@ export default function ConfirmId({ data, userId }) {
 				time: paymentDate.toLocaleDateString("ru-RU", options),
 				remainingBonus: userBonus.restBonus,
 				saveBonus: userBonus.deductBonus,
-				newBonus: !isCredited ? 100 : 0,
+				newBonus: !isCredited ? subsBonus : 0,
 			}
 
 			try {
@@ -182,18 +183,19 @@ export default function ConfirmId({ data, userId }) {
 							userId={userId}
 							isCredited={isCredited}
 							setCredited={setCredited}
+							setSubsBonus={setSubsBonus}
 						/>
 
 						
 						{!isVisible ? 
 						(<>
-						{/*
+						{/* 
 						<div className="main-button">
 							<button onClick={onCheckout}>
 								Купить за {price !== null ? price : ConfirmPrice}₽
 							</button>
 						</div>
-						 */}
+						*/}
 						<ButtonCheckout
 							onCheckout={onCheckout}
 							price={price !== null ? price : ConfirmPrice}

@@ -2,6 +2,7 @@
 import { useState } from "react"
 import initData from "@/app/UI/useInitData/initData"
 import Link from "next/link"
+import SubsFetcherId from "./SubsFetcherId"
 export default function SelectBonus({
 	price,
 	setParentPrice,
@@ -10,19 +11,19 @@ export default function SelectBonus({
 	userId,
 	isCredited,
 	setCredited,
+	setSubsBonus,
 }) {
-	
 	const { WebApp } = initData()
 	const [restBonus, setRestBonus] = useState(0)
 	const [deductBonus, setDeductBonus] = useState(0)
-	
+	const {SubsInfo} = SubsFetcherId()
+	setSubsBonus(SubsInfo)
 	const priceNumeric = parseFloat(
 		price.replace(/[\u00a0₽ ]/g, "").replace(",", ".")
 	)
 
 	if (priceNumeric !== undefined && !isNaN(priceNumeric)) {
 		let result = priceNumeric - 0.1 * priceNumeric
-
 	} else {
 		console.error(``)
 	}
@@ -56,8 +57,8 @@ export default function SelectBonus({
 			setParentPrice(calculatedPrice)
 			setParentBonus({
 				restBonus: rest,
-				deductBonus: difference
-			  });
+				deductBonus: difference,
+			})
 			WebApp.HapticFeedback.impactOccurred("medium")
 		} else {
 			WebApp.HapticFeedback.notificationOccurred("error")
@@ -86,7 +87,7 @@ export default function SelectBonus({
 							>
 								₽
 							</span>
-							<span className="item-switcher-num">100</span>
+							<span className="item-switcher-num">{SubsInfo}</span>
 						</div>
 					</div>
 					<div
