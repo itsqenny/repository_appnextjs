@@ -135,7 +135,7 @@
 	color: var(--tg-color);
 }
 
-.profile-subsribe-title {
+.profile-subscribe-title {
 	display: flex;
 	line-height: 100%;
 	margin-bottom: 10px;
@@ -145,11 +145,88 @@
 	letter-spacing: -0.02em;
 	text-align: left;
 	margin-left: var(--space-4x);
-	color: var(--tg-color);
+	color: var(--tg-text);
 	align-items: center;
 }
 
-.profile-subsribe-title p {
+.profile-subscribe-ui{
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+	margin: var(--space-4x);
+}
+
+.subscribe-text-ui{
+	font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+	margin: 0;
+	padding: 0;
+}
+.subscribe-key{
+	flex: 0 0 75px;
+    white-space: nowrap;
+	text-align: left;
+}
+.subscribe-value{
+	flex: 1 1;
+    text-align: right;
+}
+.subscribe-add{
+	flex: 0 0 83px;
+    text-align: right;
+}
+.profile-subscribe-info{
+	color: var(--tg-text);
+    border-radius: 17px;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    text-align: center;
+	font-weight: 400;
+	margin: 0 var(--space-4x);
+    text-align: left;
+}
+
+.subscribe-bonus-text-plus{
+	font-weight: 700;
+    text-align: right;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    line-height: 100%;
+    background: linear-gradient( 234deg, rgba(76, 60, 175, 1) 1%, rgba(76, 60, 175, 1) 9%, rgba(76, 60, 175, 1) 35%, rgba(76, 60, 175, 1) 60%, rgba(91, 75, 190, 1) 77%, rgba(106, 90, 205, 1) 91%, rgba(106, 90, 205, 1) 100% );
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #0000;
+    background-clip: text;
+}
+
+.subscribe-bonus-text-pro{
+	font-weight: 700;
+    text-align: right;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    line-height: 100%;
+	background: linear-gradient(45deg, rgb(0, 198, 251), rgb(0, 91, 234));
+    -webkit-text-fill-color: #0000;
+    background-clip: text;
+}
+.subscribe-bonus-text{
+	font-weight: 400;
+    text-align: right;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    line-height: 100%;
+	color: var(--tg-text);
+}
+.profile-subscribe-title p {
 	margin: 0; /* Сбросим отступы, если они были заданы по умолчанию */
 }
 
@@ -322,6 +399,7 @@
 
 .features-list {
 	list-style-type: none;
+	margin: var(--space-4x) 0 0;
 	padding: 0;
 	text-align: left;
   }

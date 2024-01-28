@@ -4,38 +4,33 @@ import Link from "next/link"
 import InfiniteScroll from "react-infinite-scroll-component"
 import { useState } from "react"
 import SkeletonProducts from "./SkeletonProducts"
-
-export default function Products({ searchQuery, data }) {
-	const [items, setItems] = useState(data.slice(0, 20))
-
-	const moreData = () => {
-		setTimeout(() => {
-			const nextItems = data.slice(items.length, items.length + 10)
-			setItems([...items, ...nextItems])
-		}, 1000)
+import { useSearchParams } from "next/navigation"
+export default function Products({ data, setSize, size }) {
+	const searchParams = useSearchParams()
+	const search = searchParams.get("q")
+	const items = data ? data.flat() : []
+	const loadMore = () => {
+		if (setSize) {
+			setSize(size + 1)
+		}
 	}
-	if (searchQuery) {
-		const filteredItems = data?.filter((item) =>
-			item.name.toLowerCase().includes(searchQuery.toLowerCase())
-		)
-		setItems(filteredItems.slice(0, 10))
-	}
+	const filteredItems = search
+		? items.filter((item) =>
+				item.name.toLowerCase().includes(search.toLowerCase())
+		  )
+		: items
 
 	return (
 		<>
 			<div>
 				<InfiniteScroll
-					dataLength={items.length}
-					next={moreData}
-					hasMore={items.length < data.length} // Change this condition based on your data fetching logic
-					loader={
-						<>
-							<SkeletonProducts />
-						</>
-					}
+					dataLength={filteredItems.length}
+					next={loadMore}
+					hasMore={true}
+					loader={<>{!search && <SkeletonProducts />}</>}
 				>
 					<div className="item-box">
-						{data.map((item) => (
+						{filteredItems.map((item) => (
 							<div className="item" key={item.id}>
 								<Link href={`/products/${item.id}`}>
 									<div className="item-img-box">

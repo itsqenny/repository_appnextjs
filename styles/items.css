@@ -9,7 +9,7 @@ main {
 	grid-template-columns: 1fr 1fr;
 	grid-gap: 10px;
 	gap: 10px;
-	margin: var(--space-4x);
+	margin: 10px var(--space-4x) 0px;
   }
   
   .item {
@@ -245,7 +245,7 @@ main {
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
     gap: 10px;
-    margin: var(--space-4x);
+	margin: 10px var(--space-4x) 0px;
 }
 .skeleton-item-img-box {
 	padding: 8px 8px 0;

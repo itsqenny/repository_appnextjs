@@ -1,32 +1,39 @@
-'use client'
-import useSWR from 'swr'
+"use client"
+import useSWRInfinite from "swr/infinite"
 import Products from "./Products"
-import SkeletonProducts from './SkeletonProducts'
-const fetcher = (url) => fetch(url).then((res) => res.json())
+import SkeletonProducts from "./SkeletonProducts"
+import { useState } from "react"
+const getKey = (pageIndex, previousPageData) => {
+	if (previousPageData && !previousPageData.length) return null
+	pageIndex = pageIndex + 1
+	return `/api/products/?_page=${pageIndex}`
+}
 
-export default function FetcherProducts({ searchQuery, userId }) {
-	const { data, error } = useSWR(
-		`/api/products`,
-		fetcher
-	)
-        console.log(data)
+const fetcher = (url) => fetch(url).then((res) => res.json())
+export default function FetcherProducts({ searchParams, userId }) {
+	const { data, size, setSize, error } = useSWRInfinite(getKey, fetcher, {
+		initialSize: 1,
+	})
 	return (
 		<>
 			{" "}
 			{error ? (
 				<>
-					<SkeletonProducts/>
+					<SkeletonProducts />
 				</>
 			) : (
 				<>
 					{!data ? (
 						<>
-							<SkeletonProducts/>
+							<SkeletonProducts />
 						</>
 					) : (
 						<>
-						
-							 <Products data={data} searchQuery={searchQuery}/>
+							<Products
+								data={data}
+								setSize={setSize}
+								size={size}
+							/>
 						</>
 					)}
 				</>

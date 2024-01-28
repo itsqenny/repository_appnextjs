@@ -1,10 +1,13 @@
+
 import FetcherProducts from "./FetcherProducts";
 
 
-const ProductPage = ({searchParams}) => {
+const ProductPage = () => {
+    
+    
     return (
         <>
-        <FetcherProducts searchParams={searchParams}/>
+        <FetcherProducts/>
         </>
     );
 };

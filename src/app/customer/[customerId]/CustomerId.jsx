@@ -7,13 +7,14 @@ import initData from "@/app/UI/useInitData/initData"
 import Link from "next/link"
 import CustomerIdRank from "./CustomerIdRank"
 import Notification from "@/app/components/popup/notification"
+import CustomerIdSettings from "./CustomerIdSettings"
 
 const CustomerId = ({ customerId, data, error, user }) => {
 	const [isVisible, setIsPopupVisible] = useState(false)
-	const message = 'В текущее время эта функция недоступна'
+	const message = "В текущее время эта функция недоступна"
 	const { WebApp } = initData()
 	const showPopup = () => {
-		WebApp.HapticFeedback.notificationOccurred('error');
+		WebApp.HapticFeedback.notificationOccurred("error")
 		setIsPopupVisible(true)
 		setTimeout(() => {
 			setIsPopupVisible(false)
@@ -30,8 +31,26 @@ const CustomerId = ({ customerId, data, error, user }) => {
 		setIsEditing(false)
 	}
 
-	const handleSaveClick = () => {
+	const handleSaveClick = async () => {
 		setIsEditing(true)
+		const postData = {
+			userId: customerId,
+			fullName: form.fullName,
+			userPhone: form.phone,
+			userCity: form.city,
+			address: form.address,
+		}
+
+		const response = await fetch(`/api/customer/settings/`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(postData),
+		})
+
+		const responseData = await response.json()
+		console.log(responseData.message)
 	}
 
 	const handleChange = (e) => {
@@ -39,7 +58,6 @@ const CustomerId = ({ customerId, data, error, user }) => {
 			...form,
 			[e.target.name]: e.target.value,
 		})
-		console.log([e.target.name])
 	}
 
 	const handlePhoneNumberInput = (e) => {
@@ -129,31 +147,11 @@ const CustomerId = ({ customerId, data, error, user }) => {
 						</div>
 					</div>
 					<div className="profile-data">
-						<div className="profile-data-title">Данные доставки</div>
-						<div className="profile-data-info">
-							<span>ФИО</span>
-							<span className="profile-data-text">
-								{form.fullName || "Не указан"}
-							</span>
-						</div>
-						<div className="profile-data-info">
-							<span>Телефон</span>
-							<span className="profile-data-text">
-								{form.phone || "Не указан"}
-							</span>
-						</div>
-						<div className="profile-data-info">
-							<span>Город</span>
-							<span className="profile-data-text">
-								{form.city || "Не указан"}
-							</span>
-						</div>
-						<div className="profile-data-info">
-							<span>Адрес доставки</span>
-							<span className="profile-data-text">
-								{form.address || "Не указан"}
-							</span>
-						</div>
+						<CustomerIdSettings
+							form={form}
+							userId={customerId}
+							setForm={setForm}
+						/>
 
 						<button
 							className="btn-profile-data-info btn-profile-data"
@@ -163,19 +161,52 @@ const CustomerId = ({ customerId, data, error, user }) => {
 						</button>
 					</div>
 					<div className="profile-data">
-						<div className="profile-subsribe-title">
-							Подписка
-							{/*
-							<div className="subsribe-box">
-								<p className="subscribe-status">
-									connect+
-								</p>
+						<div className="profile-subscribe-title">Подписка</div>
+						<div className="profile-subscribe-info">
+							Доступ к эксклюзивным возможностям 
+						</div>
+						<div className="profile-subscribe-ui" style={{color:'var(--tg-hint)', fontSize:'16px'}}>
+							<div className="subscribe-key">Вид</div>
+							<div className="subscribe-value">Зачислить</div>
+							<div className="subscribe-add">Списать</div>
+						</div>
+						<div className="profile-subscribe-ui">
+							<div className="subscribe-key">
+								<div
+									className="usercard-status"
+									style={{ marginLeft: "0px", fontSize:'16px', background:'var(--tg-second)' }}
+								>
+									connect
+								</div>
 							</div>
-							 */}
+							<div className="subscribe-value"><div className="subscribe-bonus-text">100</div></div>
+							<div className="subscribe-add">6990</div>
 						</div>
-						<div className="profile-data-info">
-							Получите доступ к эксклюзивным возможностям
+						<div className="profile-subscribe-ui">
+							<div className="subscribe-key">
+								<div
+									className="usercard-status-connect-plus"
+									style={{ marginLeft: "0px", fontSize:'16px' }}
+								>
+									connect+
+								</div>
+							</div>
+							<div className="subscribe-value"><div className="subscribe-bonus-text-plus">300</div></div>
+							<div className="subscribe-add">6490</div>
 						</div>
+						<div className="profile-subscribe-ui">
+							<div className="subscribe-key">
+								<div
+									className="usercard-status-connect-pro"
+									style={{ marginLeft: "0px", fontSize:'16px' }}
+								>
+									connect pro
+								</div>
+							</div>
+							<div className="subscribe-value"><div className="subscribe-bonus-text-pro">500</div></div>
+							<div className="subscribe-add">5990</div>
+						</div>
+						
 						<Link href={`/customer/${customerId}/subscription`}>
 							<button className="btn-profile-data-info btn-profile-data">
 								Смотреть Подробности
@@ -193,11 +224,13 @@ const CustomerId = ({ customerId, data, error, user }) => {
 							</span>
 						</div>
 
-						<button className="btn-profile-data-info btn-profile-data"
-						onClick={showPopup}>
+						<button
+							className="btn-profile-data-info btn-profile-data"
+							onClick={showPopup}
+						>
 							Написать
 						</button>
-						<Notification isVisible={isVisible} message={message}/>
+						<Notification isVisible={isVisible} message={message} />
 					</div>
 				</>
 			) : (
@@ -250,7 +283,7 @@ const CustomerId = ({ customerId, data, error, user }) => {
 									</div>
 									<div className="bg-delivery-type"></div>
 									<div className="delivery-type-image">
-										<img src="../img/svg/bx4bg.png" alt="" />
+										<img src="../../bx4bg.png" alt="" />
 									</div>
 								</div>
 							</button>
@@ -353,11 +386,10 @@ const CustomerId = ({ customerId, data, error, user }) => {
 						</div>
 					</div>
 
-					{/* 
-            <div className="main-button">
-              <button onClick={handleSaveClick}>Сохранить</button>
-            </div>
-            */}
+					<div className="main-button">
+						<button onClick={handleSaveClick}>Сохранить</button>
+					</div>
+					{/*  */}
 					<SavedButton handleSaveClick={handleSaveClick} />
 				</>
 			)}
