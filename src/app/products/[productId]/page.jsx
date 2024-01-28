@@ -36,8 +36,10 @@ export default function ProductId() {
 				console.error("Ошибка при загрузке продукта:", error)
 			})
 	}, [params.productId])
-
-
+	const widths = [640, 750, 828, 1080, 1200, 1920, 2048, 3840]
+	const srcSet = widths
+	.map((width) => `${item?.img}?w=${width}&q=75 ${width}w`)
+	.join(", ")
 
 	const handlePriceChange = (newPrice) => {
 		setCurrentPrice(newPrice)
@@ -45,10 +47,7 @@ export default function ProductId() {
 	const handleSizeChange = (newSize) => {
 		setCurrentSize(newSize)
 	}
-	const widths = [640, 750, 828, 1080, 1200, 1920, 2048, 3840]
-	const srcSet = widths
-		.map((width) => `${item.img}?w=${width}&q=75 ${width}w`)
-		.join(", ")
+
 
 	const generateOrderId = () => {
 		const randomId = Math.floor(0 + Math.random() * 9999999) // Генерируйте случайное шестизначное число
@@ -76,14 +75,14 @@ export default function ProductId() {
 			<div className="full-item">
 				<div className="images-slider-wrapper">
 					<div className="images-slider-images">
-						{item?.img.map((img, id) => (
+					{item?.img.map((img, id) => (
 							<div className="images-slider-image-item" key={id}>
 								<div className="image-item-wrapper">
 									<Image
 										src={img}
 										alt={`photo-${id}`}
-										width={3840} // Начальная ширина изображения
-										height={2160} // Начальная высота изображения (может быть другой, в зависимости от соотношения сторон)
+										width={3840}
+										height={2160}
 										srcSet={srcSet}
 										sizes="(max-width: 768px) 100vw, 50vw"
 										style={{
