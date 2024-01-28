@@ -6,7 +6,7 @@ const getKey = (pos) => `${uniq}_${pos}`;
 export const HistoryState = null;
 
 let replaceStateCounter = 0;
-const replaceStateLimit = 90;
+const replaceStateLimit = 79;
 const replaceStateInterval = 10000; // 10 секунд
 
 export const setCurrentScrollHistory = ([x, y]) => {
