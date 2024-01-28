@@ -1,15 +1,13 @@
 "use client"
 import { useState, useEffect } from "react"
-import Loading from "./loading"
-import Link from "next/link"
-import Back from "@/app/UI/BackButton/BackButton"
+import dynamic from 'next/dynamic';
+
+const DynamicBackButton = dynamic(() => import('@/app/UI/BackButton/BackButton'));
 import ChangeButton from "@/app/UI/MainButton/ChangeButton"
-import Image from "next/image"
 import FilterProduct from "./FilterProduct"
 import SkeletonProducts from "../products/SkeletonProducts"
 export default function Filter() {
 	const [productData, setProductsData] = useState([])
-
 	const [selectedCategories, setSelectedCategories] = useState([])
 	const [selectedSize, setSelectedSize] = useState([])
 	const [minPrice, setMinPrice] = useState("")
@@ -203,7 +201,7 @@ export default function Filter() {
 
 	return (
 		<>
-			<Back />
+			<DynamicBackButton />
 			<div className="filters">
 				{filtersVisible && (
 					<div className="filters-body">
