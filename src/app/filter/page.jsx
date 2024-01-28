@@ -1,12 +1,14 @@
-"use client"
+
 import Filter from "./Filter"
-export const dynamic = "force-dynamic"
+
 const FilterPage = () => {
-	return (
-		<>
+	if (typeof window !== 'undefined') {
+		return (
+		  <>
 			<Filter />
-		</>
-	)
+		  </>
+		);
+	  }
 }
 
 export default FilterPage
