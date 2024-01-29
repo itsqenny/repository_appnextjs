@@ -865,3 +865,62 @@
 .form-data-info span {
 	padding-inline: 28px;
 }
+
+
+.subscription-banner-container{
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 4px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    /* margin: 0 var(--space-4x-negative); */
+    padding: var(--space-4x);
+    position: relative;
+    z-index: 5;
+    scroll-snap-type: x mandatory;
+    /* scroll-padding-left: var(--space-4x); */
+    width: 100vw;
+    height: 100vh;
+}
+.subscription-banner-container::-webkit-scrollbar {
+	display: none;
+  }
+.subscription-banner-box{
+	flex-shrink: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	width: 100%;
+    height: 80vh;
+	padding: 4px;
+	outline: none;
+	text-align: unset;
+	background: #0000;
+	border: none;
+	scroll-snap-align: center;
+	-webkit-user-select: none;
+	user-select: none;
+	transition: transform 0.15s linear;
+}
+
+.subscription-banner{
+	position: absolute;
+  inset: 0;
+}
+
+.subscription-banner-bg{
+	background: linear-gradient(180deg, #7969dc, #4c3caf);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+	border-radius: 16px;
+}

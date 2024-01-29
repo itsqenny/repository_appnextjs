@@ -3,6 +3,8 @@ import { useState } from "react"
 import initData from "@/app/UI/useInitData/initData"
 import Link from "next/link"
 import SubsFetcherId from "./SubsFetcherId"
+import SubsCardPlus from "@/app/components/SubsCard/SubsCardPlus"
+import SubsCardMinus from "@/app/components/SubsCard/SubsCardMinus"
 export default function SelectBonus({
 	price,
 	setParentPrice,
@@ -16,7 +18,7 @@ export default function SelectBonus({
 	const { WebApp } = initData()
 	const [restBonus, setRestBonus] = useState(0)
 	const [deductBonus, setDeductBonus] = useState(0)
-	const {SubsInfo} = SubsFetcherId()
+	const { SubsInfo, SubsMinusInfo } = SubsFetcherId()
 	setSubsBonus(SubsInfo)
 	const priceNumeric = parseFloat(
 		price.replace(/[\u00a0₽ ]/g, "").replace(",", ".")
@@ -39,7 +41,7 @@ export default function SelectBonus({
 				// Вставляем пробел между числами при списании бонусов
 				calculatedPrice =
 					price.replace(/[\u00a0₽ ]/g, "").replace(",", ".") - data.bonus
-				calculatedPrice = Math.max(calculatedPrice, 6990)
+				calculatedPrice = Math.max(calculatedPrice, SubsMinusInfo)
 				calculatedPrice = calculatedPrice
 					.toString()
 					.replace(/\B(?=(\d{3})+(?!\d))/g, "\u00a0")
@@ -129,65 +131,23 @@ export default function SelectBonus({
 			</div>
 			{isCredited ? (
 				<>
-					<hr />
-					<div className="warning-bonus-selection">
-						<div className="warning-bonus-selection-box">
-							<div
-								className="warning-bonus-selection-title"
-								style={{ fontSize: "15px", letterSpacing: "-0.01em" }}
-							>
-								Увеличьте лимит списания с
-								<div
-									className="warning-bonus-status-plus"
-									style={{ marginLeft: "4px" }}
-								>
-									connect+
-								</div>
-								<div className="warning-bonus-little-title">
-									*Без подписки списание доступно до 6990 ₽
-								</div>
-							</div>
-							<Link href={`/customer/${userId}/subscription`}>
-								<button
-									className="btn-profile-data-info btn-profile-data"
-									style={{ marginTop: "8px" }}
-								>
-									Приобрести подписку
-								</button>
-							</Link>
-						</div>
-					</div>
+					{SubsInfo === "300" || SubsInfo === "500" ? (
+						<></>
+					) : (
+						<>
+							<SubsCardMinus userId={userId} />
+						</>
+					)}
 				</>
 			) : (
 				<>
-					<hr />
-					<div className="warning-bonus-selection">
-						<div className="warning-bonus-selection-box">
-							<div
-								className="warning-bonus-selection-title"
-								style={{ fontSize: "15px", letterSpacing: "-0.01em" }}
-							>
-								Начислите 300₽ с
-								<div
-									className="warning-bonus-status-plus"
-									style={{ marginLeft: "4px" }}
-								>
-									connect+
-								</div>
-								<div className="warning-bonus-little-title">
-									*Без подписки начисление доступно до 100 ₽
-								</div>
-							</div>
-							<Link href={`/customer/${userId}/subscription`}>
-								<button
-									className="btn-profile-data-info btn-profile-data"
-									style={{ marginTop: "8px" }}
-								>
-									Приобрести подписку
-								</button>
-							</Link>
-						</div>
-					</div>
+					{SubsInfo === "300" || SubsInfo === "500" ? (
+						<></>
+					) : (
+						<>
+							<SubsCardPlus userId={userId} />
+						</>
+					)}
 				</>
 			)}
 		</>
