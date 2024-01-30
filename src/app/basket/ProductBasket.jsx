@@ -36,15 +36,11 @@ const ProductBasket = ({ data }) => {
 					href={`/order/id=${item.id}&name=${item.name}&ConfirmPrice=${item.price}&ConfirmSize=${item.size}&orderId=${item.order_id}`}
 				>
 					<div className="product-image-component">
-						<div className="product-image-container">
-							<div className="product-image-card">
-								<div className="product-image-inner">
-									<div className="product-image-inner-row">
+						
+							
 										<ProductImage item={item} />
-									</div>
-								</div>
-							</div>
-						</div>
+									
+						
 					</div>
 
 					<div className="product-details">
