@@ -15,7 +15,7 @@ export default function PaidFetcher({ userId }) {
 			{" "}
 			{error ? (
 				<>
-					<p>Ошибка. Пожалуйста, обратитесь за поддержкой.</p>
+					<SkeletonBasket />
 				</>
 			) : (
 				<>
