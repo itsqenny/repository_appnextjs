@@ -15,7 +15,8 @@ export default function ProductImage({ item }) {
 		<>
 			{error ? (
 				<>
-					<div className="product-image-container">
+					<div className="product-image-container"
+					style={{ background: "var(--tg-bg" }}>
 						<div
 							className="product-image-card"
 							style={{ background: "var(--tg-bg" }}
@@ -32,7 +33,8 @@ export default function ProductImage({ item }) {
 				<>
 					{!data ? (
 						<>
-							<div className="product-image-container">
+							<div className="product-image-container"
+							style={{ background: "var(--tg-bg" }}>
 								<div
 									className="product-image-card"
 									style={{ background: "var(--tg-bg" }}
