@@ -7,7 +7,7 @@ export const HistoryState = null
 
 let replaceStateCounter = 0
 const replaceStateLimit = 80
-const replaceStateInterval = 11000 // 10 секунд
+const replaceStateInterval = 15000 // 10 секунд
 
 export const setCurrentScrollHistory = ([x, y]) => {
 	//console.log(`Remember history scroll to ${x} ${y}. Href ${window.location.href}.`);
