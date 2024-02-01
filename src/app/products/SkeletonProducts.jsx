@@ -6,14 +6,6 @@ export default function SkeletonProducts() {
 				<div className="skeleton-item-box">
 					<Skeleton />
 					<Skeleton />
-					<Skeleton />
-					<Skeleton />
-					<Skeleton />
-					<Skeleton />
-					<Skeleton />
-					<Skeleton />
-					<Skeleton />
-					<Skeleton />
 				</div>
 			</div>
 		</>
