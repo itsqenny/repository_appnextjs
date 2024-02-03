@@ -15,10 +15,10 @@ export default async function Home() {
 			<Customer />
 			<SearchTab />
 			<Bonus />
-			{/*<BasketItem />
-				<PaidBasket />
-				{/*<OpenBanner/>
-				{/*<ComingSoon /> */}
+			<BasketItem />
+			<PaidBasket />
+			{/*<OpenBanner/>
+			{/*<ComingSoon /> */}
 			<CatalogTab />
 			<ProductsPage />
 		</>
