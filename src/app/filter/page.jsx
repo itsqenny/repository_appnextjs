@@ -2,7 +2,7 @@
 import Filter from "./Filter"
 
 export default function FilterPage() {
-	if (typeof window === "undefined") {
+	if (typeof window !== "undefined") {
 		return (
 			<>
 				<Filter />
