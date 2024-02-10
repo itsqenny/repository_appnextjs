@@ -367,11 +367,12 @@ const CustomerId = ({ customerId, data, error, user }) => {
 							</div>
 						</div>
 					</div>
-
-					<div className="main-button">
+					{/* 
+					<div 
+					className="main-button">
 						<button onClick={handleSaveClick}>Сохранить</button>
 					</div>
-					{/* */}
+					*/}
 					<SavedButton handleSaveClick={handleSaveClick} />
 				</>
 			)}
