@@ -1,7 +1,7 @@
 "use client"
 import Filter from "./Filter"
 
-const FilterPage = () => {
+export default function FilterPage() {
 	if (typeof window === "undefined") {
 		return (
 			<>
@@ -10,5 +10,3 @@ const FilterPage = () => {
 		)
 	}
 }
-
-export default FilterPage

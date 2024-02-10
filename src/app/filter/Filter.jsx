@@ -1,9 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import dynamic from "next/dynamic"
-const DynamicBackButton = dynamic(() =>
-	import("@/app/UI/BackButton/BackButton")
-)
+
 import useSWRInfinite from "swr/infinite"
 import ChangeButton from "@/app/UI/MainButton/ChangeButton"
 import FilterProduct from "./FilterProduct"
@@ -113,7 +111,6 @@ export default function Filter() {
 
 	return (
 		<>
-			<DynamicBackButton />
 			<div className="filters">
 				<div className="filters-body">
 					<h2>Фильтр</h2>
