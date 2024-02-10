@@ -5,7 +5,7 @@ import useWebApp from "../UI/useWebApp/useWebApp"
 import PhotoFetcher from "./PhotoFetcher"
 
 export default function Customer() {
-	//const { user, userId } = initData();
+	const { user, userId } = initData()
 	useWebApp()
 	//const userId = "204688184"
 	//const user = { username: "whokilledravey", first_name: "Евгений" }
