@@ -2,11 +2,13 @@
 import Filter from "./Filter"
 
 const FilterPage = () => {
-	return (
-		<>
-			<Filter />
-		</>
-	)
+	if (typeof window === "undefined") {
+		return (
+			<>
+				<Filter />
+			</>
+		)
+	}
 }
 
 export default FilterPage
