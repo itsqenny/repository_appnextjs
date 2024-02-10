@@ -22,10 +22,10 @@ const CustomerId = ({ customerId, data, error, user }) => {
 		}, 3000) // Закроется через 3 секунды, можно настроить
 	}
 	const [form, setForm] = useState({
-		fullName: "",
-		address: "",
-		city: "",
-		phone: "",
+		userFio: "",
+		userAdress: "",
+		userCity: "",
+		phoneNumber: "",
 	})
 	const [isEditing, setIsEditing] = useState(true)
 	const handleEdit = () => {
@@ -36,11 +36,12 @@ const CustomerId = ({ customerId, data, error, user }) => {
 		setIsEditing(true)
 		const postData = {
 			userId: customerId,
-			fullName: form.fullName,
-			userPhone: form.phone,
-			userCity: form.city,
-			address: form.address,
+			userFio: form.userFio,
+			phoneNumber: form.phoneNumber,
+			userCity: form.userCity,
+			userAdress: form.userAdress,
 		}
+		console.log(postData)
 
 		const response = await fetch(`/api/customer/settings/`, {
 			method: "POST",
@@ -79,13 +80,13 @@ const CustomerId = ({ customerId, data, error, user }) => {
 			// Обновите состояние form с новым номером телефона
 			setForm((prevForm) => ({
 				...prevForm,
-				phone: formattedNumber,
+				phoneNumber: formattedNumber,
 			}))
 		} else {
 			// Обновите состояние form с номером телефона без форматирования
 			setForm((prevForm) => ({
 				...prevForm,
-				phone: digitsOnly,
+				phoneNumber: digitsOnly,
 			}))
 		}
 	}
@@ -99,9 +100,11 @@ const CustomerId = ({ customerId, data, error, user }) => {
 						<div className="profile-avatar-box">
 							<div className="profile-avatar-transparent">
 								<div className="profile-avatar">
-									<CustomerIdPhoto data={data} error={error}/>
+									<CustomerIdPhoto data={data} error={error} />
 								</div>
-								<div className="profile-name">{user?.first_name || 'Пользователь'}</div>
+								<div className="profile-name">
+									{user?.first_name || "Пользователь"}
+								</div>
 								<footer>{`@${
 									user?.username !== undefined ? user?.username : customerId
 								}`}</footer>
@@ -126,9 +129,12 @@ const CustomerId = ({ customerId, data, error, user }) => {
 					<div className="profile-data">
 						<div className="profile-subscribe-title">Подписка</div>
 						<div className="profile-subscribe-info">
-							Доступ к эксклюзивным возможностям 
+							Доступ к эксклюзивным возможностям
 						</div>
-						<div className="profile-subscribe-ui" style={{color:'var(--tg-hint)', fontSize:'16px'}}>
+						<div
+							className="profile-subscribe-ui"
+							style={{ color: "var(--tg-hint)", fontSize: "16px" }}
+						>
 							<div className="subscribe-key">Вид</div>
 							<div className="subscribe-value">Зачислить</div>
 							<div className="subscribe-add">Списать</div>
@@ -137,39 +143,49 @@ const CustomerId = ({ customerId, data, error, user }) => {
 							<div className="subscribe-key">
 								<div
 									className="usercard-status"
-									style={{ marginLeft: "0px", fontSize:'16px', background:'var(--tg-second)' }}
+									style={{
+										marginLeft: "0px",
+										fontSize: "16px",
+										background: "var(--tg-second)",
+									}}
 								>
 									connect
 								</div>
 							</div>
-							<div className="subscribe-value"><div className="subscribe-bonus-text">100</div></div>
+							<div className="subscribe-value">
+								<div className="subscribe-bonus-text">100</div>
+							</div>
 							<div className="subscribe-add">6990</div>
 						</div>
 						<div className="profile-subscribe-ui">
 							<div className="subscribe-key">
 								<div
 									className="usercard-status-connect-plus"
-									style={{ marginLeft: "0px", fontSize:'16px' }}
+									style={{ marginLeft: "0px", fontSize: "16px" }}
 								>
 									connect+
 								</div>
 							</div>
-							<div className="subscribe-value"><div className="subscribe-bonus-text-plus">300</div></div>
+							<div className="subscribe-value">
+								<div className="subscribe-bonus-text-plus">300</div>
+							</div>
 							<div className="subscribe-add">6490</div>
 						</div>
 						<div className="profile-subscribe-ui">
 							<div className="subscribe-key">
 								<div
 									className="usercard-status-connect-pro"
-									style={{ marginLeft: "0px", fontSize:'16px' }}
+									style={{ marginLeft: "0px", fontSize: "16px" }}
 								>
 									connect pro
 								</div>
 							</div>
-							<div className="subscribe-value"><div className="subscribe-bonus-text-pro">500</div></div>
+							<div className="subscribe-value">
+								<div className="subscribe-bonus-text-pro">500</div>
+							</div>
 							<div className="subscribe-add">5990</div>
 						</div>
-						
+
 						<Link href={`/customer/${customerId}/subscription`}>
 							<button className="btn-profile-data-info btn-profile-data">
 								Смотреть Подробности
@@ -205,7 +221,7 @@ const CustomerId = ({ customerId, data, error, user }) => {
 						</div>
 						<div className="delivery-type-input">
 							<button className={`button-delivery`}>
-								{form.address === "pickup" && (
+								{form.userAdress === "pickup" && (
 									<span className="delivery-type-item-outline">
 										<svg
 											width="135"
@@ -260,7 +276,8 @@ const CustomerId = ({ customerId, data, error, user }) => {
 								<input
 									type="text"
 									className="profile-search-value"
-									name="city"
+									name="userCity"
+									value={form.userCity}
 									onChange={handleChange}
 								/>
 								<div className="profile-select-info-icon">
@@ -287,7 +304,8 @@ const CustomerId = ({ customerId, data, error, user }) => {
 								<input
 									type="text"
 									className="profile-search-value"
-									name="address"
+									name="userAdress"
+									value={form.userAdressr}
 									onChange={handleChange}
 								/>
 							</div>
@@ -300,7 +318,8 @@ const CustomerId = ({ customerId, data, error, user }) => {
 								<input
 									type="text"
 									className="profile-search-value"
-									name="fullName"
+									name="userFio"
+									value={form.userFio}
 									onChange={handleChange}
 								/>
 								<div className="profile-select-info-icon">
@@ -325,8 +344,8 @@ const CustomerId = ({ customerId, data, error, user }) => {
 								<input
 									type="text"
 									className="profile-search-value"
-									name="phone"
-									value={form.phone}
+									name="phoneNumber"
+									value={form.phoneNumber}
 									onChange={handlePhoneNumberInput}
 								/>
 								<div className="profile-select-info-icon">
@@ -348,11 +367,11 @@ const CustomerId = ({ customerId, data, error, user }) => {
 							</div>
 						</div>
 					</div>
-					{/*
+
 					<div className="main-button">
 						<button onClick={handleSaveClick}>Сохранить</button>
 					</div>
-					  */}
+					{/* */}
 					<SavedButton handleSaveClick={handleSaveClick} />
 				</>
 			)}

@@ -6,10 +6,9 @@ import axios from "axios"
 export const revalidate = 0
 export const dynamic = "force-dynamic"
 const BonusTab = ({ data }) => {
-
 	return (
 		<>
-			<div className="action-poinst-icon">{data.bonus}</div>
+			<div className="action-poinst-icon">{data}</div>
 		</>
 	)
 }

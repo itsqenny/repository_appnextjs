@@ -4,10 +4,10 @@ import initData from "@/app/UI/useInitData/initData"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
-const BonusPage = ({data}) => {
+const BonusPage = ({ data }) => {
 	return (
 		<>
-			<div className="refer-friend-text">{data.bonus}</div>
+			<div className="refer-friend-text">{data}</div>
 		</>
 	)
 }

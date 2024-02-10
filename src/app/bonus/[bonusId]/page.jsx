@@ -6,8 +6,9 @@ import Back from "@/app/UI/BackButton/BackButton"
 import { useState } from "react"
 import BonusCard from "@/app/components/bonusCard/BonusCard"
 import CopyLink from "@/app/components/CopyLinkReferral/CopyLink"
+import ReferralFriends from "@/app/components/bonusCard/ReferralFriends"
 const bonusId = () => {
-	const { userId } = initData();
+	const { userId } = initData()
 	//const userId = "204688184"
 
 	const [isCopied, setIsCopied] = useState(false)
@@ -24,8 +25,12 @@ const bonusId = () => {
 	return (
 		<>
 			<Back />
-			<BonusCard userId={userId}/>
-			<CopyLink userId={userId} isCopied={isCopied} handleCopyClick={handleCopyClick}/>
+			<BonusCard userId={userId} />
+			<ReferralFriends
+				userId={userId}
+				isCopied={isCopied}
+				handleCopyClick={handleCopyClick}
+			/>
 		</>
 	)
 }

@@ -6,7 +6,6 @@ export const dynamic = "force-dynamic"
 export const revalidate = 0
 export default function BonusFetcher({ userId }) {
 	const { data, error } = useSWR(`/api/customer/bonus/${userId}`, fetcher)
-	if (error) return "An error has occurred."
 
 	return (
 		<>
@@ -17,12 +16,12 @@ export default function BonusFetcher({ userId }) {
 							<div className="action-card-QWE13B"></div>
 							<div className="action-card-bg">
 								<div className="action-inner">
-									{!data ? (
+									{!data && error ? (
 										<>
 											<div className="action-head">
 												<div className="skeleton-action-title"></div>
 											</div>
-											<div className="action-footer" >
+											<div className="action-footer">
 												<div className="skeleton-action-poinst-title"></div>
 
 												<div className="skeleton-action-poinst-icon">

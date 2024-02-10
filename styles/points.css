@@ -127,14 +127,13 @@
 	border-radius: 16px;
 	line-height: 110%;
 	letter-spacing: -0.01em;
-	background: linear-gradient(
-			0.25turn,
-			transparent,
-			var(--tg-bg),
-			transparent
-		),
+	background: linear-gradient(0.25turn, transparent, var(--tg-bg), transparent),
 		linear-gradient(var(--tg-second), var(--tg-second)),
-		radial-gradient(38px circle at 19px 19px, var(--tg-second) 50%, transparent 51%),
+		radial-gradient(
+			38px circle at 19px 19px,
+			var(--tg-second) 50%,
+			transparent 51%
+		),
 		linear-gradient(var(--tg-second), var(--tg-second));
 	background-repeat: no-repeat;
 	background-size: 315px 250px, 315px 180px, 100px 100px, 225px 30px;
@@ -171,10 +170,8 @@
 }
 
 .skeleton-action-poinst-icon {
-	
 	margin: 0;
 	padding: 0;
-
 }
 .skeleton-action-poinst-icon p {
 	width: 55px;
@@ -182,16 +179,14 @@
 	height: 25px;
 	font-weight: 700;
 	font-size: 20px;
-	;
 	border-radius: 16px;
-	background: linear-gradient(
-			0.25turn,
-			transparent,
-			var(--tg-bg),
-			transparent
-		),
+	background: linear-gradient(0.25turn, transparent, var(--tg-bg), transparent),
 		linear-gradient(var(--tg-second), var(--tg-second)),
-		radial-gradient(38px circle at 19px 19px, var(--tg-second) 50%, transparent 51%),
+		radial-gradient(
+			38px circle at 19px 19px,
+			var(--tg-second) 50%,
+			transparent 51%
+		),
 		linear-gradient(var(--tg-second), var(--tg-second));
 	background-repeat: no-repeat;
 	background-size: 315px 250px, 315px 180px, 100px 100px, 225px 30px;
@@ -246,15 +241,14 @@
 }
 
 .skeleton-action-poinst-title {
-	margin:	0px;
-	background: linear-gradient(
-			0.25turn,
-			transparent,
-			var(--tg-bg),
-			transparent
-		),
+	margin: 0px;
+	background: linear-gradient(0.25turn, transparent, var(--tg-bg), transparent),
 		linear-gradient(var(--tg-second), var(--tg-second)),
-		radial-gradient(38px circle at 19px 19px, var(--tg-second) 50%, transparent 51%),
+		radial-gradient(
+			38px circle at 19px 19px,
+			var(--tg-second) 50%,
+			transparent 51%
+		),
 		linear-gradient(var(--tg-second), var(--tg-second));
 	background-repeat: no-repeat;
 	background-size: 315px 250px, 315px 180px, 100px 100px, 225px 30px;
@@ -315,32 +309,31 @@
 	animation: refer-friend-image-emoji 0.8s both;
 }
 
-
 .bonus-card-container {
 	border-radius: 20px;
 	background-color: #7969dc;
 	width: 100%;
 	animation: refer-friend-image-emoji 0.8s both;
 	padding: 0 20px;
-  }
+}
 
-  .bonus-card-box{
+.bonus-card-box {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-  }
-  
-  .bonus-card-text,
-  .bonus-card-title {
+}
+
+.bonus-card-text,
+.bonus-card-title {
 	margin-top: 12px;
 	letter-spacing: -0.03em;
 	color: white;
 	font-size: 18px;
 	font-weight: bold;
-  }
-  .bonus-card-title{
+}
+.bonus-card-title {
 	font-weight: 300;
-  }
+}
 .refer-friend-box {
 	display: flex;
 	flex-direction: row;
@@ -389,8 +382,6 @@
 	border-radius: 99999px;
 }
 
-
-
 @keyframes refer-friend-image-emoji {
 	0% {
 		transform: scale(0.1);
@@ -412,13 +403,13 @@
 }
 
 .refer-friend-title {
-	text-align: left;
-	font-style: normal;
 	font-weight: 900;
-	font-size: 25px;
-	line-height: 110%;
+	font-size: 20px;
+	line-height: 130%;
 	letter-spacing: -0.02em;
-	display: block;
+	text-align: left;
+	margin-left: var(--space-4x);
+	color: var(--tg-color);
 }
 
 .refer-friend-title-gradient {
@@ -484,16 +475,18 @@
 	color: #7969dc;
 	cursor: pointer;
 	display: flex;
-	text-align: center;
-	justify-content: center;
+	text-align: left;
 	line-height: 150%;
 }
 
-.link-refer-svg{
+.link-refer-svg {
+	display: flex;
+	align-items: center;
+	margin-left: auto;
 }
 
-.link-refer-svg svg{
-	width: 18px;
+.link-refer-svg svg {
+	stroke-width: 2.2px;
 }
 
 .link-button-copy {
@@ -553,4 +546,168 @@
 	box-shadow: none;
 	transform: scale(0.94);
 	transition: 0.1s linear;
+}
+
+.history-bonus-box {
+	text-align: left;
+	padding: 15px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 140%;
+	border-radius: 20px;
+	background: var(--tg-second);
+	width: 100%;
+}
+
+.history-bonus-title {
+	text-align: left;
+	margin: 0;
+	font-size: 18px;
+	font-weight: 900;
+}
+.history-point {
+	display: flex;
+	align-items: center;
+	margin-left: auto;
+}
+.history-point svg {
+	stroke-width: 2.2px;
+}
+
+.history-bonus-info {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+.history-bonus-card {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	justify-content: space-between;
+}
+.history-bonus-avatar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 9999px;
+	background-color: var(--tg-bg);
+	font-size: 22px;
+	text-align: center;
+	width: 49px;
+	height: 49px;
+	flex: 0 0 49px;
+}
+
+.history-bonus-details {
+	padding-bottom: 0;
+	border-bottom: none;
+	width: 100%;
+	margin-right: 4px;
+}
+
+.history-bonus-points {
+	display: flex;
+	gap: 8px;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: space-between;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 140%;
+}
+
+.history-bonus-data {
+	display: flex;
+	gap: 8px;
+	flex-direction: row;
+	justify-content: space-between;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 140%;
+}
+
+.history-bonus-card-name {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.history-bonus-card-points {
+	font-size: 16px;
+}
+
+.history-bonus-desc {
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 140%;
+	color: var(--hint-color);
+}
+
+.history-bonus-card-date {
+	font-weight: 400;
+	font-size: 12px;
+	line-height: 140%;
+	color: var(--hint-color);
+}
+
+.referral-icon {
+	height: 24px;
+	display: inline-flex;
+	text-align: center;
+}
+.action-points-text {
+	font-weight: 700;
+	font-size: 20px;
+	letter-spacing: -0.01em;
+	line-height: 100%;
+	background: linear-gradient(
+		234deg,
+		rgba(76, 60, 175, 1) 1%,
+		rgba(76, 60, 175, 1) 9%,
+		rgba(76, 60, 175, 1) 35%,
+		rgba(76, 60, 175, 1) 60%,
+		rgba(91, 75, 190, 1) 77%,
+		rgba(106, 90, 205, 1) 91%,
+		rgba(106, 90, 205, 1) 100%
+	);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: #0000;
+	background-clip: text;
+}
+
+.referral-footer {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.referral-point {
+	display: flex;
+	align-items: center;
+	margin-left: auto; /* Это выравнивает элемент справа */
+}
+
+.action-point {
+	display: flex;
+	align-items: center;
+	margin-left: auto;
+}
+.referral-icon svg {
+	stroke-width: 2.2px;
+	color: #7969dc;
+}
+
+.refer-title {
+	text-align: left;
+	margin-left: var(--space-4x);
+	font-weight: 400;
+	margin-top: -10px;
 }

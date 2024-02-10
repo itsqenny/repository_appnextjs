@@ -1,14 +1,12 @@
-
+"use client"
 import Filter from "./Filter"
 
 const FilterPage = () => {
-	if (typeof window !== 'undefined') {
-		return (
-		  <>
+	return (
+		<>
 			<Filter />
-		  </>
-		);
-	  }
+		</>
+	)
 }
 
 export default FilterPage

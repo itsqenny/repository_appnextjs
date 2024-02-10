@@ -1,371 +1,183 @@
 "use client"
 import { useState, useEffect } from "react"
-import dynamic from 'next/dynamic';
-
-const DynamicBackButton = dynamic(() => import('@/app/UI/BackButton/BackButton'));
+import dynamic from "next/dynamic"
+const DynamicBackButton = dynamic(() =>
+	import("@/app/UI/BackButton/BackButton")
+)
+import useSWRInfinite from "swr/infinite"
 import ChangeButton from "@/app/UI/MainButton/ChangeButton"
 import FilterProduct from "./FilterProduct"
-import SkeletonProducts from "../products/SkeletonProducts"
-export default function Filter() {
-	const [productData, setProductsData] = useState([])
-	const [selectedCategories, setSelectedCategories] = useState([])
-	const [selectedSize, setSelectedSize] = useState([])
-	const [minPrice, setMinPrice] = useState("")
-	const [maxPrice, setMaxPrice] = useState("")
-	const [sortBy, setSortBy] = useState("")
-	const [filtersApplied, setFiltersApplied] = useState(false)
-	const [filteredProducts, setFilteredProducts] = useState(productData)
-	const [activeFiltersText, setActiveFiltersText] = useState("")
-	const [filtersVisible, setFiltersVisible] = useState(true)
-	useEffect(() => {
-		// Replace direct import with a fetch request
-		fetch("https://repositorydb.onrender.com/products?_page=1&_limit=50")
-			.then((response) => response.json())
-			.then((data) => {
-				setProductsData(data)
-			})
-			.catch((error) => console.error("Ошибка при получении данных:", error))
-	}, [])
+import useSWR from "swr"
+import Brand from "./FilterComponents/Brand"
+import Size from "./FilterComponents/Size"
+import Price from "./FilterComponents/Price"
+import Sort from "./FilterComponents/Sort"
 
-	if (!filteredProducts) {
-		return <SkeletonProducts />
-	}
+const fetcher = (url) => fetch(url).then((res) => res.json())
+const getKey = (
+	pageIndex,
+	previousPageData,
+	fromValue,
+	selectedSizes,
+	toValue,
+	selectedBrands,
+	fetchOn
+) => {
+	console.log("fetchOn inside getKey:", fetchOn)
 
-	const updateActiveFiltersText = () => {
-		const filters = []
+	if (previousPageData && !previousPageData.length) return null
 
-		if (selectedCategories.length > 0 || sortBy !== "") {
-			filters.push("Применены фильтры: ")
+	pageIndex = pageIndex + 1
 
-			if (sortBy === "cheap") {
-				filters.push("Недорогие")
-			} else if (sortBy === "expensive") {
-				filters.push("Дорогие")
-			} else if (sortBy === "best_seller") {
-				filters.push("Популярные")
-			}
-		} else {
-			filters.push("Применены фильтры")
-		}
-
-		if (minPrice || maxPrice) {
-			const priceRange = []
-			if (minPrice) {
-				priceRange.push(`от ${minPrice}₽`)
-			}
-			if (maxPrice) {
-				priceRange.push(`до ${maxPrice}₽`)
-			}
-			filters.push(priceRange.join(" - "))
-		}
-
-		if (selectedCategories.length > 0) {
-			filters.push(selectedCategories.join(", "))
-		}
-		if (selectedSize.length > 0) {
-			filters.push(`Размер ${selectedSize.join(", ")} (EU)`)
-		}
-
-		const filtersText = filters.length > 0 ? filters.join(" ") : ""
-		setActiveFiltersText(filtersText)
-	}
-
-	const handleFiltersChange = () => {
-		updateActiveFiltersText()
-		applyFiltersAndSort()
-		setFiltersVisible(false)
-	}
-
-	const handleCategoryChange = (category) => {
-		if (selectedCategories.includes(category)) {
-			setSelectedCategories(
-				selectedCategories.filter(
-					(selectedCategory) => selectedCategory !== category
-				)
-			)
-		} else {
-			setSelectedCategories([...selectedCategories, category])
-		}
-	}
-
-	const getUniqueCategories = (products) => {
-		const uniqueCategories = Array.from(
-			new Set(products.map((product) => product.category))
-		)
-		return uniqueCategories
-	}
-
-	const filterProductsByCategories = (products, selectedCategories) => {
-		if (selectedCategories.length === 0) {
-			return products
-		}
-		return products.filter((product) =>
-			selectedCategories.includes(product.category)
-		)
-	}
-
-	const applyFiltersAndSort = () => {
-		let updatedProducts = productData.slice()
-
-		updatedProducts = filterProductsByCategories(
-			updatedProducts,
-			selectedCategories
-		)
-
-		updatedProducts = updatedProducts.filter((product) => {
-			const price = parseFloat(product.price.replace(/\D/g, ""))
-
-			if (minPrice && maxPrice) {
-				return price >= parseFloat(minPrice) && price <= parseFloat(maxPrice)
-			} else if (minPrice) {
-				return price >= parseFloat(minPrice)
-			} else if (maxPrice) {
-				return price <= parseFloat(maxPrice)
-			}
-
-			return true
-		})
-
-		if (sortBy === "cheap") {
-			updatedProducts = updatedProducts.filter((product) => {
-				const price = parseFloat(product.price.replace(/\D/g, ""))
-				return price < 10000
-			})
-		} else if (sortBy === "best_seller") {
-			updatedProducts = updatedProducts.filter((product) => product.best_seller)
-		} else if (sortBy === "expensive") {
-			updatedProducts = updatedProducts.filter((product) => {
-				const price = parseFloat(product.price.replace(/\D/g, ""))
-				return price >= 20000
-			})
-		}
-
-		if (selectedSize.length > 0) {
-			updatedProducts = updatedProducts.filter((product) =>
-				selectedSize.some((size) => product.size.hasOwnProperty(size))
-			)
-		}
-
-		setFilteredProducts(updatedProducts)
-		setFiltersApplied(true)
-	}
-
-	const clearFilters = () => {
-		setSelectedCategories([])
-		setSelectedSize([])
-		setMinPrice("")
-		setMaxPrice("")
-		setSortBy("")
-		setFiltersApplied(false)
-		setFilteredProducts([])
-		setFiltersVisible(true)
-	}
-
-	const uniqueSize = [
-		...new Set(productData.flatMap((product) => Object.keys(product.size))),
-	]
-
-	const handleSizeChange = (size) => {
-		if (selectedSize.includes(size)) {
-			setSelectedSize((prevSizes) =>
-				prevSizes.filter((selectedSize) => selectedSize !== size)
-			)
-			console.log("Selected Sizes:", selectedSize)
-		} else {
-			setSelectedSize((prevSizes) => [...prevSizes, size])
-		}
-	}
-	const allSizes = productData.flatMap((product) => Object.keys(product.size))
-
-	// Удалите дубликаты и отсортируйте
-	const uniqueSortedSizes = [...new Set(allSizes)].sort(
-		(a, b) => parseFloat(a) - parseFloat(b)
+	return (
+		`/api/filter?limit=10&page=${pageIndex}&` +
+		(fromValue ? `_from=${fromValue}&` : "") +
+		(selectedSizes ? `_size=${selectedSizes}&` : "") +
+		(toValue ? `_to=${toValue}&` : "") +
+		(selectedBrands ? `_brand=${selectedBrands}` : "")
 	)
-
-	const uniqueCategories = getUniqueCategories(productData)
-	const handleMinPriceChange = (e) => {
-		const value = e.target.value.replace(/\D/g, "")
-		if (value.length > 7) {
-			return
+}
+export default function Filter() {
+	const brands = ["Nike", "Adidas", "Puma", "Reebok", "Supreme"]
+	const [selectedBrands, setSelectedBrands] = useState(null)
+	const [selectedSizes, setSelectedSizes] = useState(null)
+	const [selectedOption, setSelectedOption] = useState(null)
+	const [fromValue, setFromValue] = useState("")
+	const [toValue, setToValue] = useState("")
+	const [fetchOn, setFetchOn] = useState(false)
+	const selectFilter = `Применены фильтры: ${selectedBrands || " "} ${
+		selectedSizes || " "
+	} ${fromValue || " "} ${toValue || " "} ${selectedOption || " "}`
+	const handleBrandToggle = (brand) => {
+		setSelectedBrands((prevBrand) => (prevBrand === brand ? null : brand))
+	}
+	const category = "sneakers"
+	const sizes = [
+		"36",
+		"36.5",
+		"37",
+		"37.5",
+		"38",
+		"38.5",
+		"39",
+		"39.5",
+		"40",
+		"40.5",
+		"41",
+		"41.5",
+		"42",
+		"42.5",
+		"43",
+		"43.5",
+		"44",
+		"44.5",
+	]
+	const handleSizeToggle = (size) => {
+		setSelectedSizes((prevSize) => (prevSize === size ? null : size))
+	}
+	const handleInputChange = (inputType, value) => {
+		const sanitizedValue = value.replace(/\D/g, "").slice(0, 6)
+		if (inputType === "from") {
+			setFromValue(sanitizedValue)
+		} else {
+			setToValue(sanitizedValue)
 		}
-		setMinPrice(value)
+	}
+	const handleSortChange = (option) => {
+		setSelectedOption((prevOption) => (prevOption === option ? null : option))
 	}
 
-	const handleMaxPriceChange = (e) => {
-		const value = e.target.value.replace(/\D/g, "")
-		if (value.length > 7) {
-			return
+	const handleFiltered = async () => {
+		setFetchOn(true)
+	}
+
+	const { data, size, setSize, error } = useSWRInfinite(
+		(pageIndex, previousPageData) =>
+			getKey(
+				pageIndex,
+				previousPageData,
+				fromValue,
+				selectedSizes,
+				toValue,
+				selectedBrands,
+				fetchOn
+			),
+		fetcher,
+		{
+			initialSize: 1,
 		}
-		setMaxPrice(value)
+	)
+	if (data) {
+		console.log(data)
 	}
 
 	return (
 		<>
 			<DynamicBackButton />
 			<div className="filters">
-				{filtersVisible && (
-					<div className="filters-body">
-						<h2>Фильтр</h2>
-						<div className="filter-price-text">Цена, Р</div>
-						<div className="filter-price">
-							<label className="filter-input-price">
-								<div className="filter-price-label">От</div>
-								<input
-									className="filter-price-label-input"
-									type="text"
-									value={minPrice}
-									onChange={handleMinPriceChange}
-								/>
-							</label>
-							<label className="filter-input-price">
-								<div className="filter-price-label">До</div>
-								<input
-									className="filter-price-label-input"
-									type="text"
-									value={maxPrice}
-									onChange={handleMaxPriceChange}
-								/>
-							</label>
-						</div>
-						<div className="sort-price">
-							<button
-								className={`label-price ${
-									sortBy === "cheap" ? "selected" : ""
-								}`}
-								onClick={() => setSortBy("cheap")}
-							>
-								Меньше
-							</button>
-							<button
-								className={`label-price ${
-									sortBy === "best_seller" ? "selected" : ""
-								}`}
-								onClick={() => setSortBy("best_seller")}
-							>
-								Популярные
-							</button>
-							<button
-								className={`label-price ${
-									sortBy === "expensive" ? "selected" : ""
-								}`}
-								onClick={() => setSortBy("expensive")}
-							>
-								Больше
-							</button>
-						</div>
-						<div className="filters-item">
-                        <div className="filter-price-text">Бренд</div>
-							<div className="tag-filters-item">
-								{uniqueCategories.map((category) => (
-									<label className="tag-filter-button" key={category}>
-										<button
-											className={`checkbox-item ${
-												selectedCategories.includes(category) ? "selected" : ""
-											}`}
-											onClick={() => handleCategoryChange(category)}
-										>
-											<span className="checkbox-check">
-												<input
-													type="checkbox"
-													className="checkbox-check-input"
-													checked={selectedCategories.includes(category)}
-													onChange={() => handleCategoryChange(category)}
-												/>
-												<span className="checkbox-icon">
-													{selectedCategories.includes(category) ? (
-														<svg
-															viewBox="0 0 20 20"
-															fill="none"
-															xmlns="http://www.w3.org/2000/svg"
-														>
-															<path
-																d="M10 1.667c-.182 0-.36.001-.535.004l-.513.014-.25.01-.482.03-.46.038c-3.988.386-5.61 2.009-5.998 5.996l-.038.461-.028.483c-.004.081-.009.165-.011.249l-.014.513-.004.265V10c0 .182.001.36.004.535l.014.513.01.25.03.482.037.46c.387 3.988 2.01 5.61 5.997 5.998l.461.038.482.028c.082.004.165.009.25.011l.513.014.535.004.535-.004.513-.014.25-.01.482-.03.46-.037c3.988-.387 5.61-2.01 5.998-5.997l.038-.461.028-.482c.004-.082.009-.165.011-.25l.014-.513.004-.535-.004-.535-.014-.513-.01-.25-.03-.482-.037-.46c-.387-3.988-2.01-5.61-5.997-5.997l-.461-.039-.482-.028a23.59 23.59 0 0 0-.25-.011l-.513-.014-.265-.003-.27-.001Zm1.91 6.077a.833.833 0 0 1 1.248 1.1l-.069.079-3.333 3.333a.834.834 0 0 1-1.1.069l-.079-.07-1.666-1.666a.833.833 0 0 1 1.1-1.247l.078.069 1.078 1.077 2.744-2.744Z"
-																fill="currentColor"
-															></path>
-														</svg>
-													) : (
-														<svg
-															viewBox="0 0 20 20"
-															fill="none"
-															xmlns="http://www.w3.org/2000/svg"
-														>
-															<path
-																d="M10 2.5c6 0 7.5 1.5 7.5 7.5S16 17.5 10 17.5 2.5 16 2.5 10 4 2.5 10 2.5Z"
-																stroke="currentColor"
-																strokeWidth="1.5"
-																strokeLinecap="round"
-																strokeLinejoin="round"
-																fill="none"
-															></path>
-														</svg>
-													)}
-												</span>
-											</span>
-											<span className="checkbox-text">{category}</span>
-										</button>
-									</label>
-								))}
-							</div>
-						</div>
-						<div className="filters-item">
-                        <div className="filter-price-text">Размер <strong>(EU)</strong></div>
-							<div className="sort-price">
-								{uniqueSortedSizes.map((size) => (
-									<button
-										key={size}
-										className={`label-price ${
-											selectedSize.includes(size) ? "selected" : ""
-										}`}
-										onClick={() => handleSizeChange(size)}
-									>
-										{size}
-									</button>
-								))}
-							</div>
-						</div>
+				<div className="filters-body">
+					<h2>Фильтр</h2>
+					<div className="filter-price-text">Цена, Р</div>
+					<div className="filter-price">
+						<Price
+							handleInputChange={handleInputChange}
+							fromValue={fromValue}
+							toValue={toValue}
+						/>
 					</div>
-				)}
-				{filtersApplied ? (
-					<div className="active-filter-text">
-						<span>{activeFiltersText}</span>
-						<button className="active-filter-btn" onClick={clearFilters}>
-							<svg
-								viewBox="0 0 20 20"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									d="M15 5 5 15M5 5l10 10"
-									stroke="currentColor"
-									strokeWidth="1.5"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								></path>
-							</svg>
-						</button>
+					<div className="sort-price">
+						<Sort
+							handleSortChange={handleSortChange}
+							selectedOption={selectedOption}
+						/>
 					</div>
-				) : (
-					<>
-						<div className="main-button">
-							<button onClick={handleFiltersChange}>Применить фильтр</button>
-						</div>
-						{/*  */}
-						<ChangeButton handleFiltersChange={handleFiltersChange} />
-					</>
-				)}
-				{filteredProducts.length === 0 ? (
-					<p></p>
-				) : (
-					<div>
-						<div className="item-box">
-							{filteredProducts.map((product) => (
-								<FilterProduct product={product}  key={product.id} />
-							))}
-						</div>
+					<div className="filters-item">
+						<div className="filter-price-text">Бренд</div>
+						<Brand
+							selectedBrands={selectedBrands}
+							brands={brands}
+							handleBrandToggle={handleBrandToggle}
+						/>
 					</div>
-				)}
+					<div className="filters-item">
+						<div className="filter-price-text">
+							Размер <strong>(EU)</strong>
+						</div>
+						<Size
+							sizes={sizes}
+							selectedSizes={selectedSizes}
+							handleSizeToggle={handleSizeToggle}
+						/>
+					</div>
+				</div>
+
+				<div className="active-filter-text">
+					<span>{selectFilter}</span>
+					<button className="active-filter-btn">
+						<svg
+							viewBox="0 0 20 20"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M15 5 5 15M5 5l10 10"
+								stroke="currentColor"
+								strokeWidth="1.5"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+							></path>
+						</svg>
+					</button>
+				</div>
+
+				<div className="main-button">
+					<button onClick={handleFiltered}>Применить фильтр</button>
+				</div>
+				{/*  */}
+				<ChangeButton />
+
+				<FilterProduct data={data} size={size} setSize={setSize} />
 			</div>
 		</>
 	)
 }
-
