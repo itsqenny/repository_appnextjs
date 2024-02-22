@@ -178,9 +178,11 @@ export default function Filter() {
 						selectedBrands ||
 						selectedOption ? (
 							<>
+								{/* 
 								<div className="main-button">
 									<button onClick={handleFiltered}>Применить фильтр</button>
 								</div>
+								 */}
 								<ChangeButton handleFiltered={handleFiltered} />
 							</>
 						) : (
@@ -188,8 +190,6 @@ export default function Filter() {
 						)}
 					</>
 				)}
-
-				{/*  */}
 			</div>
 		</>
 	)

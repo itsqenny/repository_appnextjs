@@ -22,7 +22,7 @@ export default function ConfirmId({ data, userId }) {
 		`/api/customer/settings/?userId=${userId}`,
 		fetcher
 	)
-	console.log(`userId in confirm: ${userId}`)
+	//console.log(`userId in confirm: ${userId}`)
 	const [item, setItem] = useState(null)
 	const [size, setSize] = useState(ConfirmSize || null)
 	const [price, setPrice] = useState(ConfirmPrice || null)
@@ -33,11 +33,11 @@ export default function ConfirmId({ data, userId }) {
 	const [customerStatus, setCustomerStatus] = useState(false)
 	const [isVisible, setIsPopupVisible] = useState(false)
 	const [subsBonus, setSubsBonus] = useState(100)
-	console.log("size:", size)
+	//console.log("size:", size)
 	const resultSize = size !== null ? size : ConfirmSize
 	const sizeResult = resultSize.replace(/["']/g, "")
-	console.log("resultSize:", sizeResult)
-	console.dir(resultSize)
+	//console.log("resultSize:", sizeResult)
+	//console.dir(resultSize)
 	const message = "Чтобы продолжить покупку, необходимо заполнить данные"
 	useEffect(() => {
 		// Выполнение HTTP-запроса
@@ -204,12 +204,13 @@ export default function ConfirmId({ data, userId }) {
 
 						{!isVisible ? (
 							<>
+								{/* 
 								<div className="main-button">
 									<button onClick={onCheckout}>
 										Купить за {price !== null ? price : ConfirmPrice}₽
 									</button>
 								</div>
-
+								*/}
 								<ButtonCheckout
 									onCheckout={onCheckout}
 									price={price !== null ? price : ConfirmPrice}
