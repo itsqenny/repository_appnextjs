@@ -6,7 +6,7 @@ export async function GET(req) {
 	const userId = searchParams.get("userId")
 	const orderId = searchParams.get("order_id")
 	const res = await fetch(
-		`http://localhost:8080/api/status?userId=${userId}&order_id=${orderId}`
+		`${api}/api/status?userId=${userId}&order_id=${orderId}`
 	)
 	const items = await res.json()
 	return new Response(JSON.stringify(items))

@@ -8,7 +8,7 @@ export async function POST(req) {
 	try {
 		const body = await req.json()
 
-		const res = await fetch(`http://localhost:8080/api/payment`, {
+		const res = await fetch(`${api}/api/payment`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

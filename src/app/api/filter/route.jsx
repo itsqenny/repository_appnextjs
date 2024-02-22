@@ -8,7 +8,7 @@ export async function GET(req) {
 	const brand = searchParams.get("_brand")
 	const size = searchParams.get("_size")
 	const option = searchParams.get("_option")
-	const res = await fetch(`http://localhost:8080/api/products`)
+	const res = await fetch(`${api}/api/products`)
 	const items = await res.json()
 
 	const filteredItems = items.filter((item) => {
