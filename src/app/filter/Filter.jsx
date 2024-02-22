@@ -97,11 +97,8 @@ export default function Filter() {
 		setOnFilter(false)
 	}
 
-	const Back = useBack()
-
 	return (
 		<>
-			{Back}
 			<div className="filters">
 				{onFilter ? (
 					<>
