@@ -99,7 +99,7 @@ export default function Filter() {
 
 	return (
 		<>
-			{window && <Back />}
+			{typeof window !== "undefined" && <Back />}
 			<div className="filters">
 				{onFilter ? (
 					<>
