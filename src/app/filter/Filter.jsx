@@ -97,9 +97,17 @@ export default function Filter() {
 		setOnFilter(false)
 	}
 
+	useEffect(() => {
+		// Доступ к window или любому другому коду, специфичному для браузера
+		if (typeof window !== "undefined") {
+			// Вернуть компонент
+			// Необходимо использовать оператор return для включения JSX в компонент
+			return <Back />
+		}
+	}, [])
+
 	return (
 		<>
-			{typeof window !== "undefined" && <Back />}
 			<div className="filters">
 				{onFilter ? (
 					<>
