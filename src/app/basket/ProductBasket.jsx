@@ -10,7 +10,8 @@ export const revalidate = 0
 const ProductBasket = ({ data }) => {
 	//const userId = '204688184'
 	const { userId } = initData()
-	const initialBasketItems = data && data.basket ? data.basket.slice(0, 2) : []
+	const initialBasketItems =
+		data && data.userOrder ? data.userOrder.slice(0, 2) : []
 	const [basketItem, setBasketItem] = useState(initialBasketItems)
 
 	const handleDelete = async (item) => {
@@ -36,11 +37,7 @@ const ProductBasket = ({ data }) => {
 					href={`/order/id=${item.id}&name=${item.name}&ConfirmPrice=${item.price}&ConfirmSize=${item.size}&orderId=${item.order_id}`}
 				>
 					<div className="product-image-component">
-						
-							
-										<ProductImage item={item} />
-									
-						
+						<ProductImage item={item} />
 					</div>
 
 					<div className="product-details">
@@ -80,11 +77,11 @@ const ProductBasket = ({ data }) => {
 
 	return (
 		<>
-			{data && data.basket && data.basket && basketItem.length > 0 && (
+			{data && data.userOrder && data.userOrder.length > 0 && (
 				<div className="product-block-order">
 					<div className="product-order">
 						Оплачивается
-						{data && data.basket && data.basket.length > 2 && (
+						{data && data.userOrder && data.userOrder.length > 2 && (
 							<Link href={`/basket/`}>
 								<div className="product-order-open-all">
 									Все

@@ -30,7 +30,7 @@ export default function Products({ data, setSize, size }) {
 					loader={<>{!search && <SkeletonProducts />}</>}
 				>
 					<div className="item-box">
-						{filteredItems.map((item) => (
+						{filteredItems?.map((item) => (
 							<div className="item" key={item.id}>
 								<Link href={`/products/${item.id}`}>
 									<div className="item-img-box">

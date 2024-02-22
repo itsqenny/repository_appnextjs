@@ -3,11 +3,13 @@ import useSWR from "swr"
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function CustomerStatus({ userId, orderId }) {
+	//console.log(`userId: ${userId}`)
 	const { data, error } = useSWR(
-		`/api/customer/status?userId=${userId}&orderId=${orderId}`,
+		`/api/customer/status?userId=${userId}&order_id=${orderId}`,
 		fetcher
 	)
 
+	//console.log(data)
 	if (error) return "An error has occurred."
 	if (!data) return "Loading..."
 
@@ -20,11 +22,11 @@ export default function CustomerStatus({ userId, orderId }) {
 			text: "Оплачено",
 			color: "#31b545",
 		},
-    SENT: {
+		SENT: {
 			text: "Отправлен",
 			color: "#31b545",
 		},
-    GOING: {
+		GOING: {
 			text: "Собирается",
 			color: "#31b545",
 		},
@@ -57,7 +59,11 @@ export default function CustomerStatus({ userId, orderId }) {
 
 	// Условие для проверки статусов, которые должны изменять цвет
 	const ChangeColor1 =
-		data.status === "PAID" || data.status === "WAIT" || data.status === "SENT" || data.status === "GOING" || data.status === "CANCEL"
+		data.status === "PAID" ||
+		data.status === "WAIT" ||
+		data.status === "SENT" ||
+		data.status === "GOING" ||
+		data.status === "CANCEL"
 	const ChangeColor2 = data.status === "SENT" || data.status === "CANCEL"
 	const ChangeColor3 =
 		data.status === "TRANSITCN" ||
@@ -88,9 +94,10 @@ export default function CustomerStatus({ userId, orderId }) {
 						</svg>
 					</div>
 					<span className="status-selection-line"></span>
-					<div className="status-selection-step-inner"
-          style={ChangeColor2 ? style : null}
-          >
+					<div
+						className="status-selection-step-inner"
+						style={ChangeColor2 ? style : null}
+					>
 						<svg
 							viewBox="0 0 40 40"
 							fill="none"
@@ -106,9 +113,10 @@ export default function CustomerStatus({ userId, orderId }) {
 						</svg>
 					</div>
 					<span className="status-selection-line"></span>
-					<div className="status-selection-step-inner"
-          style={ChangeColor3 ? style : null}
-          >
+					<div
+						className="status-selection-step-inner"
+						style={ChangeColor3 ? style : null}
+					>
 						<svg
 							viewBox="0 0 20 20"
 							fill="none"
@@ -123,9 +131,10 @@ export default function CustomerStatus({ userId, orderId }) {
 						</svg>
 					</div>
 					<span className="status-selection-line"></span>
-					<div className="status-selection-step-inner"
-          style={ChangeColor4 ? style : null}
-          >
+					<div
+						className="status-selection-step-inner"
+						style={ChangeColor4 ? style : null}
+					>
 						<svg
 							viewBox="0 0 40 40"
 							fill="none"
@@ -142,7 +151,7 @@ export default function CustomerStatus({ userId, orderId }) {
 					</div>
 				</div>
 			</div>
-      <div className="product-offer-id">Заказ №{orderId}</div>
+			<div className="product-offer-id">Заказ №{orderId}</div>
 			<div className="product-offer-status">
 				<p>{statusInfo.text}</p>
 			</div>

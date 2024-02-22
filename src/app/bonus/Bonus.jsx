@@ -1,13 +1,12 @@
 "use client"
 
-
-import BonusFetcher from './BonusFetcher'
+import BonusFetcher from "./BonusFetcher"
 import initData from "../UI/useInitData/initData"
 export const revalidate = 0
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic"
 const Bonus = () => {
 	const { userId } = initData()
-	//const userId = '204688184'
+	//const userId = "204688184"
 
 	return (
 		<>

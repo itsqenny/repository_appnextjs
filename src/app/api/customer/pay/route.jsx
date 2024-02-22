@@ -7,7 +7,8 @@ export async function POST(req) {
 
 	try {
 		const body = await req.json()
-		const res = await fetch(`${api}/customer/settings/client/buy/offer/pay`, {
+
+		const res = await fetch(`http://localhost:8080/api/payment`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -17,7 +18,7 @@ export async function POST(req) {
 
 		if (res.ok) {
 			const responseBody = await res.json()
-            console.log(`response : ${JSON.stringify(responseBody)}`)
+			console.log(`response : ${JSON.stringify(responseBody)}`)
 
 			return NextResponse.json(responseBody)
 		} else {

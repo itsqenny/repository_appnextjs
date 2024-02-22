@@ -10,9 +10,9 @@ import axios from "axios"
 
 export const revalidate = 0
 const ProductBasketList = ({ data }) => {
-	const { userId } = initData();
+	const { userId } = initData()
 	//const userId = '204688184'
-	const [basketItem, setBasketItem] = useState(data.basket || [])
+	const [basketItem, setBasketItem] = useState(data.userOrder || [])
 	const handleDelete = async (item) => {
 		try {
 			// Отправляем запрос на удаление элемента с заданным order_id
@@ -82,19 +82,16 @@ const ProductBasketList = ({ data }) => {
 	))
 
 	return (
-		<> 
-		{typeof window !== "undefined" && (
-			(async () => {
-				const Back = (await import("@/app/UI/BackButton/BackButton")).default;
-				return <Back />;
-			})()
-		)}
-		<div className="product-block-order">
-			<div className="product-order">
-				Оплачивается	
+		<>
+			{typeof window !== "undefined" &&
+				(async () => {
+					const Back = (await import("@/app/UI/BackButton/BackButton")).default
+					return <Back />
+				})()}
+			<div className="product-block-order">
+				<div className="product-order">Оплачивается</div>
+				<div className="product-container">{basketItems}</div>
 			</div>
-			<div className="product-container">{basketItems}</div>
-		</div>
 		</>
 	)
 }

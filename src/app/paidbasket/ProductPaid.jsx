@@ -5,7 +5,7 @@ import ProductImage from "../basket/ProductImage"
 
 export const revalidate = 0
 const ProductPaid = ({ data }) => {
-	const initialBasketItems = data ? data.slice(0, 2) : []
+	const initialBasketItems = data ? data.userOrder.slice(0, 2) : []
 
 	const basketItems = initialBasketItems.map((item, index) => (
 		<div
@@ -39,11 +39,11 @@ const ProductPaid = ({ data }) => {
 	))
 	return (
 		<>
-			{initialBasketItems.length > 0 && (
+			{data && initialBasketItems.length > 0 && (
 				<div className="product-block-order">
 					<div className="product-order">
 						Оплачено
-						{data.length > 2 && (
+						{data && data.userOrder.length > 2 && (
 							<Link href={`/paidbasket/`}>
 								<div className="product-order-open-all">
 									Все

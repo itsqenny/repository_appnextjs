@@ -30,7 +30,7 @@ export default function SelectBonus({
 		console.error(``)
 	}
 	const handleToggle = () => {
-		if (data.bonus > 0) {
+		if (data > 0) {
 			setCredited(!isCredited)
 			let calculatedPrice
 
@@ -40,7 +40,7 @@ export default function SelectBonus({
 			} else {
 				// Вставляем пробел между числами при списании бонусов
 				calculatedPrice =
-					price.replace(/[\u00a0₽ ]/g, "").replace(",", ".") - data.bonus
+					price.replace(/[\u00a0₽ ]/g, "").replace(",", ".") - data
 				calculatedPrice = Math.max(calculatedPrice, SubsMinusInfo)
 				calculatedPrice = calculatedPrice
 					.toString()
@@ -53,7 +53,7 @@ export default function SelectBonus({
 			const difference =
 				priceNumeric -
 				parseFloat(calculatedPrice.replace(/[\u00a0₽ ]/g, "").replace(",", "."))
-			const rest = data.bonus - difference
+			const rest = data - difference
 			setRestBonus(rest)
 			setDeductBonus(difference)
 			setParentPrice(calculatedPrice)
@@ -73,7 +73,7 @@ export default function SelectBonus({
 				<div
 					className={`item-switcher-box ${isCredited ? "credited" : "debited"}`}
 					onClick={handleToggle}
-					disabled={data.bonus < 0}
+					disabled={data < 0}
 				>
 					<div
 						className={`item-switcher-active ${
@@ -107,7 +107,7 @@ export default function SelectBonus({
 								₽
 							</span>
 							<span className="item-switcher-num">
-								{!isCredited ? data.bonus : deductBonus}
+								{!isCredited ? data : deductBonus}
 							</span>
 						</div>
 					</div>

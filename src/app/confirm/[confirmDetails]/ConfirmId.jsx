@@ -22,6 +22,7 @@ export default function ConfirmId({ data, userId }) {
 		`/api/customer/settings/?userId=${userId}`,
 		fetcher
 	)
+	console.log(`userId in confirm: ${userId}`)
 	const [item, setItem] = useState(null)
 	const [size, setSize] = useState(ConfirmSize || null)
 	const [price, setPrice] = useState(ConfirmPrice || null)
@@ -32,7 +33,12 @@ export default function ConfirmId({ data, userId }) {
 	const [customerStatus, setCustomerStatus] = useState(false)
 	const [isVisible, setIsPopupVisible] = useState(false)
 	const [subsBonus, setSubsBonus] = useState(100)
-	const message = 'Чтобы продолжить покупку, необходимо заполнить данные'
+	console.log("size:", size)
+	const resultSize = size !== null ? size : ConfirmSize
+	const sizeResult = resultSize.replace(/["']/g, "")
+	console.log("resultSize:", sizeResult)
+	console.dir(resultSize)
+	const message = "Чтобы продолжить покупку, необходимо заполнить данные"
 	useEffect(() => {
 		// Выполнение HTTP-запроса
 		fetch(`/api/products/${id}`)
@@ -63,11 +69,15 @@ export default function ConfirmId({ data, userId }) {
 	const paymentDate = new Date()
 	const options = { month: "short", day: "numeric" }
 	const onCheckout = async () => {
-		if (userData && Object.values(userData).some((value) => value === null || value === undefined || value === "")) {
-			WebApp.HapticFeedback.notificationOccurred('error');
+		if (
+			userData &&
+			Object.values(userData).some(
+				(value) => value === null || value === undefined || value === ""
+			)
+		) {
+			WebApp.HapticFeedback.notificationOccurred("error")
 			setIsPopupVisible(true)
 		} else {
-			
 			setCredited(true)
 			setShowConfirmation(false)
 
@@ -95,6 +105,7 @@ export default function ConfirmId({ data, userId }) {
 				})
 
 				const responseData = await response.json()
+				console.log(`responseData: ${JSON.stringify(responseData)}`)
 				if (responseData.paymentUrl) {
 					Telegram.WebApp.openLink(responseData.paymentUrl)
 					setCustomerStatus(true)
@@ -147,7 +158,7 @@ export default function ConfirmId({ data, userId }) {
 								{name}
 								<span className="confirm-item-size">
 									{" "}
-									размер {size !== null ? size : ConfirmSize} EU
+									размер {resultSize} EU
 								</span>
 							</div>
 						</div>
@@ -162,10 +173,15 @@ export default function ConfirmId({ data, userId }) {
 												fontSize: "24px",
 												color: "var(--tg-hint)",
 											}}
-										>{`${ConfirmPrice}₽`}</del>{" "}
+										>
+											{`${ConfirmPrice} ₽`.replace(
+												/(\d)(?=(\d{3})+(?!\d))/g,
+												" $1 "
+											)}
+										</del>{" "}
 									</>
 								) : (
-									<>{ConfirmPrice}₽</>
+									<>{ConfirmPrice.replace(/\B(?=(\d{3})+(?!\d))/g, " ")}₽</>
 								)}
 							</div>
 							<div className="public-oferta">
@@ -186,24 +202,29 @@ export default function ConfirmId({ data, userId }) {
 							setSubsBonus={setSubsBonus}
 						/>
 
-						
-						{!isVisible ? 
-						(<>
-						{/* 
-						<div className="main-button">
-							<button onClick={onCheckout}>
-								Купить за {price !== null ? price : ConfirmPrice}₽
-							</button>
-						</div>
-						*/}
-						<ButtonCheckout
-							onCheckout={onCheckout}
-							price={price !== null ? price : ConfirmPrice}
-						/>
-						</>):(<>
-							<FormData isVisible={isVisible} setIsPopupVisible={setIsPopupVisible} userId={userId} user={user}/>
-						</>)}
-						
+						{!isVisible ? (
+							<>
+								<div className="main-button">
+									<button onClick={onCheckout}>
+										Купить за {price !== null ? price : ConfirmPrice}₽
+									</button>
+								</div>
+
+								<ButtonCheckout
+									onCheckout={onCheckout}
+									price={price !== null ? price : ConfirmPrice}
+								/>
+							</>
+						) : (
+							<>
+								<FormData
+									isVisible={isVisible}
+									setIsPopupVisible={setIsPopupVisible}
+									userId={userId}
+									user={user}
+								/>
+							</>
+						)}
 					</>
 				) : (
 					<>

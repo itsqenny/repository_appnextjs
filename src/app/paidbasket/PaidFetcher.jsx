@@ -5,11 +5,8 @@ import SkeletonBasket from "../basket/SkeletonBasket"
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function PaidFetcher({ userId }) {
-	const { data, error } = useSWR(
-		`/api/customer/basketpaid/${userId}`,
-		fetcher
-	)
-
+	const { data, error } = useSWR(`/api/customer/basketpaid/${userId}`, fetcher)
+	console.log(data)
 	return (
 		<>
 			{" "}

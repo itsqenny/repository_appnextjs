@@ -8,14 +8,15 @@ import Checkout from "@/app/confirm/[confirmDetails]/checkout"
 import Loading from "@/app/products/[productId]/loading"
 import initData from "@/app/UI/useInitData/initData"
 
-
 export default function ProductOffer() {
 	const params = useParams()
-	const decodedParamsString = decodeURIComponent(params.paidId);
-	const parsedParams = Object.fromEntries(new URLSearchParams(decodedParamsString))
+	const decodedParamsString = decodeURIComponent(params.paidId)
+	const parsedParams = Object.fromEntries(
+		new URLSearchParams(decodedParamsString)
+	)
 	const { id, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams
-	const {userId, queryId} = initData();
-   	//const userId = '204688184'
+	const { userId, queryId } = initData()
+	//const userId = "204688184"
 	const [item, setItem] = useState(null)
 	const [size, setSize] = useState(ConfirmSize || null)
 	const [price, setPrice] = useState(ConfirmPrice || null)
@@ -23,7 +24,7 @@ export default function ProductOffer() {
 	const [showConfirmation, setShowConfirmation] = useState(true)
 	const [paymentData, setPaymentData] = useState("WAIT")
 	const [customerStatus, setCustomerStatus] = useState(true)
-	//const userId = '1234'
+
 	useEffect(() => {
 		// Выполнение HTTP-запроса
 		fetch(`/api/products/${id}`)
@@ -50,7 +51,6 @@ export default function ProductOffer() {
 	const srcSet = widths
 		.map((width) => `${item.img}?w=${width}&q=75 ${width}w`)
 		.join(", ")
-
 
 	return (
 		<>
@@ -85,15 +85,15 @@ export default function ProductOffer() {
 						))}
 					</div>
 				</div>
-					<Checkout
-						customerStatus={customerStatus}
-						paymentData={paymentData}
-						userId={userId}
-						items={parsedParams}
-						isCredited={isCredited}
-						price={ConfirmPrice}
-						orderId={orderId}
-					/>
+				<Checkout
+					customerStatus={customerStatus}
+					paymentData={paymentData}
+					userId={userId}
+					items={parsedParams}
+					isCredited={isCredited}
+					price={ConfirmPrice}
+					orderId={orderId}
+				/>
 			</div>
 		</>
 	)
