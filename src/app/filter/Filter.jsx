@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from "react"
-import dynamic from "next/dynamic"
+export const revalidate = 0
 
 import useSWRInfinite from "swr/infinite"
 import ChangeButton from "@/app/UI/MainButton/ChangeButton"
@@ -10,7 +10,7 @@ import Size from "./FilterComponents/Size"
 import Price from "./FilterComponents/Price"
 import Sort from "./FilterComponents/Sort"
 import NotFound from "./FilterComponents/NotFound"
-import Back from "../UI/BackButton/BackButton"
+import useBack from "../UI/BackButton/Back"
 
 export default function Filter() {
 	const brands = ["Nike", "Adidas", "Puma", "Reebok", "Supreme"]
@@ -97,17 +97,11 @@ export default function Filter() {
 		setOnFilter(false)
 	}
 
-	useEffect(() => {
-		// Доступ к window или любому другому коду, специфичному для браузера
-		if (typeof window !== "undefined") {
-			// Вернуть компонент
-			// Необходимо использовать оператор return для включения JSX в компонент
-			return <Back />
-		}
-	}, [])
+	const Back = useBack()
 
 	return (
 		<>
+			{Back}
 			<div className="filters">
 				{onFilter ? (
 					<>
