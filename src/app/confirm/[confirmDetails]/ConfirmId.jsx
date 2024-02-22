@@ -124,7 +124,7 @@ export default function ConfirmId({ data, userId }) {
 			<div className="confirm-item">
 				<div className="images-slider-wrapper">
 					<div className="images-slider-images">
-						{item?.img.map((img, id) => (
+						{item?.img.slice(0, 4).map((img, id) => (
 							<div className="images-slider-image-item" key={id}>
 								<div className="image-item-wrapper">
 									<Image

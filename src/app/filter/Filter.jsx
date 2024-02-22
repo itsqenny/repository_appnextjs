@@ -10,6 +10,7 @@ import Size from "./FilterComponents/Size"
 import Price from "./FilterComponents/Price"
 import Sort from "./FilterComponents/Sort"
 import NotFound from "./FilterComponents/NotFound"
+import Back from "../UI/BackButton/BackButton"
 
 export default function Filter() {
 	const brands = ["Nike", "Adidas", "Puma", "Reebok", "Supreme"]
@@ -98,6 +99,7 @@ export default function Filter() {
 
 	return (
 		<>
+			{window && <Back />}
 			<div className="filters">
 				{onFilter ? (
 					<>
