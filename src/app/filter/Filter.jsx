@@ -22,6 +22,7 @@ export default function Filter() {
 	const [fetchOn, setFetchOn] = useState(false)
 	const [filter, setFilter] = useState([])
 	const [message, setMessage] = useState("")
+	const [progress, setProgress] = useState(false)
 	const [onFilter, setOnFilter] = useState(false)
 	const selectFilter = `Применены фильтры: ${selectedBrands || " "} ${
 		selectedSizes || " "
@@ -67,6 +68,7 @@ export default function Filter() {
 	}
 
 	const handleFiltered = async () => {
+		setProgress(true)
 		try {
 			const response = await fetch(
 				`/api/filter?` +
@@ -121,14 +123,8 @@ export default function Filter() {
 							</button>
 						</div>
 						{message}
+
 						<FilterProduct data={filter} />
-						<NotFound
-							toValue={toValue}
-							fromValue={fromValue}
-							selectedBrands={selectedBrands}
-							selectedOption={selectedOption}
-							selectedSizes={selectedSizes}
-						/>
 					</>
 				) : (
 					<>
@@ -183,8 +179,11 @@ export default function Filter() {
 								<div className="main-button">
 									<button onClick={handleFiltered}>Применить фильтр</button>
 								</div>
-								 */}
-								<ChangeButton handleFiltered={handleFiltered} />
+								*/}
+								<ChangeButton
+									handleFiltered={handleFiltered}
+									progress={progress}
+								/>
 							</>
 						) : (
 							<></>

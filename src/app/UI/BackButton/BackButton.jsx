@@ -1,16 +1,14 @@
-'use client'
+"use client"
 
 import { BackButton } from "@twa-dev/sdk/react"
-import { useRouter } from 'next/navigation'
-export const dynamic = 'force-dynamic'
-function Back(){
-   
-    return (
-    <>
+import { useRouter } from "next/navigation"
+export const dynamic = "force-dynamic"
+function Back() {
+	return (
+		<>
+			<BackButton />
+		</>
+	)
+}
 
-    <BackButton />
-    </>
-    );
-};
-
-export default Back;
+export default Back
