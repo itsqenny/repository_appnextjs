@@ -7,6 +7,7 @@ import Loading from "./loading"
 import { useParams, useRouter } from "next/navigation"
 import ButtonPayment from "@/app/UI/MainButton/ButtonPayment"
 import { BackButton } from "@twa-dev/sdk/react"
+import SkeletonProduct from "./components/SkeletonProduct"
 
 export default function ProductId() {
 	const params = useParams()
@@ -71,60 +72,68 @@ export default function ProductId() {
 	return (
 		<>
 			<BackButton />
-			<div className="full-item">
-				<div className="images-slider-wrapper">
-					<div className="images-slider-images">
-						{item?.img.slice(0, 4).map((img, id) => (
-							<div className="images-slider-image-item" key={id}>
-								<div className="image-item-wrapper">
-									<Image
-										src={img}
-										alt={`photo-${id}`}
-										width={3840}
-										height={2160}
-										srcSet={srcSet}
-										sizes="(max-width: 768px) 100vw, 50vw"
-										style={{
-											height: "100%",
-											width: "100%",
-											margin: "4% 0 5% 0",
-											objectFit: "cover",
-											WebkitUserSelect: "none",
-											MozUserSelect: "none",
-											userSelect: "none",
-											pointerEvents: "none",
-										}}
-										priority={true}
-									/>
-								</div>
+			{!item ? (
+				<>
+					<SkeletonProduct />
+				</>
+			) : (
+				<>
+					<div className="full-item">
+						<div className="images-slider-wrapper">
+							<div className="images-slider-images">
+								{item?.img.slice(0, 4).map((img, id) => (
+									<div className="images-slider-image-item" key={id}>
+										<div className="image-item-wrapper">
+											<Image
+												src={img}
+												alt={`photo-${id}`}
+												width={3840}
+												height={2160}
+												srcSet={srcSet}
+												sizes="(max-width: 768px) 100vw, 50vw"
+												style={{
+													height: "100%",
+													width: "100%",
+													margin: "4% 0 5% 0",
+													objectFit: "cover",
+													WebkitUserSelect: "none",
+													MozUserSelect: "none",
+													userSelect: "none",
+													pointerEvents: "none",
+												}}
+												priority={true}
+											/>
+										</div>
+									</div>
+								))}
 							</div>
-						))}
+						</div>
+						<div className="bg-full-item-name">
+							<div className="full-item-name">{item?.name}</div>
+						</div>
+						<div className="item-order-info">
+							<p className="full-item-price">{currentPrice}₽</p>
+							<hr />
+							<SelectSize
+								item={item}
+								onPriceClick={handlePriceChange}
+								onSizeClick={handleSizeChange}
+							/>
+						</div>
 					</div>
-				</div>
-				<div className="bg-full-item-name">
-					<div className="full-item-name">{item?.name}</div>
-				</div>
-				<div className="item-order-info">
-					<p className="full-item-price">{currentPrice}₽</p>
-					<hr />
-					<SelectSize
-						item={item}
-						onPriceClick={handlePriceChange}
-						onSizeClick={handleSizeChange}
-					/>
-				</div>
-			</div>
 
-			<div className="main-button">
-				<button onClick={handlePaymentClick}>Перейти к оплате</button>
-			</div>
-			{/**/}
+					<div className="main-button">
+						<button onClick={handlePaymentClick}>Перейти к оплате</button>
+					</div>
+					{/**/}
 
-			<ButtonPayment handlePaymentClick={handlePaymentClick} />
-			{showPopup && (
-				<div className="main-popup">
-					<div className="main-popup show">{message}</div>
-				</div>
+					<ButtonPayment handlePaymentClick={handlePaymentClick} />
+					{showPopup && (
+						<div className="main-popup">
+							<div className="main-popup show">{message}</div>
+						</div>
+					)}
+				</>
 			)}
 		</>
 	)

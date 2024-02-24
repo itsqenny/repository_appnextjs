@@ -9,7 +9,7 @@ export default function SubsFetcherId() {
 	//const { userId } = initData()
 	const userId = "204688184"
 	const { data, error } = useSWR(`/api/customer/rank/${userId}`, fetcher)
-
+	//console.log(`susbdata: ${JSON.stringify(data)}`)
 
 	const SubsTextMap = {
 		connect: {
@@ -22,7 +22,7 @@ export default function SubsFetcherId() {
 			text: "500",
 		},
 	}
-	const SubsInfo = SubsTextMap[data?.subscription] || SubsTextMap["connect"]
+	const SubsInfo = SubsTextMap[data?.userRank] || SubsTextMap["connect"]
 	const SubsMinusTextMap = {
 		connect: {
 			text: "6990",
@@ -34,29 +34,29 @@ export default function SubsFetcherId() {
 			text: "5990",
 		},
 	}
-	const SubsMinusInfo = SubsMinusTextMap[data?.subscription] || SubsTextMap["connect"]
+	const SubsMinusInfo =
+		SubsMinusTextMap[data?.userRank] || SubsTextMap["connect"]
 	const SubsPriceInfo = {
 		connect: {
-			id: '111000000',
+			id: "111000000",
 			text: "0",
 			name: "connect",
-		  },
-		  "connect+": {
-			id: '111000111',
+		},
+		"connect+": {
+			id: "111000111",
 			text: "590",
 			name: "connect+",
-		  },
-		  "connect pro": {
-			id: '111111111',
+		},
+		"connect pro": {
+			id: "111111111",
 			text: "990",
 			name: "connect pro",
-		  },
+		},
 	}
-	
+
 	return {
 		SubsInfo: SubsInfo?.text,
 		SubsMinusInfo: SubsMinusInfo?.text,
 		SubsPriceInfo,
-		
 	}
 }
