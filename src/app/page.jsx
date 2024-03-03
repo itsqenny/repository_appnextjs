@@ -7,12 +7,14 @@ import ComingSoon from "./banners/comingsoon/banner"
 import BasketItem from "./basket/basket"
 import PaidBasket from "./paidbasket/paidBasket"
 import Customer from "./customer/Customer"
+import Stories from "./stories/page"
 
 export default async function Home() {
 	return (
 		<>
 			<Customer />
 			<SearchTab />
+			<Stories />
 			<Bonus />
 			<BasketItem />
 			<PaidBasket />

@@ -28,9 +28,7 @@ export default function Checkout({
 					</>
 				) : (
 					<>
-						<div className="product-offer-status">
-							<p>Ожидается оплата...</p>
-						</div>
+						<CustomerStatus userId={userId} orderId={orderId} />
 					</>
 				)}
 				<div
