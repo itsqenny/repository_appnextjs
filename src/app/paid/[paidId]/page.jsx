@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import Back from "@/app/UI/BackButton/BackButton"
 import { useParams } from "next/navigation"
 import Checkout from "@/app/confirm/[confirmDetails]/checkout"
-import Loading from "@/app/products/[productId]/loading"
+
 import initData from "@/app/UI/useInitData/initData"
 
 export default function ProductOffer() {
@@ -42,10 +42,6 @@ export default function ProductOffer() {
 				console.error("Ошибка при загрузке продукта:", error)
 			})
 	}, [id])
-
-	if (!item) {
-		return <Loading />
-	}
 
 	const widths = [640, 750, 828, 1080, 1200, 1920, 2048, 3840]
 	const srcSet = widths

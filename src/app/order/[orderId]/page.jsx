@@ -5,17 +5,18 @@ import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
 import Back from "@/app/UI/BackButton/BackButton"
 import { useParams } from "next/navigation"
 import Checkout from "@/app/confirm/[confirmDetails]/checkout"
-import Loading from "@/app/products/[productId]/loading"
-import initData from "@/app/UI/useInitData/initData"
 
+import initData from "@/app/UI/useInitData/initData"
 
 export default function ProductOffer() {
 	const params = useParams()
-	const decodedParamsString = decodeURIComponent(params.orderId);
-	const parsedParams = Object.fromEntries(new URLSearchParams(decodedParamsString))
+	const decodedParamsString = decodeURIComponent(params.orderId)
+	const parsedParams = Object.fromEntries(
+		new URLSearchParams(decodedParamsString)
+	)
 	const { id, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams
-	const {userId, queryId} = initData();
-    //const userId = '204688184'
+	const { userId, queryId } = initData()
+	//const userId = '204688184'
 	const [item, setItem] = useState(null)
 	const [size, setSize] = useState(ConfirmSize || null)
 	const [price, setPrice] = useState(ConfirmPrice || null)
@@ -42,10 +43,6 @@ export default function ProductOffer() {
 			})
 	}, [id])
 
-	if (!item) {
-		return <Loading />
-	}
-
 	const widths = [640, 750, 828, 1080, 1200, 1920, 2048, 3840]
 	const srcSet = widths
 		.map((width) => `${item.img}?w=${width}&q=75 ${width}w`)
@@ -60,7 +57,7 @@ export default function ProductOffer() {
 			size: ConfirmSize,
 			queryId,
 			userId,
-			order_id: orderId, 
+			order_id: orderId,
 			productId: id,
 			time: time,
 			remainingBonus: remainingBonus,
@@ -126,20 +123,17 @@ export default function ProductOffer() {
 						))}
 					</div>
 				</div>
-					<Checkout
-						customerStatus={customerStatus}
-						paymentData={paymentData}
-						userId={userId}
-						items={parsedParams}
-						isCredited={isCredited}
-						price={ConfirmPrice}
-						orderId={orderId}
-					/>
+				<Checkout
+					customerStatus={customerStatus}
+					paymentData={paymentData}
+					userId={userId}
+					items={parsedParams}
+					isCredited={isCredited}
+					price={ConfirmPrice}
+					orderId={orderId}
+				/>
 			</div>
-			<ButtonCheckout
-				onCheckout={onCheckout}
-				price={ConfirmPrice}
-			/>
+			<ButtonCheckout onCheckout={onCheckout} price={ConfirmPrice} />
 		</>
 	)
 }
