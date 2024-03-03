@@ -1,17 +1,16 @@
 "use client"
 import Back from "@/app/UI/BackButton/BackButton"
-import { useState } from "react"
-import SavedButton from "@/app/UI/MainButton/SavedButton"
-import { useParams } from "next/navigation"
+import { useState, useEffect } from "react"
 import initData from "@/app/UI/useInitData/initData"
 import Link from "next/link"
 import CustomerIdRank from "./CustomerIdRank"
 import Notification from "@/app/components/popup/notification"
 import CustomerIdSettings from "./CustomerIdSettings"
 import CustomerIdPhoto from "./CustomerIdPhoto"
-
+import CustomerData from "./components/CustomerData"
 const CustomerId = ({ customerId, data, error, user }) => {
 	const [isVisible, setIsPopupVisible] = useState(false)
+	const [userData, setUserData] = useState(null)
 	const message = "В текущее время эта функция недоступна"
 	const { WebApp } = initData()
 	const showPopup = () => {
@@ -32,8 +31,53 @@ const CustomerId = ({ customerId, data, error, user }) => {
 		setIsEditing(false)
 	}
 
+	useEffect(() => {
+		// При монтировании компонента, попытайтесь загрузить данные из localStorage
+		const storedData = localStorage.getItem("form")
+		if (storedData) {
+			setForm(JSON.parse(storedData))
+		}
+	}, [])
+
+	const handleChange = (e) => {
+		const { name, value } = e.target
+		setForm((prevData) => ({
+			...prevData,
+			[name]: value,
+		}))
+	}
+
+	const handlePhoneNumberInput = (e) => {
+		const inputValue = e.target.value
+
+		const digitsOnly = inputValue.replace(/\D/g, "")
+
+		if (digitsOnly.length >= 11) {
+			// Ограничить номер 11 цифрами
+			const formattedNumber = `+${digitsOnly.slice(0, 1)}(${digitsOnly.slice(
+				1,
+				4
+			)})-${digitsOnly.slice(4, 7)}-${digitsOnly.slice(
+				7,
+				9
+			)}-${digitsOnly.slice(9, 11)}`
+
+			setForm((prevForm) => ({
+				...prevForm,
+				phoneNumber: formattedNumber,
+			}))
+		} else {
+			setForm((prevForm) => ({
+				...prevForm,
+				phoneNumber: digitsOnly,
+			}))
+		}
+	}
+
 	const handleSaveClick = async () => {
 		setIsEditing(true)
+		localStorage.setItem("form", JSON.stringify(form))
+		console.log("Сохранено:", form)
 		const postData = {
 			userId: customerId,
 			userFio: form.userFio,
@@ -41,7 +85,6 @@ const CustomerId = ({ customerId, data, error, user }) => {
 			userCity: form.userCity,
 			userAdress: form.userAdress,
 		}
-		console.log(postData)
 
 		const response = await fetch(`/api/customer/settings/`, {
 			method: "POST",
@@ -55,42 +98,15 @@ const CustomerId = ({ customerId, data, error, user }) => {
 		console.log(responseData.message)
 	}
 
-	const handleChange = (e) => {
-		setForm({
-			...form,
-			[e.target.name]: e.target.value,
+	const handleUserDataChange = (newUserData) => {
+		setUserData(newUserData)
+	}
+	//console.log(`data: ${JSON.stringify(userData)}`)
+	const handleWrite = () => {
+		Telegram?.WebApp?.openLink("https://t.me/mustnotbeempty", {
+			try_instant_view: true,
 		})
 	}
-
-	const handlePhoneNumberInput = (e) => {
-		const inputValue = e.target.value
-		// Удалить все символы, кроме цифр
-		const digitsOnly = inputValue.replace(/\D/g, "")
-
-		if (digitsOnly.length >= 11) {
-			// Ограничить номер 11 цифрами
-			const formattedNumber = `+${digitsOnly.slice(0, 1)}(${digitsOnly.slice(
-				1,
-				4
-			)})-${digitsOnly.slice(4, 7)}-${digitsOnly.slice(
-				7,
-				9
-			)}-${digitsOnly.slice(9, 11)}`
-
-			// Обновите состояние form с новым номером телефона
-			setForm((prevForm) => ({
-				...prevForm,
-				phoneNumber: formattedNumber,
-			}))
-		} else {
-			// Обновите состояние form с номером телефона без форматирования
-			setForm((prevForm) => ({
-				...prevForm,
-				phoneNumber: digitsOnly,
-			}))
-		}
-	}
-
 	return (
 		<>
 			<Back />
@@ -117,6 +133,7 @@ const CustomerId = ({ customerId, data, error, user }) => {
 							form={form}
 							userId={customerId}
 							setForm={setForm}
+							onDataChange={handleUserDataChange}
 						/>
 
 						<button
@@ -205,7 +222,7 @@ const CustomerId = ({ customerId, data, error, user }) => {
 
 						<button
 							className="btn-profile-data-info btn-profile-data"
-							onClick={showPopup}
+							onClick={handleWrite}
 						>
 							Написать
 						</button>
@@ -214,166 +231,14 @@ const CustomerId = ({ customerId, data, error, user }) => {
 				</>
 			) : (
 				<>
-					<div className="profile-data">
-						<div className="profile-data-title">Данные доставки</div>
-						<div className="profile-data-info">
-							<h2>Вид доставки</h2>
-						</div>
-						<div className="delivery-type-input">
-							<button className={`button-delivery`}>
-								{form.userAdress === "pickup" && (
-									<span className="delivery-type-item-outline">
-										<svg
-											width="135"
-											height="100"
-											fill="none"
-											xmlns="http://www.w3.org/2000/svg"
-										>
-											<rect
-												x="0.5"
-												y="0.5"
-												width="134"
-												height="99"
-												rx="19.5"
-												stroke="url(#outline_svg__a)"
-											></rect>
-											<defs>
-												<radialGradient
-													id="outline_svg__a"
-													cx="0"
-													cy="0"
-													r="1"
-													gradientUnits="userSpaceOnUse"
-													gradientTransform="rotate(-38.951 123.34 28.893) scale(146.314 152.629)"
-												>
-													<stop stopColor="#EB9C00"></stop>
-													<stop offset="0.271" stopColor="#FF4769"></stop>
-													<stop offset="0.664" stopColor="#3D50FF"></stop>
-													<stop offset="1" stopColor="#00B3FF"></stop>
-												</radialGradient>
-											</defs>
-										</svg>
-									</span>
-								)}
-								<div className="delivery-type-item-content">
-									<div className="delivery-type-title">
-										Самовывоз <br />
-										из ПВЗ
-									</div>
-									<div className="bg-delivery-type"></div>
-									<div className="delivery-type-image">
-										<img src="../../bx4bg.png" alt="" />
-									</div>
-								</div>
-							</button>
-						</div>
-						<div className="profile-data-info">
-							<h2>Данные получателя</h2>
-						</div>
-						<div className="profile-select-info">
-							<div className="profile-select-input">
-								<label className="profile-select-label">Город</label>
-								<input
-									type="text"
-									className="profile-search-value"
-									name="userCity"
-									value={form.userCity}
-									onChange={handleChange}
-								/>
-								<div className="profile-select-info-icon">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="22"
-										height="22"
-										viewBox="0 0 24 24"
-										fill="none"
-										stroke="currentColor"
-										strokeWidth="1.5"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										className="tabler-icon tabler-icon-chevron-right"
-									>
-										<path d="M9 6l6 6l-6 6"></path>
-									</svg>
-								</div>
-							</div>
-						</div>
-						<div className="profile-select-info">
-							<div className="profile-select-input">
-								<label className="profile-select-label">Адрес доставки</label>
-								<input
-									type="text"
-									className="profile-search-value"
-									name="userAdress"
-									value={form.userAdressr}
-									onChange={handleChange}
-								/>
-							</div>
-						</div>
-						<div className="profile-select-info">
-							<div className="profile-select-input">
-								<label className="profile-select-label">
-									Фамилия, имя и очетство
-								</label>
-								<input
-									type="text"
-									className="profile-search-value"
-									name="userFio"
-									value={form.userFio}
-									onChange={handleChange}
-								/>
-								<div className="profile-select-info-icon">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="22"
-										height="22"
-										viewBox="0 0 24 24"
-										fill="none"
-										stroke="currentColor"
-										strokeWidth="1.5"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										className="tabler-icon tabler-icon-chevron-right"
-									>
-										<path d="M9 6l6 6l-6 6"></path>
-									</svg>
-								</div>
-							</div>
-							<div className="profile-select-input">
-								<label className="profile-select-label">Телефон</label>
-								<input
-									type="text"
-									className="profile-search-value"
-									name="phoneNumber"
-									value={form.phoneNumber}
-									onChange={handlePhoneNumberInput}
-								/>
-								<div className="profile-select-info-icon">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="22"
-										height="22"
-										viewBox="0 0 24 24"
-										fill="none"
-										stroke="currentColor"
-										strokeWidth="1.5"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										className="tabler-icon tabler-icon-chevron-right"
-									>
-										<path d="M9 6l6 6l-6 6"></path>
-									</svg>
-								</div>
-							</div>
-						</div>
-					</div>
-					{/* 
-					<div 
-					className="main-button">
-						<button onClick={handleSaveClick}>Сохранить</button>
-					</div>
-					*/}
-					<SavedButton handleSaveClick={handleSaveClick} />
+					<CustomerData
+						customerId={customerId}
+						userData={userData}
+						form={form}
+						handleChange={handleChange}
+						handlePhoneNumberInput={handlePhoneNumberInput}
+						handleSaveClick={handleSaveClick}
+					/>
 				</>
 			)}
 		</>

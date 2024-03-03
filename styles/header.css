@@ -175,7 +175,7 @@
 	transition: transform 0.15s linear;
 	animation: status-both 0.8s both;
 	flex: 0 1;
-	background: var(--tg-hint);
+	background: #292929;
 }
 .connect-pro-type {
 	background: linear-gradient(-100deg, var(--tg-text), var(--tg-hint));

@@ -1,3 +1,4 @@
+"use client"
 import useSWR from "swr"
 import CustomerId from "./CustomerId"
 const fetcher = (url) => fetch(url).then((res) => res.json())

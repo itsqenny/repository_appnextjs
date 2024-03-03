@@ -2,9 +2,11 @@ import useSWR from "swr"
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export const revalidate = 0
-export default function CustomerIdSettings({ userId, form }) {
+export default function CustomerIdSettings({ userId, form, onDataChange }) {
 	const { data, error } = useSWR(`/api/customer/settings/${userId}`, fetcher)
-	console.log(data)
+	if (data) {
+		onDataChange(data)
+	}
 
 	return (
 		<>
@@ -16,9 +18,9 @@ export default function CustomerIdSettings({ userId, form }) {
 				</span>
 			</div>
 			<div className="profile-data-info">
-				<span style={{ textAlign: "left" }}>Телефон</span>
+				<span style={{ textAlign: "left" }}>Адрес доставки</span>
 				<span style={{ textAlign: "right" }}>
-					{form?.phoneNumber || data?.phoneNumber || "Не указан"}
+					{form?.userAdress || data?.userAdress || "Не указан"}
 				</span>
 			</div>
 			<div className="profile-data-info">
@@ -28,9 +30,9 @@ export default function CustomerIdSettings({ userId, form }) {
 				</span>
 			</div>
 			<div className="profile-data-info">
-				<span style={{ textAlign: "left" }}>Адрес доставки</span>
+				<span style={{ textAlign: "left" }}>Телефон</span>
 				<span style={{ textAlign: "right" }}>
-					{form?.userAdress || data?.userAdress || "Не указан"}
+					{form?.phoneNumber || data?.phoneNumber || "Не указан"}
 				</span>
 			</div>
 		</>
