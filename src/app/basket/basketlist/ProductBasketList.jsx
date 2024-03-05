@@ -9,7 +9,7 @@ import { useState } from "react"
 import axios from "axios"
 export const dynamic = "force-dynamic"
 export const revalidate = 0
-const Back = Dynamic(() => import("../UI/BackButton/BackButton"))
+const Back = Dynamic(() => import("../../UI/BackButton/BackButton"))
 const ProductBasketList = ({ data }) => {
 	const { userId } = initData()
 	//const userId = "204688184"
