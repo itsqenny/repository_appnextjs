@@ -9,7 +9,8 @@ import { useState } from "react"
 import axios from "axios"
 export const dynamic = "force-dynamic"
 export const revalidate = 0
-const Back = Dynamic(() => import("../UI/BackButton/BackButton"))
+
+import { BackButton } from "@twa-dev/sdk/react"
 const ProductBasketList = ({ data }) => {
 	const { userId } = initData()
 	//const userId = "204688184"
@@ -83,7 +84,7 @@ const ProductBasketList = ({ data }) => {
 
 	return (
 		<>
-			<Back />
+			<BackButton />
 			<div className="product-block-order">
 				<div className="product-order">Оплачивается</div>
 				<div className="product-container">{basketItems}</div>
