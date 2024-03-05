@@ -10,8 +10,8 @@ export default function CustomerStatus({ userId, orderId }) {
 	)
 
 	//console.log(data)
-	if (error) return "An error has occurred."
-	if (!data) return "Loading..."
+	if (error) return ""
+	if (!data) return ""
 
 	const statusTextMap = {
 		WAIT: {

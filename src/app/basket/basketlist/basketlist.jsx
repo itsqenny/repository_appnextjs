@@ -4,13 +4,12 @@ import axios from "axios"
 import BasketListFetcher from "./BasketListFetcher"
 import initData from "../../UI/useInitData/initData"
 
-
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic"
 
 const BasketListItem = () => {
 	const [basketData, setBasketData] = useState([])
-	//const { userId } = initData()
-	const userId = '204688184'
+	const { userId } = initData()
+	//const userId = "204688184"
 	const handleDelete = async (productId, order_id) => {
 		setBasketData((prevBasketData) =>
 			prevBasketData.filter((item) => item.order_id !== productId)
@@ -31,7 +30,7 @@ const BasketListItem = () => {
 			console.error("Ошибка при удалении товара:", error)
 		}
 	}
-	const isBrowser = typeof window !== "undefined";
+
 	return (
 		<>
 			<BasketListFetcher userId={userId} />

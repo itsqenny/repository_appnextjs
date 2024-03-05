@@ -11,12 +11,11 @@ const Subscription = () => {
 	const { WebApp, userId, queryId } = initData()
 	//const userId = "204688184"
 	//const queryId = 'acsdoasdAWQc12351'
-	
 
 	const SubsBuy = async (name, text, id) => {
-		console.log(text,name,id)
-		console.log(`text:${text}, name:${name}, id: ${id}`)
-		
+		//console.log(text, name, id)
+		//console.log(`text:${text}, name:${name}, id: ${id}`)
+
 		const SubsData = {
 			productId: name,
 			queryId,
@@ -60,9 +59,9 @@ const Subscription = () => {
 					<div className="connect-classic">connect</div>
 					<p className="connect-free">Бесплатно</p>
 					<ul className="features-list">
-						<li className="feature-item">Кэшбэк с покупки (1000 рублей)</li>
+						<li className="feature-item">Начислим 100 ₽ с покупки</li>
 						<li className="feature-item">
-							Лимит на списание бонусов (до 5990)
+							Спишем все бонусы на сумму покупки до 6990 ₽
 						</li>
 					</ul>
 				</div>
@@ -73,15 +72,12 @@ const Subscription = () => {
 					<div className="connect-plus">connect+</div>
 					<p className="connect-plus-price">590 ₽</p>
 					<ul className="features-list">
-						<li className="feature-item">Повышенный кэшбэк (+15%)</li>
+						<li className="feature-item">Начислим 300 ₽ с покупки</li>
 						<li className="feature-item">
 							Эксклюзивный доступ к новинкам и акциям
 						</li>
 						<li className="feature-item">
-							Дополнительные предложения и скидки
-						</li>
-						<li className="feature-item">
-							Лимит на списание бонусов (до 4990)
+							Спишем все бонусы на сумму покупки до 6490 ₽
 						</li>
 					</ul>
 					{SubsInfo === "300" || SubsInfo === "500" ? (
@@ -107,7 +103,7 @@ const Subscription = () => {
 					<div className="connect-pro">connect pro</div>
 					<p className="connect-pro-price">990 ₽</p>
 					<ul className="features-list">
-						<li className="feature-item">Повышенный кэшбэк (+25%)</li>
+						<li className="feature-item">Начислим 500 ₽ с покупки</li>
 						<li className="feature-item">
 							Эксклюзивный доступ к новинкам и акциям
 						</li>
@@ -115,7 +111,7 @@ const Subscription = () => {
 							Дополнительные предложения и скидки
 						</li>
 						<li className="feature-item">
-							Лимит на списание бонусов (до 3990)
+							Спишем все бонусы на сумму покупки до 5990 ₽{" "}
 						</li>
 					</ul>
 					{SubsInfo === "500" ? (

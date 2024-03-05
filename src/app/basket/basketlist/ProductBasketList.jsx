@@ -2,23 +2,23 @@
 
 import Image from "next/image"
 import Link from "next/link"
-
+import Dynamic from "next/dynamic"
 import initData from "@/app/UI/useInitData/initData"
 import ProductListImage from "./ProductListImage"
 import { useState } from "react"
 import axios from "axios"
-
+export const dynamic = "force-dynamic"
 export const revalidate = 0
+const Back = Dynamic(() => import("../UI/BackButton/BackButton"))
 const ProductBasketList = ({ data }) => {
 	const { userId } = initData()
-	//const userId = '204688184'
+	//const userId = "204688184"
 	const [basketItem, setBasketItem] = useState(data.userOrder || [])
+
 	const handleDelete = async (item) => {
 		try {
 			// Отправляем запрос на удаление элемента с заданным order_id
-			await axios.get(
-				`https://crm.zipperconnect.space/customers/user/basket/delete/item?userId=${userId}&productId=${item.id}&orderId=${item.order_id}`
-			)
+			await axios.get(`/api/delete?_userId=${userId}&_orderId=${item.order_id}`)
 
 			// Update the state by filtering out the deleted item
 			setBasketItem((prevItems) =>
@@ -83,11 +83,7 @@ const ProductBasketList = ({ data }) => {
 
 	return (
 		<>
-			{typeof window !== "undefined" &&
-				(async () => {
-					const Back = (await import("@/app/UI/BackButton/BackButton")).default
-					return <Back />
-				})()}
+			<Back />
 			<div className="product-block-order">
 				<div className="product-order">Оплачивается</div>
 				<div className="product-container">{basketItems}</div>

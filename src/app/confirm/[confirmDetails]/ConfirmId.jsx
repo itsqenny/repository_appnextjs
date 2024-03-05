@@ -12,6 +12,7 @@ import SelectBonus from "./SelectBonus"
 import useSWR from "swr"
 import FormData from "@/app/components/popup/FormData"
 import SkeletonProduct from "../../products/[productId]/components/SkeletonProduct"
+import StoriesBanner from "@/app/stories/components/StoriesBanner"
 const fetcher = (url) => fetch(url).then((res) => res.json())
 export default function ConfirmId({ data, userId }) {
 	const params = useParams()
@@ -204,13 +205,12 @@ export default function ConfirmId({ data, userId }) {
 
 								{!isVisible ? (
 									<>
-										{/* 
 										<div className="main-button">
 											<button onClick={onCheckout}>
 												Купить за {price !== null ? price : ConfirmPrice}₽
 											</button>
 										</div>
-										*/}
+										{/* */}
 										<ButtonCheckout
 											onCheckout={onCheckout}
 											price={price !== null ? price : ConfirmPrice}
@@ -241,6 +241,7 @@ export default function ConfirmId({ data, userId }) {
 							</>
 						)}
 					</div>
+					<StoriesBanner />
 				</>
 			)}
 		</>

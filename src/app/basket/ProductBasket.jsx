@@ -8,19 +8,16 @@ import { useState } from "react"
 
 export const revalidate = 0
 const ProductBasket = ({ data }) => {
-	//const userId = '204688184'
-	const { userId } = initData()
+	const userId = "204688184"
+	//const { userId } = initData()
 	const initialBasketItems =
 		data && data.userOrder ? data.userOrder.slice(0, 2) : []
 	const [basketItem, setBasketItem] = useState(initialBasketItems)
 
 	const handleDelete = async (item) => {
-		const api = process.env.API_URL
 		try {
 			// Отправляем запрос на удаление элемента с заданным order_id
-			await axios.get(
-				`${api}/customers/user/basket/delete/item?userId=${userId}&productId=${item.id}&orderId=${item.order_id}`
-			)
+			await axios.get(`/api/delete?_userId=${userId}&_orderId=${item.order_id}`)
 
 			// Update the state by filtering out the deleted item
 			setBasketItem((prevItems) =>

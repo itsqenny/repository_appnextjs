@@ -7,6 +7,7 @@ import { useParams, useRouter } from "next/navigation"
 import ButtonPayment from "@/app/UI/MainButton/ButtonPayment"
 import { BackButton } from "@twa-dev/sdk/react"
 import SkeletonProduct from "./components/SkeletonProduct"
+import StoriesBanner from "@/app/stories/components/StoriesBanner"
 
 export default function ProductId() {
 	const params = useParams()
@@ -134,6 +135,7 @@ export default function ProductId() {
 					)}
 				</>
 			)}
+			<StoriesBanner />
 		</>
 	)
 }

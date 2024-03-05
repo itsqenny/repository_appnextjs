@@ -5,8 +5,10 @@ import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
 import Back from "@/app/UI/BackButton/BackButton"
 import { useParams } from "next/navigation"
 import Checkout from "@/app/confirm/[confirmDetails]/checkout"
-
+import StoriesView from "@/app/stories/components/StoriesView"
 import initData from "@/app/UI/useInitData/initData"
+import Stories from "@/app/stories/page"
+import StoriesBanner from "@/app/stories/components/StoriesBanner"
 
 export default function ProductOffer() {
 	const params = useParams()
@@ -16,7 +18,7 @@ export default function ProductOffer() {
 	)
 	const { id, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams
 	const { userId, queryId } = initData()
-	//const userId = '204688184'
+	//const userId = "204688184"
 	const [item, setItem] = useState(null)
 	const [size, setSize] = useState(ConfirmSize || null)
 	const [price, setPrice] = useState(ConfirmPrice || null)
@@ -45,7 +47,7 @@ export default function ProductOffer() {
 
 	const widths = [640, 750, 828, 1080, 1200, 1920, 2048, 3840]
 	const srcSet = widths
-		.map((width) => `${item.img}?w=${width}&q=75 ${width}w`)
+		.map((width) => `${item?.img}?w=${width}&q=75 ${width}w`)
 		.join(", ")
 
 	const onCheckout = async () => {
@@ -96,7 +98,7 @@ export default function ProductOffer() {
 			<div className="confirm-item">
 				<div className="images-slider-wrapper">
 					<div className="images-slider-images">
-						{item.img.map((img, id) => (
+						{item?.img?.slice(0, 4).map((img, id) => (
 							<div className="images-slider-image-item" key={id}>
 								<div className="image-item-wrapper">
 									<Image
@@ -133,7 +135,9 @@ export default function ProductOffer() {
 					orderId={orderId}
 				/>
 			</div>
+
 			<ButtonCheckout onCheckout={onCheckout} price={ConfirmPrice} />
+			<StoriesBanner />
 		</>
 	)
 }

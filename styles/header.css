@@ -45,12 +45,12 @@
 	align-items: center;
 	padding: 1px 4px;
 	border-radius: 5px;
-	color: var(--tg-text);
+	color: #000;
 	font-weight: 200;
 	font-size: 12px;
 	line-height: 110%;
 	letter-spacing: 0.04em;
-	background: var(--tg-bg);
+	background: #fff;
 }
 
 .skeleton-usercard-rank {
@@ -108,12 +108,12 @@
 	align-items: center;
 	padding: 1px 4px;
 	border-radius: 5px;
-	color: #fff;
+	color: var(--tg-bg);
 	font-weight: 200;
 	font-size: 12px;
 	line-height: 110%;
 	letter-spacing: 0.04em;
-	background: var(--tg-hint);
+	background: var(--tg-text);
 }
 
 .usercard-status {
@@ -122,12 +122,12 @@
 	align-items: center;
 	padding: 1px 5px;
 	border-radius: 5px;
-	color: var(--tg-text);
+	color: #000;
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 130%;
 	white-space: nowrap;
-	background: var(--tg-bg);
+	background: #fff;
 	outline: unset;
 	transition: transform 0.15s linear;
 	animation: status-both 0.8s both;
