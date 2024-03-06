@@ -166,7 +166,7 @@
 	align-items: center;
 	padding: 1px 5px;
 	border-radius: 5px;
-	color: #fff;
+	color: var(--tg-bg);
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 130%;
@@ -175,7 +175,7 @@
 	transition: transform 0.15s linear;
 	animation: status-both 0.8s both;
 	flex: 0 1;
-	background: #292929;
+	background: var(--tg-text);
 }
 .connect-pro-type {
 	background: linear-gradient(-100deg, var(--tg-text), var(--tg-hint));

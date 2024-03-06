@@ -163,7 +163,7 @@ const CustomerId = ({ customerId, data, error, user }) => {
 									style={{
 										marginLeft: "0px",
 										fontSize: "16px",
-										background: "var(--tg-second)",
+										background: "#f5f5f5",
 									}}
 								>
 									connect
@@ -228,6 +228,7 @@ const CustomerId = ({ customerId, data, error, user }) => {
 						</button>
 						<Notification isVisible={isVisible} message={message} />
 					</div>
+					<footer> beta 9.02</footer>
 				</>
 			) : (
 				<>
