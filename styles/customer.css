@@ -323,7 +323,7 @@
 }
 .subscription-container {
 	margin-top: 8px;
-	border: 2px solid var(--tg-text);
+	border: 2px solid #f5f5f5;
 	border-radius: 15px;
 	padding: 20px;
 	position: relative;
