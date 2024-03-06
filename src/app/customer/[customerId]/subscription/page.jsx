@@ -15,7 +15,8 @@ const Subscription = () => {
 	const SubsBuy = async (name, text, id) => {
 		//console.log(text, name, id)
 		//console.log(`text:${text}, name:${name}, id: ${id}`)
-
+		const paymentDate = new Date()
+		const options = { month: "short", day: "numeric" }
 		const SubsData = {
 			productId: name,
 			queryId,
@@ -23,6 +24,12 @@ const Subscription = () => {
 			name: text,
 			userId,
 			order_id: name,
+			userBonus: 0,
+			size: 0,
+			time: paymentDate.toLocaleDateString("ru-RU", options),
+			remainingBonus: 0,
+			saveBonus: 0,
+			newBonus: 0,
 		}
 
 		try {
@@ -59,10 +66,11 @@ const Subscription = () => {
 					<div className="connect-classic">connect</div>
 					<p className="connect-free">Бесплатно</p>
 					<ul className="features-list">
-						<li className="feature-item">Начислим 100 ₽ с покупки</li>
+						<li className="feature-item">💎 Начислим 100 ₽ с покупки</li>
 						<li className="feature-item">
-							Спишем все бонусы на сумму покупки до 6990 ₽
+							🛒 Спишем все бонусы на сумму покупки
 						</li>
+						<li className="feature-item">до 6990 ₽</li>
 					</ul>
 				</div>
 				<div
@@ -72,13 +80,13 @@ const Subscription = () => {
 					<div className="connect-plus">connect+</div>
 					<p className="connect-plus-price">590 ₽</p>
 					<ul className="features-list">
-						<li className="feature-item">Начислим 300 ₽ с покупки</li>
+						<li className="feature-item">💎 Начислим 300 ₽ с покупки</li>
+						<li className="feature-item">🔐 Эксклюзивный доступ к новинкам</li>
+						<li className="feature-item">и акциям</li>
 						<li className="feature-item">
-							Эксклюзивный доступ к новинкам и акциям
+							🛒 Спишем все бонусы на сумму покупки
 						</li>
-						<li className="feature-item">
-							Спишем все бонусы на сумму покупки до 6490 ₽
-						</li>
+						<li className="feature-item">до 6490 ₽</li>
 					</ul>
 					{SubsInfo === "300" || SubsInfo === "500" ? (
 						<></>
@@ -103,16 +111,16 @@ const Subscription = () => {
 					<div className="connect-pro">connect pro</div>
 					<p className="connect-pro-price">990 ₽</p>
 					<ul className="features-list">
-						<li className="feature-item">Начислим 500 ₽ с покупки</li>
+						<li className="feature-item">💎 Начислим 500 ₽ с покупки</li>
+						<li className="feature-item">🔐 Эксклюзивный доступ к новинкам</li>
+						<li className="feature-item">и акциям</li>
 						<li className="feature-item">
-							Эксклюзивный доступ к новинкам и акциям
+							⚙️ Дополнительные предложения и скидки
 						</li>
 						<li className="feature-item">
-							Дополнительные предложения и скидки
+							🛒 Спишем все бонусы на сумму покупки
 						</li>
-						<li className="feature-item">
-							Спишем все бонусы на сумму покупки до 5990 ₽{" "}
-						</li>
+						<li className="feature-item">до 5990 ₽</li>
 					</ul>
 					{SubsInfo === "500" ? (
 						<></>
