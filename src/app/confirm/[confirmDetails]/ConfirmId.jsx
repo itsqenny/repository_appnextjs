@@ -205,12 +205,13 @@ export default function ConfirmId({ data, userId }) {
 
 								{!isVisible ? (
 									<>
+										{/* 
 										<div className="main-button">
 											<button onClick={onCheckout}>
 												Купить за {price !== null ? price : ConfirmPrice}₽
 											</button>
 										</div>
-										{/* */}
+										*/}
 										<ButtonCheckout
 											onCheckout={onCheckout}
 											price={price !== null ? price : ConfirmPrice}

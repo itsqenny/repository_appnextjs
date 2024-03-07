@@ -19,17 +19,11 @@ const Subscription = () => {
 		const options = { month: "short", day: "numeric" }
 		const SubsData = {
 			productId: name,
-			queryId,
 			price: id,
 			name: text,
 			userId,
 			order_id: name,
-			userBonus: 0,
-			size: 0,
 			time: paymentDate.toLocaleDateString("ru-RU", options),
-			remainingBonus: 0,
-			saveBonus: 0,
-			newBonus: 0,
 		}
 
 		try {
@@ -107,7 +101,11 @@ const Subscription = () => {
 						</>
 					)}
 				</div>
-				<div className="subscription-container" style={{ marginTop: "30px" }}>
+
+				<div
+					className="subscription-container"
+					style={{ border: "2px solid var(--tg-text)", marginTop: "30px" }}
+				>
 					<div className="connect-pro">connect pro</div>
 					<p className="connect-pro-price">990 ₽</p>
 					<ul className="features-list">
