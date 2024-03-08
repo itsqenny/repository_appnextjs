@@ -91,7 +91,13 @@ export default function Stories() {
 							</div>
 						</div>
 						<div className="Story-item-title" style={{ color: "#fff" }}>
-							Что умеет Zipper Store?
+							Что умеет
+						</div>
+						<div
+							className="Story-item-title"
+							style={{ color: "#fff", fontSize: "10px", marginTop: "2px" }}
+						>
+							<strong>WORLDSTUFF?</strong>
 						</div>
 					</div>
 				</button>
@@ -131,7 +137,10 @@ export default function Stories() {
 								src="../../refer.png"
 							/>
 						</div>
-						<div className="Story-item-title">Зови друзей! +500₽ </div>
+						<div className="Story-item-title">Зови друзей!</div>
+						<div className="Story-item-title">
+							<strong>+500₽</strong>{" "}
+						</div>
 					</div>
 				</button>
 

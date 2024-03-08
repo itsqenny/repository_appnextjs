@@ -21,7 +21,7 @@ const CopyLink = ({ isCopied, userId, handleCopyClick }) => {
 							></path>
 						</svg>
 					</div>
-					<div className="referral-points-text">zipperstore_bot/{userId}</div>
+					<div className="referral-points-text">worldstuffru_bot/{userId}</div>
 					<div className="referral-point" onClick={handleCopyClick}>
 						{isCopied ? (
 							<>

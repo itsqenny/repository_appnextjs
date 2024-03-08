@@ -15,7 +15,7 @@ const bonusId = () => {
 	const handleCopyClick = async () => {
 		try {
 			await navigator.clipboard.writeText(
-				`https://t.me/zipperstore_bot?start=${userId}`
+				`https://t.me/WORLDSTUFFRU_BOT?start=${userId}`
 			)
 			setIsCopied(true)
 		} catch (err) {

@@ -69,7 +69,7 @@ export default function SelectBonus({
 	return (
 		<>
 			<div className="item-toggle-box">
-				<div className="item-toggle-box-title">Бонусы Zipperapp</div>
+				<div className="item-toggle-box-title">Бонусы WORLDSTUFF</div>
 				<div
 					className={`item-switcher-box ${isCredited ? "credited" : "debited"}`}
 					onClick={handleToggle}

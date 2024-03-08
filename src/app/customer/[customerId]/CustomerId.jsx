@@ -228,7 +228,7 @@ const CustomerId = ({ customerId, data, error, user }) => {
 						</button>
 						<Notification isVisible={isVisible} message={message} />
 					</div>
-					<footer> beta 9.02</footer>
+					<footer> WORLDSTUFF beta 9.02</footer>
 				</>
 			) : (
 				<>
