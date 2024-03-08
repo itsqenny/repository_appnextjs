@@ -1,4 +1,3 @@
-
 import { Inter } from "next/font/google"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "../../styles/customer.css"
@@ -18,7 +17,7 @@ import "../../styles/basket.css"
 import Head from "next/head"
 import Script from "next/script"
 import ClientSideScrollRestorer from "./ClientSideScrollRestorer"
-
+import { TmaSDKLoader } from "./UI/tmaSDKLoader/TmaSDKLoader"
 const inter = Inter({ subsets: ["latin"] })
 export const revalidate = 1
 
@@ -34,15 +33,15 @@ export const viewport = {
 	userScalable: 1,
 	interactiveWidget: "resizes-visual",
 	userScalable: "no",
-
 }
 export default function RootLayout({ children }) {
-	const theme = 'telegram-white telegram-black telegram-hint telegram-link telegram-primary telegram-primary-text telegram-secondary-white'
-	const css = `${inter.className} ${theme}`;
-	
+	const theme =
+		"telegram-white telegram-black telegram-hint telegram-link telegram-primary telegram-primary-text telegram-secondary-white"
+	const css = `${inter.className}`
+
 	return (
-		<html lang="ru" class="colors" suppressHydrationWarning>
-			<body className={css} suppressHydrationWarning={true}>
+		<html lang="ru">
+			<body className={inter.className}>
 				<Script
 					id="Telegram WebApp"
 					type="text/javascript"
@@ -52,8 +51,7 @@ export default function RootLayout({ children }) {
 					async
 				/>
 				<ClientSideScrollRestorer />
-				{children}
-
+				<TmaSDKLoader>{children}</TmaSDKLoader>
 				<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 				<script>eruda.init();</script>
 			</body>

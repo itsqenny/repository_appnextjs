@@ -1,12 +1,15 @@
+import { useEffect } from "react"
 import useSWR from "swr"
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export const revalidate = 0
 export default function CustomerIdSettings({ userId, form, onDataChange }) {
 	const { data, error } = useSWR(`/api/customer/settings/${userId}`, fetcher)
-	if (data) {
-		onDataChange(data)
-	}
+	useEffect(() => {
+		if (data) {
+			onDataChange(data)
+		}
+	}, [data, onDataChange])
 
 	return (
 		<>
