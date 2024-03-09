@@ -1,3 +1,4 @@
+"use client"
 import ProductsPage from "./products/page"
 import CatalogTab from "./components/CatalogTab"
 import SearchTab from "./components/SearchTab"
@@ -9,7 +10,7 @@ import PaidBasket from "./paidbasket/paidBasket"
 import Customer from "./customer/Customer"
 import Stories from "./stories/page"
 
-export default async function Home() {
+export default function Home() {
 	return (
 		<>
 			<Customer />
