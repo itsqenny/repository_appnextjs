@@ -27,7 +27,12 @@ function SDKInitialState() {
 export function TmaSDKLoader({ children }) {
 	return (
 		<SDKProvider
-			options={{ cssVars: true, acceptCustomStyles: true, async: true }}
+			options={{
+				cssVars: true,
+				acceptCustomStyles: true,
+				async: true,
+				timeout: 10000,
+			}}
 		>
 			<DisplayGate
 				error={SDKProviderError}
