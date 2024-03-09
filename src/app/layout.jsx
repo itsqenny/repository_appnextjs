@@ -35,10 +35,6 @@ export const viewport = {
 	userScalable: "no",
 }
 export default function RootLayout({ children }) {
-	const theme =
-		"telegram-white telegram-black telegram-hint telegram-link telegram-primary telegram-primary-text telegram-secondary-white"
-	const css = `${inter.className}`
-
 	return (
 		<html lang="ru">
 			<body className={inter.className}>
@@ -52,8 +48,8 @@ export default function RootLayout({ children }) {
 				/>
 				<ClientSideScrollRestorer />
 				<TmaSDKLoader>{children}</TmaSDKLoader>
-				<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-				<script>eruda.init();</script>
+				{/*<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+				<script>eruda.init();</script>*/}
 			</body>
 		</html>
 	)
