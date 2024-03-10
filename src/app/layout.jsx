@@ -38,16 +38,16 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="ru">
 			<body className={inter.className}>
-				{/*<Script
+				<ClientSideScrollRestorer />
+				<TmaSDKLoader>{children}</TmaSDKLoader>
+				<Script
 					id="Telegram WebApp"
 					type="text/javascript"
 					src="https://telegram.org/js/telegram-web-app.js"
 					strategy="beforeInteractive"
 					defer
 					async
-				/>*/}
-				<ClientSideScrollRestorer />
-				<TmaSDKLoader>{children}</TmaSDKLoader>
+				/>
 				{/*<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 				<script>eruda.init();</script>*/}
 			</body>
