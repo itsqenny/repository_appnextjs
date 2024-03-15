@@ -17,6 +17,7 @@ import "../../styles/basket.css"
 import Head from "next/head"
 import Script from "next/script"
 import ClientSideScrollRestorer from "./ClientSideScrollRestorer"
+import Bin from "./bin/Bin"
 import { TmaSDKLoader } from "./UI/tmaSDKLoader/TmaSDKLoader"
 const inter = Inter({ subsets: ["latin"] })
 export const revalidate = 1
@@ -39,7 +40,8 @@ export default function RootLayout({ children }) {
 		<html lang="ru">
 			<body className={inter.className}>
 				<ClientSideScrollRestorer />
-				<TmaSDKLoader>{children}</TmaSDKLoader>
+
+				{/*<Bin />*/}
 				<Script
 					id="Telegram WebApp"
 					type="text/javascript"
@@ -48,6 +50,7 @@ export default function RootLayout({ children }) {
 					defer
 					async
 				/>
+				{children}
 				{/*<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
 				<script>eruda.init();</script>*/}
 			</body>
