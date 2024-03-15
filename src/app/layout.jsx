@@ -14,11 +14,9 @@ import "../../styles/stories.css"
 import "../../styles/openBanner.css"
 import "../../styles/ComingSoon.css"
 import "../../styles/basket.css"
-import Head from "next/head"
 import Script from "next/script"
 import ClientSideScrollRestorer from "./ClientSideScrollRestorer"
 import Bin from "./bin/Bin"
-import { TmaSDKLoader } from "./UI/tmaSDKLoader/TmaSDKLoader"
 const inter = Inter({ subsets: ["latin"] })
 export const revalidate = 1
 
