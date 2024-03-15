@@ -85,7 +85,7 @@ const ProductBasketList = ({ data }) => {
 		<>
 			<Back />
 			<div className="product-block-order">
-				<div className="product-order">Оплачивается</div>
+				<div className="product-order">Корзина</div>
 				<div className="product-container">{basketItems}</div>
 			</div>
 		</>

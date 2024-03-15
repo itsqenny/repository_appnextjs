@@ -355,3 +355,50 @@
 	font-size: 14px;
 	color: var(--tg-theme-button-color);
 }
+
+.bin-box {
+	position: fixed;
+	bottom: 15px;
+	right: 15px;
+	width: 36px;
+	height: 36px;
+	background: #6252c6;
+	z-index: 9999999;
+	aspect-ratio: 1 / 1;
+	border-radius: 12px;
+	overflow: hidden;
+}
+
+.bin-body {
+}
+
+.bin-body svg {
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.bin-circle {
+	position: fixed;
+	bottom: 37px;
+	right: 7px;
+	width: 20px;
+	height: 20px;
+	background: #c65252;
+	z-index: 99999999;
+	aspect-ratio: 1 / 1;
+	border-radius: 12px;
+	overflow: hidden;
+}
+
+.bin-circle p {
+	font-size: 12px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	color: #fff;
+	margin-top: 1px;
+}
