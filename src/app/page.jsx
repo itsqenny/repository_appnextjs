@@ -16,7 +16,6 @@ export default function Home() {
 	return (
 		<>
 			<Suspense fallback={<></>}>
-				<useWebApp />
 				<Customer />
 				<SearchTab />
 				<Stories />
