@@ -10,11 +10,13 @@ import PaidBasket from "./paidbasket/paidBasket"
 import Customer from "./customer/Customer"
 import Stories from "./stories/page"
 import { Suspense } from "react"
+import useWebApp from "./UI/useWebApp/useWebApp"
 
 export default function Home() {
 	return (
 		<>
 			<Suspense fallback={<></>}>
+				<useWebApp />
 				<Customer />
 				<SearchTab />
 				<Stories />
