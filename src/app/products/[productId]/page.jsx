@@ -14,7 +14,9 @@ import { BackButton } from "@twa-dev/sdk/react"
 import SkeletonProduct from "./components/SkeletonProduct"
 import StoriesBanner from "@/app/stories/components/StoriesBanner"
 import { createUrl } from "@/app/lib/utils"
-
+function formatPrice(price) {
+	return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+}
 export default function ProductId() {
 	const pathname = usePathname()
 	const params = useParams()
@@ -165,7 +167,9 @@ export default function ProductId() {
 										>
 											<div className="Story-size-content">
 												<div className="size-nubmer">{item.size.eu}</div>
-												<div className="size-price">{item.price}₽</div>
+												<div className="size-price">
+													{formatPrice(item.priceV2.price)} {""}₽{" "}
+												</div>
 											</div>
 										</button>
 									)
@@ -174,11 +178,11 @@ export default function ProductId() {
 					</div>
 				</div>
 			)}
-
+			{/* 
 			<div className="main-button">
 				<button onClick={handlePaymentClick}>Перейти к оплате</button>
 			</div>
-
+*/}
 			<ButtonPayment handlePaymentClick={handlePaymentClick} />
 
 			{showPopup && (
