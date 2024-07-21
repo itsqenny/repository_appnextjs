@@ -5,6 +5,9 @@ import InfiniteScroll from "react-infinite-scroll-component"
 import { useState } from "react"
 import SkeletonProducts from "./SkeletonProducts"
 import { useSearchParams } from "next/navigation"
+function formatPrice(price) {
+	return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+}
 export default function Products({ data, setSize, size }) {
 	const searchParams = useSearchParams()
 	const search = searchParams.get("q")
@@ -31,13 +34,13 @@ export default function Products({ data, setSize, size }) {
 				>
 					<div className="item-box">
 						{filteredItems?.map((item) => (
-							<div className="item" key={item.id}>
-								<Link href={`/products/${item.id}`}>
+							<div className="item" key={item.spuId}>
+								<Link href={`/products/${item.spuId}?sku=${item.skuId}`}>
 									<div className="item-img-box">
 										<div className="item-img-wrapper">
 											<div className="item-img-inner">
 												<Image
-													src={item.img[0]}
+													src={item.images[0]}
 													width={200}
 													height={160}
 													sizes="(max-width: 768px) 100vw,
@@ -57,7 +60,9 @@ export default function Products({ data, setSize, size }) {
 										</div>
 									</div>
 									<div className="item-info">
-										<h4>{item.price}₽</h4>
+										<h4>
+											{formatPrice(item.priceV2.price)} {""}₽{" "}
+										</h4>
 										<p>{item.name}</p>
 										<button className="add-item">
 											<div className="buy-item">Купить</div>

@@ -752,89 +752,68 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	opacity: 0;
 	z-index: 9999;
-	background: #0000; /* Полупрозрачный фон */
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	backdrop-filter: blur(5px); /* Добавляем блюр к фону */
-	transition: blur 0.3s ease-in-out;
+	opacity: 0;
+	transition: opacity 0.5s ease-in-out;
 }
+
 .form-container.open {
 	opacity: 1;
-	height: 100%;
-	animation: popupBlur 0.5s ease-in-out;
+	background: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(5px);
+	transition: backdrop-filter 0.5s ease-in-out;
 }
 
 .form-container.close {
-	animation: popupClose 0.5s ease-in-out;
+	opacity: 1;
+	backdrop-filter: blur(0px);
+	background: rgba(0, 0, 0, 0);
+	transition: backdrop-filter 0.5s ease-in-out;
 }
 
 .form-content {
 	background: var(--tg-second);
 	position: absolute;
 	bottom: 0;
-	width: 100%;
-	height: 70%;
-	border-radius: 12px 12px 0 0;
+	/* width: 100%; */
+	transform: translateY(100%);
+	/* border-radius: 12px 12px 0 0; */
+	border-radius: 16px 16px 0 0;
 	box-shadow: 0 -4px 32px 0 rgba(0, 0, 0, 0.04),
 		inset 0 0 0 1px rgba(123, 123, 123, 0.24);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	transition: height 0.5s ease-in-out;
 }
 
 .form-content.open {
-	animation: popupAnimation 0.5s ease-in-out;
-}
-.form-content.close {
-	animation: popupAnimationClose 0.5s ease-in-out;
+	/*height: 100%;*/
+	animation: popupAnimationOpen 0.5s ease-in-out forwards;
 }
 
-@keyframes popupAnimation {
+.form-content.close {
+	animation: popupAnimationClose 0.5s ease-in-out forwards;
+}
+
+@keyframes popupAnimationOpen {
 	0% {
-		background: var(--tg-second);
-		position: absolute;
-		bottom: 0;
-		width: 100%;
-		height: 0%;
-		border-radius: 12px 12px 0 0;
-		box-shadow: 0 -4px 32px 0 rgba(0, 0, 0, 0.04),
-			inset 0 0 0 1px rgba(123, 123, 123, 0.24);
-		transition: height 0.3s ease-in-out;
+		transform: translateY(100);
 	}
-	80% {
-		background: var(--tg-second);
-		position: absolute;
-		bottom: 0;
-		width: 100%;
-		height: 70%;
-		border-radius: 12px 12px 0 0;
-		box-shadow: 0 -4px 32px 0 rgba(0, 0, 0, 0.04),
-			inset 0 0 0 1px rgba(123, 123, 123, 0.24);
-		transition: height 0.3s ease-in-out;
+	100% {
+		transform: translateY(0);
 	}
 }
+
 @keyframes popupAnimationClose {
 	0% {
-		background: var(--tg-second);
-		position: absolute;
-		bottom: 0;
-		width: 100%;
-		height: 70%;
-		border-radius: 12px 12px 0 0;
-		box-shadow: 0 -4px 32px 0 rgba(0, 0, 0, 0.04),
-			inset 0 0 0 1px rgba(123, 123, 123, 0.24);
-		transition: height 0.3s ease-in-out;
+		transform: translateY(0);
 	}
-	80% {
-		background: var(--tg-second);
-		position: absolute;
-		bottom: 0;
-		width: 100%;
-		height: 0%;
-		border-radius: 12px 12px 0 0;
-		box-shadow: 0 -4px 32px 0 rgba(0, 0, 0, 0.04),
-			inset 0 0 0 1px rgba(123, 123, 123, 0.24);
-		transition: height 0.3s ease-in-out;
+	100% {
+		transform: translateY(100);
 	}
 }
 
@@ -878,13 +857,44 @@
 		transition: opacity 0.3s ease-in-out;
 	}
 }
+.SmallCard__content {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	gap: 12px;
+}
 
+.SmallCard__firstRow {
+	display: flex;
+	justify-content: end;
+	width: 100%;
+	font-size: 26px;
+}
+.SmallCard__secondRow {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	gap: 10px;
+}
+.SmallCard__info {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	gap: 8px;
+}
+.SmallCard_button {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex-wrap: wrap;
+	margin: auto 16px 16px 16px;
+}
 .form-btn {
 	background: none;
 	border: none;
 	inset-inline-end: 0;
 	margin: 0;
-	padding: 20px 16px;
+	padding: 20px 16px 8px 0px;
 	position: absolute;
 	top: 0;
 }

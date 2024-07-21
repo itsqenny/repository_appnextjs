@@ -13,12 +13,13 @@ import useSWR from "swr"
 import FormData from "@/app/components/popup/FormData"
 import SkeletonProduct from "../../products/[productId]/components/SkeletonProduct"
 import StoriesBanner from "@/app/stories/components/StoriesBanner"
+
 const fetcher = (url) => fetch(url).then((res) => res.json())
 export default function ConfirmId({ data, userId }) {
 	const params = useParams()
 	const decodedString = decodeURIComponent(params.confirmDetails)
 	const parsedParams = Object.fromEntries(new URLSearchParams(decodedString))
-	const { id, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams
+	const { spuId, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams
 	const { queryId, WebApp, user } = initData()
 	const { data: userData, error } = useSWR(
 		`/api/customer/settings/${userId}`,
@@ -43,7 +44,7 @@ export default function ConfirmId({ data, userId }) {
 	const message = "Чтобы продолжить покупку, необходимо заполнить данные"
 	useEffect(() => {
 		// Выполнение HTTP-запроса
-		fetch(`/api/products/${id}`)
+		fetch(`/api/products/${spuId}`)
 			.then((response) => {
 				if (!response.ok) {
 					throw new Error("500 (Not Found)")
@@ -57,7 +58,7 @@ export default function ConfirmId({ data, userId }) {
 			.catch((error) => {
 				console.error("Ошибка при загрузке продукта:", error)
 			})
-	}, [id])
+	}, [spuId])
 
 	const widths = [640, 750, 828, 1080, 1200, 1920, 2048, 3840]
 	const srcSet = widths
@@ -66,6 +67,11 @@ export default function ConfirmId({ data, userId }) {
 
 	const paymentDate = new Date()
 	const options = { month: "short", day: "numeric" }
+	const [isPopupCheckout, setIsPopupCheckout] = useState(false)
+	const isOpenCheckout = () => {
+		setIsPopupVisible(true)
+		setIsPopupCheckout(true)
+	}
 	const onCheckout = async () => {
 		if (
 			userData &&
@@ -86,15 +92,15 @@ export default function ConfirmId({ data, userId }) {
 				queryId,
 				userId,
 				order_id: orderId,
-				productId: id,
+				productId: spuId,
 				time: paymentDate.toLocaleDateString("ru-RU", options),
 				remainingBonus: userBonus.restBonus,
 				saveBonus: userBonus.deductBonus,
 				newBonus: !isCredited ? subsBonus : 0,
 			}
-
+			console.log(`this data: ${JSON.stringify(data)}`)
 			try {
-				const response = await fetch(`/api/customer/pay`, {
+				const response = await fetch(`/api/customer/pay/message`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -104,8 +110,7 @@ export default function ConfirmId({ data, userId }) {
 
 				const responseData = await response.json()
 				console.log(`responseData: ${JSON.stringify(responseData)}`)
-				if (responseData.paymentUrl) {
-					Telegram.WebApp.openLink(responseData.paymentUrl)
+				if (responseData.status) {
 					setCustomerStatus(true)
 				} else {
 					console.error("Отсутствует ссылка для оплаты.")
@@ -128,7 +133,7 @@ export default function ConfirmId({ data, userId }) {
 					<div className="confirm-item">
 						<div className="images-slider-wrapper">
 							<div className="images-slider-images">
-								{item?.img.slice(0, 4).map((img, id) => (
+								{item?.images.slice(0, 4).map((img, id) => (
 									<div className="images-slider-image-item" key={id}>
 										<div className="image-item-wrapper">
 											<Image
@@ -178,11 +183,21 @@ export default function ConfirmId({ data, userId }) {
 														color: "var(--tg-hint)",
 													}}
 												>
-													{ConfirmPrice} ₽
+													{ConfirmPrice.replace(
+														/\B(?=(\d{3})+(?!\d))/g,
+														"\u00a0"
+													)}{" "}
+													₽
 												</del>{" "}
 											</>
 										) : (
-											<>{ConfirmPrice}₽</>
+											<>
+												{ConfirmPrice.replace(
+													/\B(?=(\d{3})+(?!\d))/g,
+													"\u00a0"
+												)}{" "}
+												₽
+											</>
 										)}
 									</div>
 									<div className="public-oferta">
@@ -205,13 +220,19 @@ export default function ConfirmId({ data, userId }) {
 
 								{!isVisible ? (
 									<>
-										{/* 
 										<div className="main-button">
 											<button onClick={onCheckout}>
-												Купить за {price !== null ? price : ConfirmPrice}₽
+												Купить за{" "}
+												{price !== null
+													? price.replace(/\B(?=(\d{3})+(?!\d))/g, "\u00a0")
+													: ConfirmPrice.replace(
+															/\B(?=(\d{3})+(?!\d))/g,
+															"\u00a0"
+													  )}{" "}
+												₽
 											</button>
 										</div>
-										*/}
+										{/* */}
 										<ButtonCheckout
 											onCheckout={onCheckout}
 											price={price !== null ? price : ConfirmPrice}
