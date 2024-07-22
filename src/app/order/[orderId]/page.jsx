@@ -98,7 +98,7 @@ export default function ProductOffer() {
 			<div className="confirm-item">
 				<div className="images-slider-wrapper">
 					<div className="images-slider-images">
-						{item?.img?.slice(0, 4).map((img, id) => (
+						{item?.images?.slice(0, 4).map((img, id) => (
 							<div className="images-slider-image-item" key={id}>
 								<div className="image-item-wrapper">
 									<Image

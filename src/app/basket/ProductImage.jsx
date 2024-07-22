@@ -5,7 +5,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function ProductImage({ item }) {
 	const { data, error } = useSWR(`/api/products/${item.id}`, fetcher)
-
+	console.log(`${item.id}`)
 	const widths = [640, 750, 828, 1080, 1200, 1920, 2048, 3840]
 	const srcSet = widths
 		.map((width) => `${item.img}?w=${width}&q=75 ${width}w`)
@@ -15,8 +15,10 @@ export default function ProductImage({ item }) {
 		<>
 			{error ? (
 				<>
-					<div className="product-image-container"
-					style={{ background: "var(--tg-bg" }}>
+					<div
+						className="product-image-container"
+						style={{ background: "var(--tg-bg" }}
+					>
 						<div
 							className="product-image-card"
 							style={{ background: "var(--tg-bg" }}
@@ -33,8 +35,10 @@ export default function ProductImage({ item }) {
 				<>
 					{!data ? (
 						<>
-							<div className="product-image-container"
-							style={{ background: "var(--tg-bg" }}>
+							<div
+								className="product-image-container"
+								style={{ background: "var(--tg-bg" }}
+							>
 								<div
 									className="product-image-card"
 									style={{ background: "var(--tg-bg" }}
@@ -55,7 +59,7 @@ export default function ProductImage({ item }) {
 										<div className="product-image-inner-row">
 											<SkeletonImage />
 											<Image
-												src={data.img[0]}
+												src={data.images[0]}
 												alt={`photo`}
 												width={3840} // Начальная ширина изображения
 												height={2160} // Начальная высота изображения (может быть другой, в зависимости от соотношения сторон)
