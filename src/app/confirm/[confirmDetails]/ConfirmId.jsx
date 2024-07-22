@@ -97,6 +97,7 @@ export default function ConfirmId({ data, userId }) {
 				remainingBonus: userBonus.restBonus,
 				saveBonus: userBonus.deductBonus,
 				newBonus: !isCredited ? subsBonus : 0,
+				image: item?.images[0],
 			}
 			console.log(`this data: ${JSON.stringify(data)}`)
 			try {
@@ -109,7 +110,7 @@ export default function ConfirmId({ data, userId }) {
 				})
 
 				const responseData = await response.json()
-				console.log(`responseData: ${JSON.stringify(responseData)}`)
+				//console.log(`responseData: ${JSON.stringify(responseData)}`)
 				if (responseData.status) {
 					setCustomerStatus(true)
 				} else {
