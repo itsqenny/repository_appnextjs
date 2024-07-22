@@ -19,7 +19,8 @@ export default function ConfirmId({ data, userId }) {
 	const params = useParams()
 	const decodedString = decodeURIComponent(params.confirmDetails)
 	const parsedParams = Object.fromEntries(new URLSearchParams(decodedString))
-	const { spuId, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams
+	const { spuId, name, ConfirmPrice, ConfirmSize, orderId, skuId } =
+		parsedParams
 	const { queryId, WebApp, user } = initData()
 	const { data: userData, error } = useSWR(
 		`/api/customer/settings/${userId}`,
@@ -98,6 +99,7 @@ export default function ConfirmId({ data, userId }) {
 				saveBonus: userBonus.deductBonus,
 				newBonus: !isCredited ? subsBonus : 0,
 				image: item?.images[0],
+				skuId: skuId,
 			}
 			console.log(`this data: ${JSON.stringify(data)}`)
 			try {

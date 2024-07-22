@@ -86,6 +86,7 @@ export default function ProductId() {
 			ConfirmPrice: currentPrice.toString(),
 			ConfirmSize: currentSize,
 			orderId: uniqueOrderId,
+			skuId: selectedSize,
 		}
 		//console.log("queryParams" + JSON.stringify(queryParams))
 		const queryString = new URLSearchParams(queryParams).toString()
@@ -182,15 +183,13 @@ export default function ProductId() {
 			<div className="main-button">
 				<button onClick={handlePaymentClick}>Перейти к оплате</button>
 			</div>
-*/}
+			*/}
 			<ButtonPayment handlePaymentClick={handlePaymentClick} />
-
 			{showPopup && (
 				<div className="main-popup">
 					<div className="main-popup show">{message}</div>
 				</div>
 			)}
-
 			<StoriesBanner />
 		</>
 	)
