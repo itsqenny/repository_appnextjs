@@ -3,7 +3,7 @@ import initData from "@/app/UI/useInitData/initData"
 import Image from "next/image"
 import { useState, useEffect } from "react"
 import CustomerStatus from "./StatusFetcher"
-
+import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
 export default function Checkout({
 	items,
 	userId,
@@ -11,6 +11,8 @@ export default function Checkout({
 	orderId,
 	paymentData,
 	customerStatus,
+	onCheckout,
+	ConfirmPrice,
 }) {
 	const { id, name, ConfirmSize } = items
 	return (
@@ -22,9 +24,10 @@ export default function Checkout({
 				</div>
 			</div>
 			<div className="item-order-info">
-				{customerStatus ? (
+				{customerStatus === "WAIT" ? (
 					<>
 						<CustomerStatus userId={userId} orderId={orderId} />
+						{/* 	<ButtonCheckout onCheckout={onCheckout} price={ConfirmPrice} />*/}
 					</>
 				) : (
 					<>

@@ -3,14 +3,15 @@ import Image from "next/image"
 import { useEffect, useState } from "react"
 import ButtonCheckout from "@/app/UI/ButtonCheckout/ButtonCheckout"
 import Back from "@/app/UI/BackButton/BackButton"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import Checkout from "@/app/confirm/[confirmDetails]/checkout"
 import StoriesView from "@/app/stories/components/StoriesView"
 import initData from "@/app/UI/useInitData/initData"
 import Stories from "@/app/stories/page"
 import StoriesBanner from "@/app/stories/components/StoriesBanner"
-
+import { BackButton } from "@twa-dev/sdk/react"
 export default function ProductOffer() {
+	const router = useRouter()
 	const params = useParams()
 	const decodedParamsString = decodeURIComponent(params.orderId)
 	const parsedParams = Object.fromEntries(
@@ -91,10 +92,12 @@ export default function ProductOffer() {
 			console.error("Ошибка отправки данных на сервер:", error)
 		}
 	}
-
+	const goBack = () => {
+		router.push("/")
+	}
 	return (
 		<>
-			<Back />
+			<BackButton onClick={goBack} />
 			<div className="confirm-item">
 				<div className="images-slider-wrapper">
 					<div className="images-slider-images">
@@ -136,7 +139,6 @@ export default function ProductOffer() {
 				/>
 			</div>
 
-			<ButtonCheckout onCheckout={onCheckout} price={ConfirmPrice} />
 			<StoriesBanner />
 		</>
 	)
