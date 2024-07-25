@@ -70,7 +70,7 @@ export default function ProductOffer() {
 
 		try {
 			const response = await fetch(
-				"https://crm.zipperconnect.space/customer/settings/client/buy/offer/pay",
+				`/api/delete?_userId=${userId}&_orderId=${item.order_id}`,
 				{
 					method: "POST",
 					headers: {
@@ -139,7 +139,7 @@ export default function ProductOffer() {
 				/>
 			</div>
 
-			<StoriesBanner />
+			{/*<StoriesBanner />*/}
 		</>
 	)
 }

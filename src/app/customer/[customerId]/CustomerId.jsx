@@ -125,7 +125,8 @@ const CustomerId = ({ customerId, data, error, user }) => {
 									user?.username !== undefined ? user?.username : customerId
 								}`}</footer>
 							</div>
-							<CustomerIdRank userId={customerId} />
+
+							{/*	<CustomerIdRank userId={customerId} />*/}
 						</div>
 					</div>
 					<div className="profile-data">
@@ -143,6 +144,7 @@ const CustomerId = ({ customerId, data, error, user }) => {
 							Редактировать
 						</button>
 					</div>
+					{/* 
 					<div className="profile-data">
 						<div className="profile-subscribe-title">Подписка</div>
 						<div className="profile-subscribe-info">
@@ -188,6 +190,7 @@ const CustomerId = ({ customerId, data, error, user }) => {
 							</div>
 							<div className="subscribe-add">6490</div>
 						</div>
+						
 						<div className="profile-subscribe-ui">
 							<div className="subscribe-key">
 								<div
@@ -197,18 +200,20 @@ const CustomerId = ({ customerId, data, error, user }) => {
 									connect pro
 								</div>
 							</div>
+							
 							<div className="subscribe-value">
 								<div className="subscribe-bonus-text-pro">500</div>
 							</div>
 							<div className="subscribe-add">5990</div>
 						</div>
-
+						
 						<Link href={`/customer/${customerId}/subscription`}>
 							<button className="btn-profile-data-info btn-profile-data">
 								Смотреть Подробности
 							</button>
 						</Link>
 					</div>
+					*/}
 					<div className="profile-data">
 						<div className="profile-data-title">
 							Помоги нам

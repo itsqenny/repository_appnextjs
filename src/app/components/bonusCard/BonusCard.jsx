@@ -5,7 +5,7 @@ const BonusCard = ({ userId }) => {
 		<>
 			<div className="refer-friend-section">
 				<Card userId={userId} />
-				<HistoryBonus userId={userId} />
+				{/*<HistoryBonus userId={userId} />*/}
 			</div>
 		</>
 	)

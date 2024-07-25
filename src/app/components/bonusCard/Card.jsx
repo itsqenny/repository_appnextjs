@@ -16,7 +16,7 @@ const Card = ({ userId }) => {
 					<div className="bonus-card-box">
 						<div className="bonus-card-text">Карта</div>
 						<div className="bonus-card-title">
-							<CustomerIdRank userId={userId} setSubs={setSubs} />
+							{/*<CustomerIdRank userId={userId} setSubs={setSubs} />*/}
 						</div>
 					</div>
 					<hr style={{ margin: "10px 0 0 0" }} />

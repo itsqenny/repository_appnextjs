@@ -49,8 +49,8 @@ export default function CustomerStatus({ userId, orderId }) {
 	}
 
 	const statusInfo = statusTextMap[data.status] || {
-		text: "Статус неизвестен",
-		color: "#000",
+		text: "Ожидается оплата",
+		color: "var(--tg-hint)",
 	}
 
 	const style = {

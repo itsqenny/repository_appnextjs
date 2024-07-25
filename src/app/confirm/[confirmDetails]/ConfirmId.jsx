@@ -267,7 +267,7 @@ export default function ConfirmId({ data, userId }) {
 							</>
 						)}
 					</div>
-					<StoriesBanner />
+					{/*<StoriesBanner />*/}
 				</>
 			)}
 		</>

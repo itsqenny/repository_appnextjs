@@ -18,12 +18,13 @@ export default function Home() {
 			<Suspense fallback={<></>}>
 				<Customer />
 				<SearchTab />
-				<Stories />
+				{/*<Stories />*/}
 				<Bonus />
+				<OpenBanner />
 				<BasketItem />
 				<PaidBasket />
-				{/*<OpenBanner/>
-			{/*<ComingSoon /> */}
+
+				{/*<ComingSoon /> */}
 				<CatalogTab />
 				<ProductsPage />
 			</Suspense>

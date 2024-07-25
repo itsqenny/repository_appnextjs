@@ -144,7 +144,7 @@ export default function ProductId() {
 						<div className="full-item-name">{item?.name}</div>
 					</div>
 					<div className="item-order-info">
-						<p className="full-item-price">{currentPrice} ₽</p>
+						<p className="full-item-price">{formatPrice(currentPrice)} ₽</p>
 						<hr />
 
 						<div className="size_box">
@@ -179,18 +179,18 @@ export default function ProductId() {
 					</div>
 				</div>
 			)}
-			{/* 
+
 			<div className="main-button">
 				<button onClick={handlePaymentClick}>Перейти к оплате</button>
 			</div>
-			*/}
+
 			<ButtonPayment handlePaymentClick={handlePaymentClick} />
 			{showPopup && (
 				<div className="main-popup">
 					<div className="main-popup show">{message}</div>
 				</div>
 			)}
-			<StoriesBanner />
+			{/*<StoriesBanner />*/}
 		</>
 	)
 }

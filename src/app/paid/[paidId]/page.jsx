@@ -16,8 +16,8 @@ export default function ProductOffer() {
 		new URLSearchParams(decodedParamsString)
 	)
 	const { id, name, ConfirmPrice, ConfirmSize, orderId } = parsedParams
-	//const { userId, queryId } = initData()
-	const userId = "204688184"
+	const { userId, queryId } = initData()
+	//const userId = "204688184"
 	const [item, setItem] = useState(null)
 	const [size, setSize] = useState(ConfirmSize || null)
 	const [price, setPrice] = useState(ConfirmPrice || null)
@@ -55,7 +55,7 @@ export default function ProductOffer() {
 			<div className="confirm-item">
 				<div className="images-slider-wrapper">
 					<div className="images-slider-images">
-						{item?.img?.slice(0, 4).map((img, id) => (
+						{item?.images?.slice(0, 4).map((img, id) => (
 							<div className="images-slider-image-item" key={id}>
 								<div className="image-item-wrapper">
 									<Image

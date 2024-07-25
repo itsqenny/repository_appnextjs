@@ -11,7 +11,6 @@ export default function Customer() {
 	//const user = { username: "whokilledravey", first_name: "Евгений" }
 	return (
 		<>
-			{WebApp?.setHeaderColor("secondary_bg_color")}
 			<PhotoFetcher userId={userId} user={user} />
 		</>
 	)

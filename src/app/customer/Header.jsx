@@ -57,7 +57,7 @@ const Header = ({ data, userId, error, user }) => {
 										/>
 									</svg>
 								</div>
-								<CustomerRank userId={userId} />
+								{/*<CustomerRank userId={userId} />*/}
 							</div>
 						</div>
 					</div>

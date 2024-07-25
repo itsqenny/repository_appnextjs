@@ -14,7 +14,7 @@ const ProductPaid = ({ data }) => {
 			style={{ display: "block" }}
 		>
 			<Link
-				href={`/paid/id=${item.id}&name=${item.name}&ConfirmPrice=${item.price}&ConfirmSize=${item.size}&orderId=${item.order_id}`}
+				href={`/order/id=${item.id}&name=${item.name}&ConfirmPrice=${item.price}&ConfirmSize=${item.size}&orderId=${item.order_id}`}
 			>
 				<div className="product-image-component">
 					<ProductImage item={item} />
