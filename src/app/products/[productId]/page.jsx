@@ -179,10 +179,11 @@ export default function ProductId() {
 					</div>
 				</div>
 			)}
-
+			{/*
 			<div className="main-button">
 				<button onClick={handlePaymentClick}>Перейти к оплате</button>
 			</div>
+								*/}
 
 			<ButtonPayment handlePaymentClick={handlePaymentClick} />
 			{showPopup && (
