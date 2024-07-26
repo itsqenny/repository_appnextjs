@@ -20,7 +20,7 @@ export default function Home() {
 				<SearchTab />
 				{/*<Stories />*/}
 				<Bonus />
-				<OpenBanner />
+				{/*<OpenBanner />*/}
 				<BasketItem />
 				<PaidBasket />
 
